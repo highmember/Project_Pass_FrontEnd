@@ -1,0 +1,15 @@
+<mat-card-actions>
+  Code: <input #Code
+      (keyup.enter)="add(Code.value)"
+      (blur)="add(Code.value);"><br>
+  Name: <input #Name
+      (keyup.enter)="add(Name.value)"
+      (blur)="add(Name.value);"><br>
+  Phone:<input #Phone
+      (keyup.enter)="add(Phone.value)"
+      (blur)="add(Phone.value);">
+      <div fxFlex></div>
+    <mat-card-actions>
+        <button mat-raised-button color="primary"  (click)="onSave(Code.value, Name.value, Phone.value)">บันทึก</button>
+    </mat-card-actions>
+</mat-card-actions>
