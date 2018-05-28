@@ -1,0 +1,76 @@
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]="firstFormGroup" [editable]="true">
+    <ng-template matStepLabel>เลือกชนิดโปรเจค</ng-template>
+    <mat-card class="card">
+      <mat-radio-group class="example-radio-group" [(ngModel)]="type">
+        <mat-radio-button color="primary" class="example-radio-button" *ngFor="let val of typeProject" [value]="val">
+          {{val}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="example-selected-value">Project Type is: {{type}}</div>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="selectProjectType()">ต่อไป</button>
+      </footer>
+    </mat-card>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <div *ngIf="type==='Project Jon'">
+      <ng-template matStepLabel>กรอกข้อมูลลูกค้าใหม่</ng-template>
+      <content fxLayout="column">
+        <app-input-text-normal [value]="data.customerName" name="customerName" placeholder="ชื่อ-นามสกุล" text="ชื่อ-นามสกุล" fxFlex
+          [formGroup]='form'></app-input-text-normal>
+        <app-input-text-normal [value]="data.customerPhone" name="customerPhone" placeholder="เบอร์โทรศัพท์" text="เบอร์โทรศัพท์"
+          fxFlex [formGroup]='form'></app-input-text-normal>
+        <app-input-text-normal [value]="data.customerAddress" name="customerAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex
+          [formGroup]='form'></app-input-text-normal>
+      </content>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="form.invalid" (click)="insertCustomer()">ต่อไป</button>
+      </footer>
+    </div>
+    <div *ngIf="type!=='Project Jon'">
+      <ng-template matStepLabel>เลือกลูกค้า</ng-template>
+      <content fxLayout="column">
+        <app-dropdown [data]="oldCustomer" [value]="data.oldCustomer" text="ขื่อ-นามสกุล" placeholder="เลือกลูกค้า" name="oldCustomer"
+          fxFlex [formGroup]='formSelectCus'></app-dropdown>
+      </content>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="formSelectCus.invalid" (click)="selectCustomer()">ต่อไป</button>
+      </footer>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+    <ng-template matStepLabel>กรอกข้อมูลโปรเจค</ng-template>
+    <mat-card class="card">
+      <content fxLayout="column">
+        <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
+        <app-upload-file>อัพโหลดไฟล์</app-upload-file>
+      </content>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
+      </footer>
+    </mat-card>
+  </mat-step>
+  <mat-step [stepControl]="fourthFormGroup" [editable]="true">
+    <ng-template matStepLabel>เลือกผู้จัดการ</ng-template>
+    <mat-card class="card">
+      <content fxLayout="column">
+        <app-dropdown [data]="pm" [value]="data.pm" text="ขื่อ-นามสกุล" placeholder="เลือกผู้จัดการ" name="pm" fxFlex [formGroup]='formPM'></app-dropdown>
+      </content>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="formPM.invalid" (click)="selectPM()">ต่อไป</button>
+      </footer>
+    </mat-card>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>รายละเอียดโปรเจค</ng-template>
+    <div>รหัสโปรเจค: {{code}}</div>
+    <div>ไฟล์: {{file}}</div>
+    <div>ชนิดโปรเจค: {{type}}</div>
+    <div>ลูกค้า: {{customerName}}</div>
+    <div>ผู้จัดการ: {{pmName}}</div>
+    <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" matStepperNext (click)="onSave()">บันทึก</button>
+    </footer>
+  </mat-step>
+</mat-horizontal-stepper>

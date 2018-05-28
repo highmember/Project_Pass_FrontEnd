@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <img src="assets/img/header-logo.png" fxFlex="200px" />
+    <div fxFlex></div>
+    <span fxFlex="none" *ngIf="user">{{user.firstname}} {{user.lastname}} </span>
+    <!-- <span fxFlex="none" *ngIf="user">{{user.officerPosition}}{{user.officerName}}   {{user.officerSurname}}</span> -->
+    <button mat-button [matMenuTriggerFor]="menu" fxFlex="3"><mat-icon>face</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openDialogEditProfile()">แก้ไขข้อมูลส่วนตัว</button>
+      <button mat-menu-item routerLink="/login">ออกจากระบบ</button>
+    </mat-menu>
+</mat-toolbar>

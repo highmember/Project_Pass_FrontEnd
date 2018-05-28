@@ -1,0 +1,9 @@
+<div fxLayout="row"  fxLayoutWrap fxLayoutAlign="start center">
+  <label fxFlex="nogrow" fxHide.xs>{{text}}</label>
+  <div fxFlex="20px" fxHide.xs></div>
+  <mat-form-field fxFlex [formGroup]="formGroup">
+    <input matInput [matDatepicker]="datepicker" [placeholder]="placeholder" [formControlName]="name" (click)="openDatePicker()" readonly>
+    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+    <mat-datepicker #datepicker></mat-datepicker>
+  </mat-form-field>
+</div>

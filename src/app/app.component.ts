@@ -9,15 +9,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public rows = [];
+
   constructor(
-    private router: Router,
-    private testService: TestService
+
   ) { }
 
-  ngOnInit() {
-    this.testService.getAllTest().subscribe(result => {
-      this.rows = result;
-    });
-  }
 }

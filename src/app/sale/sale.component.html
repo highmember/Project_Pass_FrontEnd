@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+    <h2>Sale</h2>
+    <div fxFlex></div>
+    <app-button-card-title (onClick)="insertProject()">
+      <mat-icon>add</mat-icon>Project</app-button-card-title>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
+      <ngx-datatable-column name="รหัสโปรเจค">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value.projectCode}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ความคืบหน้า">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value.projectProgress}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ชนิดโปรเจค">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value.projectType}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ลูกค้า">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value.customer}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ผู้จัดการ">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value.pm}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ไฟล์" [maxWidth]="170">
+        <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+          <button mat-mini-fab color="primary" (click)="viewFile()">
+            <mat-icon>attachment</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-card>
