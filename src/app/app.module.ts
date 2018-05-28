@@ -18,10 +18,17 @@ import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
 import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
+import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
+import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
+import {MatInputModule} from '@angular/material/input';
+import 'hammerjs/hammer';
+import {enableProdMode} from '@angular/core';
+import { Part1Component } from './pmcontrol/part1/part1.component';
+
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
 ];
-
+enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +36,10 @@ const appRoutes: Routes = [
     TestDialogComponent,
     SaleComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    PmcontrolComponent,
+    DialogDraftComponent,
+    Part1Component,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +50,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatInputModule,
   ],
   providers: [
     JwtService,
@@ -50,7 +61,9 @@ const appRoutes: Routes = [
   entryComponents: [
     TestDialogComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    DialogDraftComponent,
+    Part1Component
   ],
   bootstrap: [AppComponent]
 })
