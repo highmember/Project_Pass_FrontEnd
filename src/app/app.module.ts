@@ -26,10 +26,10 @@ import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
 import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
 import { MatInputModule } from '@angular/material/input';
 import { enableProdMode } from '@angular/core';
-import { Part1Component } from './pmcontrol/part1/part1.component';
-import { AssignPast2Component } from './pmcontrol/assign-past2/assign-past2.component';
-import { AssignPast3Component } from './pmcontrol/assign-past3/assign-past3.component';
-import { AssignPast4Component } from './pmcontrol/assign-past4/assign-past4.component';
+import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.component';
+import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
+import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
+import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -49,10 +49,10 @@ enableProdMode();
     P1UpdateDialogComponent,
     PmcontrolComponent,
     DialogDraftComponent,
-    Part1Component,
-    AssignPast2Component,
-    AssignPast3Component,
-    AssignPast4Component,
+    AssignPart1Component,
+    AssignPart2Component,
+    AssignPart3Component,
+    AssignPart4Component,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -79,10 +79,10 @@ enableProdMode();
     P1FileDialogComponent,
     P1UpdateDialogComponent,
     DialogDraftComponent,
-    Part1Component,
-    AssignPast2Component,
-    AssignPast3Component,
-    AssignPast4Component
+    AssignPart1Component,
+    AssignPart2Component,
+    AssignPart3Component,
+    AssignPart4Component
   ],
   bootstrap: [AppComponent]
 })

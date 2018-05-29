@@ -1,21 +1,10 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
-    <ng-template matStepLabel>Select Draft</ng-template>
-    <mat-card class="card">
-      <content fxLayout="column">
-        <app-dropdown [data]="nameDraft" [value]="data.nameDraft" text="ขื่อ-นามสกุล" placeholder="Select Draft" name="nameDraft" fxFlex [formGroup]='formDraft'></app-dropdown>
-      </content>
-      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" matStepperNext [disabled]="formDraft.invalid" (click)="selectDraft()">ต่อไป</button>
-      </footer>
-    </mat-card>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" [editable]="true">
     <ng-template matStepLabel>Select File</ng-template>
     <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="selectFile()">ต่อไป</button>
   </mat-step>
-  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
-    <ng-template matStepLabel>Scope Draft</ng-template>
+  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <ng-template matStepLabel>Scope Part1</ng-template>
     <h4>Start</h4>
     <mat-form-field>
       <input matInput [matDatepicker]="picker1" placeholder="Choose a Date" [(ngModel)]="scopeStart">
@@ -34,13 +23,13 @@
     </div>
   </mat-step>
   <mat-step [editable]="true">
-    <ng-template matStepLabel>Select Mat</ng-template>
+    <ng-template matStepLabel>Select Material</ng-template>
     <h4>Add Material</h4>
     <app-input-text-normal [value]="data.matItem" name="matItem" placeholder="Material" fxFlex [formGroup]='form'></app-input-text-normal>
     <app-input-text-normal [value]="data.matNum" name="matNum" placeholder="Num" fxFlex [formGroup]='form'></app-input-text-normal>
     <div>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" (click)="onSave()">Confirm</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
       </footer>
     </div>
   </mat-step>

@@ -1,7 +1,7 @@
-<div fxLayout="row" fxLayoutWrap fxLayoutAlign="start center" fxLayoutGap="20px">
+<div fxLayout="row" fxLayoutWrap fxLayoutAlign="start center" fxLayoutGap="10px">
   <label fxFlex fxHide.xs>{{text}}</label>
   <input type="file" ng2FileSelect  [uploader]="uploader" (onFileSelected)="upload()" *ngIf="!fileNotNull"/>
-  <img *ngIf="fileNotNull" [src]="value" height="300" width="300" />
+  <img *ngIf="fileNotNull" [src]="value" height="70" width="70" />
   <button *ngIf="fileNotNull" mat-mini-fab color="warn" (click)="remove(value)" >
     <mat-icon>delete</mat-icon>
   </button>
