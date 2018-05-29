@@ -18,14 +18,27 @@ import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
 import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
+<<<<<<< HEAD
 import { P1Component } from './p1/p1.component';
 import { P1DialogComponent } from './p1/p1-dialog.component';
 import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
 import { P1UpdateDialogComponent } from './p1/p1-update.dialog.component';
+=======
+import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
+import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
+import {MatInputModule} from '@angular/material/input';
+import 'hammerjs/hammer';
+import {enableProdMode} from '@angular/core';
+import { Part1Component } from './pmcontrol/part1/part1.component';
+import { AssignPast2Component } from './pmcontrol/assign-past2/assign-past2.component';
+import { AssignPast3Component } from './pmcontrol/assign-past3/assign-past3.component';
+import { AssignPast4Component } from './pmcontrol/assign-past4/assign-past4.component';
+
+>>>>>>> 9d51b46430a86fd535591f68eff182b24964190b
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
 ];
-
+enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,10 +47,19 @@ const appRoutes: Routes = [
     SaleComponent,
     SaleDialogComponent,
     SaleFileDialogComponent,
+<<<<<<< HEAD
     P1Component,
     P1DialogComponent,
     P1FileDialogComponent,
     P1UpdateDialogComponent,
+=======
+    PmcontrolComponent,
+    DialogDraftComponent,
+    Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component,
+>>>>>>> 9d51b46430a86fd535591f68eff182b24964190b
   ],
   imports: [
     BrowserAnimationsModule,
@@ -48,7 +70,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatInputModule,
   ],
   providers: [
     JwtService,
@@ -59,9 +82,17 @@ const appRoutes: Routes = [
     TestDialogComponent,
     SaleDialogComponent,
     SaleFileDialogComponent,
+<<<<<<< HEAD
     P1DialogComponent,
     P1FileDialogComponent,
     P1UpdateDialogComponent,
+=======
+    DialogDraftComponent,
+    Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component
+>>>>>>> 9d51b46430a86fd535591f68eff182b24964190b
   ],
   bootstrap: [AppComponent]
 })
