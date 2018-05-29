@@ -17,17 +17,21 @@ export class SaleDialogComponent implements OnInit {
   public form: FormGroup;
   public formSelectCus: FormGroup;
   public formProject: FormGroup;
+  public formScope: FormGroup;
   public formPM: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
   public fourthFormGroup: FormGroup;
+  public fifthFormGroup: FormGroup;
   public customer: any[];
   public project: any[];
   public type: String;
   public customerName: String;
   public pmName: String;
   public code: String;
+  public time: String;
+  public scope: Date;
   public file = '-';
   public typeProject = ['Project Jon', 'Mass', 'Auto Mobile'];
   public oldCustomer = ['สุทธิ ใจเย็น', 'สุขุม ว่องไว', 'มานะ ใจสั่น', 'นรากร สงคราม', 'วรชิตร สมควร'];
@@ -46,6 +50,7 @@ export class SaleDialogComponent implements OnInit {
     this.formSelectCus = this.formBuilder.group({});
     this.formProject = this.formBuilder.group({});
     this.formPM = this.formBuilder.group({});
+    this.formScope = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.type, Validators.required]
     });
@@ -56,6 +61,9 @@ export class SaleDialogComponent implements OnInit {
       firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
+      secondCtrl: [this.time, Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
     });
   }
@@ -71,6 +79,9 @@ export class SaleDialogComponent implements OnInit {
       firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
+      secondCtrl: [this.time, Validators.required]
+    });
+    this.fifthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
     });
   }
@@ -102,6 +113,9 @@ export class SaleDialogComponent implements OnInit {
     this.next();
   }
 
+  insertScope() {
+    console.log(this.scope)
+  }
   /**
    * set value in close() for return
    */

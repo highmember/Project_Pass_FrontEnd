@@ -44,7 +44,8 @@
     <mat-card class="card">
       <content fxLayout="column">
         <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
-        <app-upload-file>อัพโหลดไฟล์</app-upload-file>
+        <label for="img">ภาพห้อง</label>
+        <app-upload-file [(value)]="data.file" >อัพโหลดไฟล์</app-upload-file>
       </content>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
@@ -52,6 +53,17 @@
     </mat-card>
   </mat-step>
   <mat-step [stepControl]="fourthFormGroup" [editable]="true">
+    <ng-template matStepLabel>เลือกระยะเวลาโปรเจค</ng-template>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="scope">
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" matStepperNext [disabled]="formScope.invalid" (click)="insertScope()">ต่อไป</button>
+    </footer>
+  </mat-step>
+  <mat-step [stepControl]="fifthFormGroup" [editable]="true">
     <ng-template matStepLabel>เลือกผู้จัดการ</ng-template>
     <mat-card class="card">
       <content fxLayout="column">
