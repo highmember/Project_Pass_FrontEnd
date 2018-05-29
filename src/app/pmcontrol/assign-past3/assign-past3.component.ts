@@ -1,16 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-@Component({
-  selector: 'app-dialog-draft',
-  templateUrl: './dialog-draft.component.html',
-  styleUrls: ['./dialog-draft.component.css']
-})
 
-/**
- * manage about sale dialog insert, edit, delete data
- */
-export class DialogDraftComponent implements OnInit {
+@Component({
+  selector: 'app-assign-past3',
+  templateUrl: './assign-past3.component.html',
+  styleUrls: ['./assign-past3.component.css']
+})
+export class AssignPast3Component implements OnInit {
   name: any;
   /**
    *  variable 'form' use FormGroup for manage form
@@ -35,7 +32,7 @@ export class DialogDraftComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DialogDraftComponent>,
+    private dialogRef: MatDialogRef<AssignPast3Component>,
     private _formBuilder: FormBuilder
   ) { }
   /**
@@ -102,3 +99,4 @@ export class DialogDraftComponent implements OnInit {
    */
 
 }
+

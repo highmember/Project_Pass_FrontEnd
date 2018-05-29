@@ -8,10 +8,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./part1.component.css']
 })
 export class Part1Component implements OnInit {
+  formPM: FormGroup;
   public form: FormGroup;
   public formSelectCus: FormGroup;
   public formProject: FormGroup;
-  public formPM: FormGroup;
+  public formSelectMat: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
@@ -72,6 +73,9 @@ export class Part1Component implements OnInit {
   }
   selectFile() {
     this.next();
+  }
+  insertMat() {
+    console.log(this.formSelectMat.value);
   }
   /**
    * set value in close() for return

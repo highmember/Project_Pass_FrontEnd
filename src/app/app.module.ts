@@ -24,6 +24,9 @@ import {MatInputModule} from '@angular/material/input';
 import 'hammerjs/hammer';
 import {enableProdMode} from '@angular/core';
 import { Part1Component } from './pmcontrol/part1/part1.component';
+import { AssignPast2Component } from './pmcontrol/assign-past2/assign-past2.component';
+import { AssignPast3Component } from './pmcontrol/assign-past3/assign-past3.component';
+import { AssignPast4Component } from './pmcontrol/assign-past4/assign-past4.component';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -40,6 +43,9 @@ enableProdMode();
     PmcontrolComponent,
     DialogDraftComponent,
     Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,7 +69,10 @@ enableProdMode();
     SaleDialogComponent,
     SaleFileDialogComponent,
     DialogDraftComponent,
-    Part1Component
+    Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component
   ],
   bootstrap: [AppComponent]
 })

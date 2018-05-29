@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DialogDraftComponent } from './dialog-draft.component';
 import { Part1Component } from './part1/part1.component';
+import { AssignPast2Component } from './assign-past2/assign-past2.component';
+import { AssignPast3Component } from './assign-past3/assign-past3.component';
+import { AssignPast4Component } from './assign-past4/assign-past4.component';
+
 
 @Component({
   selector: 'app-pmcontrol',
@@ -47,6 +51,27 @@ export class PmcontrolComponent implements OnInit {
  }
  editPart1(): void {
   const dialogRef = this.dialog.open(Part1Component, {
+    width: '1000px',
+    data: {
+    }
+  });
+}
+ editPart2(): void {
+  const dialogRef = this.dialog.open(AssignPast2Component, {
+    width: '1000px',
+    data: {
+    }
+  });
+}
+editPart3(): void {
+  const dialogRef = this.dialog.open(AssignPast3Component, {
+    width: '1000px',
+    data: {
+    }
+  });
+}
+editPart4(): void {
+  const dialogRef = this.dialog.open(AssignPast4Component, {
     width: '1000px',
     data: {
     }
