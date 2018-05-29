@@ -1,0 +1,13 @@
+<mat-card>
+<mat-card-content>
+<ng-template matStepLabel>อัพเดทความคืบหน้า</ng-template>
+<content fxLayout="column">
+  <app-input-text-normal [value]="data.doSuccess" name="doSuccess" placeholder="อัพเดท" text="จำนวนงานที่เสร็จ" fxFlex
+    [formGroup]='form'></app-input-text-normal>
+  
+</content>
+<footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button mat-raised-button color="primary"  (click)="onSave()">ยืนยัน</button>
+</footer>
+</mat-card-content>
+</mat-card>

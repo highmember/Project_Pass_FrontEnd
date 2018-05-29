@@ -18,10 +18,23 @@ import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
 import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
+import { P1Component } from './p1/p1.component';
+import { P1DialogComponent } from './p1/p1-dialog.component';
+import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
+import { P1UpdateDialogComponent } from './p1/p1-update.dialog.component';
+import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
+import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
+import { MatInputModule } from '@angular/material/input';
+import { enableProdMode } from '@angular/core';
+import { Part1Component } from './pmcontrol/part1/part1.component';
+import { AssignPast2Component } from './pmcontrol/assign-past2/assign-past2.component';
+import { AssignPast3Component } from './pmcontrol/assign-past3/assign-past3.component';
+import { AssignPast4Component } from './pmcontrol/assign-past4/assign-past4.component';
+
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
 ];
-
+enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +42,17 @@ const appRoutes: Routes = [
     TestDialogComponent,
     SaleComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    P1Component,
+    P1DialogComponent,
+    P1FileDialogComponent,
+    P1UpdateDialogComponent,
+    PmcontrolComponent,
+    DialogDraftComponent,
+    Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +63,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    MatInputModule,
   ],
   providers: [
     JwtService,
@@ -50,7 +74,15 @@ const appRoutes: Routes = [
   entryComponents: [
     TestDialogComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    P1DialogComponent,
+    P1FileDialogComponent,
+    P1UpdateDialogComponent,
+    DialogDraftComponent,
+    Part1Component,
+    AssignPast2Component,
+    AssignPast3Component,
+    AssignPast4Component
   ],
   bootstrap: [AppComponent]
 })
