@@ -1,31 +1,24 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-@Component({
-  selector: 'app-dialog-draft',
-  templateUrl: './dialog-draft.component.html',
-  styleUrls: ['./dialog-draft.component.css']
-})
 
-/**
- * manage about sale dialog insert, edit, delete data
- */
-export class DialogDraftComponent implements OnInit {
-  name: any;
-  /**
-   *  variable 'form' use FormGroup for manage form
-  */
-  public formSelectDraft: FormGroup;
-  public formStep2: FormGroup;
-  public formStep3: FormGroup;
-  public formStep4: FormGroup;
+@Component({
+  selector: 'app-assign-past2',
+  templateUrl: './assign-past2.component.html',
+  styleUrls: ['./assign-past2.component.css']
+})
+export class AssignPast2Component implements OnInit {
+  formPM: FormGroup;
+  public form: FormGroup;
+  public formSelectCus: FormGroup;
+  public formProject: FormGroup;
+  public formSelectMat: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
   public fourthFormGroup: FormGroup;
-  public draft: String;
-  public draftName: String;
-  public matNum: any[];
+  public name: String;
+  public code: String;
   public pmName: String;
   public nameDraft = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
   color = 'primary';
@@ -35,25 +28,25 @@ export class DialogDraftComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DialogDraftComponent>,
+    private dialogRef: MatDialogRef<AssignPast2Component>,
     private _formBuilder: FormBuilder
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
-    this.formSelectDraft = this.formBuilder.group({});
-    this.formStep2 = this.formBuilder.group({});
-    this.formStep3 = this.formBuilder.group({});
-    this.formStep4 = this.formBuilder.group({});
+    this.form = this.formBuilder.group({});
+    this.formSelectCus = this.formBuilder.group({});
+    this.formProject = this.formBuilder.group({});
+    this.formPM = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draft, Validators.required]
+      firstCtrl: [this.name, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.name, Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.name, Validators.required]
+      firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
@@ -62,13 +55,13 @@ export class DialogDraftComponent implements OnInit {
 
   next() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draft, Validators.required]
+      firstCtrl: [this.name, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.name, Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.name, Validators.required]
+      firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
@@ -76,20 +69,13 @@ export class DialogDraftComponent implements OnInit {
   }
 
   selectDraft() {
-    this.draft = this.draftName;
     this.next();
   }
   selectFile() {
     this.next();
   }
-  selectDate() {
-    this.next();
-  }
   insertMat() {
-    console.log(this.formStep4.value);
-  }
-  onSave() {
-
+    console.log(this.formSelectMat.value);
   }
   /**
    * set value in close() for return
@@ -100,5 +86,4 @@ export class DialogDraftComponent implements OnInit {
   /**
    * save value in variable and return
    */
-
 }
