@@ -18,6 +18,10 @@ import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
 import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
+import { P1Component } from './p1/p1.component';
+import { P1DialogComponent } from './p1/p1-dialog.component';
+import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
+import { P1UpdateDialogComponent } from './p1/p1-update.dialog.component';
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
 ];
@@ -29,7 +33,11 @@ const appRoutes: Routes = [
     TestDialogComponent,
     SaleComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    P1Component,
+    P1DialogComponent,
+    P1FileDialogComponent,
+    P1UpdateDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,7 +58,10 @@ const appRoutes: Routes = [
   entryComponents: [
     TestDialogComponent,
     SaleDialogComponent,
-    SaleFileDialogComponent
+    SaleFileDialogComponent,
+    P1DialogComponent,
+    P1FileDialogComponent,
+    P1UpdateDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

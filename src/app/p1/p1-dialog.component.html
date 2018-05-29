@@ -1,0 +1,33 @@
+<mat-card>
+<mat-card-content>
+<ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="assign">
+    
+     <ngx-datatable-column name="ชื่อโปรดักส์">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.productName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="จำนวนที่สั่ง">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.goalTarget}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="จำนวนที่ทำได้">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.doSuccess}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="ความคืบหน้า">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.assignProgress}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Note">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.noteAssign}}
+          </ng-template>
+        </ngx-datatable-column>
+    
+  </ngx-datatable>
+</mat-card-content>
+</mat-card>
