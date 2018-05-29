@@ -5,74 +5,87 @@
   </mat-card-subtitle>
   <mat-card-content>
     <mat-form-field>
-       <input matInput placeholder="ID_Project:" disabled value={{projectCode}}>
+      <input matInput placeholder="ID_Project:" disabled value={{projectCode}}>
     </mat-form-field>
     <mat-form-field>
-        <input matInput placeholder="Cus_Name:" disabled value={{customer}}>
-     </mat-form-field>
+      <input matInput placeholder="Cus_Name:" disabled value={{customer}}>
+    </mat-form-field>
     <div fxFlex></div>
     <mat-grid-list cols="5" rowHeight="100px">
-      <mat-grid-tile
-          *ngFor="let tile of tiles"
-          [colspan]="tile.cols"
-          [rowspan]="tile.rows"
-          [style.background]="tile.color">
-        <div><br></div>
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
         <div *ngIf="tile.text==='Draft'">
-          <app-button-card-title (onClick)="editDraft()">Draft</app-button-card-title>
+          <label style="text-align: center;">Draft</label>
+          <button mat-mini-fab color="accent" (click)="editDraft()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFile()">
+            <mat-icon>pageview</mat-icon>
+          </button>
         </div>
         <div *ngIf="tile.text==='Part1'">
-            <app-button-card-title (onClick)="editPart1()">Part1</app-button-card-title>
+          <label style="text-align: center;">Part1</label>
+          <button mat-mini-fab color="accent" (click)="editPart1()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart1()">
+            <mat-icon>pageview</mat-icon>
+          </button>
         </div>
         <div *ngIf="tile.text==='Part2'">
-            <app-button-card-title (onClick)="editPart2()">Part2</app-button-card-title>
+          <label style="text-align: center;">Part2</label>
+          <button mat-mini-fab color="accent" (click)="editPart2()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart2()">
+            <mat-icon>pageview</mat-icon>
+          </button>
         </div>
         <div *ngIf="tile.text==='Part3'">
-            <app-button-card-title (onClick)="editPart3()">Part3</app-button-card-title>
+          <label style="text-align: center;">Part3</label>
+          <button mat-mini-fab color="accent" (click)="editPart3()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart3()">
+            <mat-icon>pageview</mat-icon>
+          </button>
         </div>
         <div *ngIf="tile.text==='Part4'">
-            <app-button-card-title (onClick)="editPart4()">Part4</app-button-card-title>
+          <label style="text-align: center;">Part4</label>
+          <button mat-mini-fab color="accent" (click)="editPart4()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart4()">
+            <mat-icon>pageview</mat-icon>
+          </button>
         </div>
-          
-
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
 </mat-card>
-
 <mat-card>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            วัสดุทั้งหมด
-          </mat-panel-title>
-          <mat-panel-description>
-            จำนวน ........
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <mat-list role="list1">
-                <mat-list-item role="listitem">Item 1</mat-list-item>
-                <mat-list-item role="listitem">Item 2</mat-list-item>
-                <mat-list-item role="listitem">Item 3</mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        วัสดุทั้งหมด
+      </mat-panel-title>
+      <mat-panel-description>
+        จำนวน ........
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list role="list1">
+      <mat-list-item role="listitem">Item 1</mat-list-item>
+      <mat-list-item role="listitem">Item 2</mat-list-item>
+      <mat-list-item role="listitem">Item 3</mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
 </mat-card>
-
 <mat-card>
-    <mat-card-content>
-            <h2>Scope</h2>
-              <mat-progress-bar
-                  [color]="color"
-                  [mode]="mode"
-                  [value]="value">
-              </mat-progress-bar>
-              <h2>Progress</h2>
-              <mat-progress-bar
-                  [color]="color"
-                  [mode]="mode"
-                  [value]="value">
-              </mat-progress-bar>
-
-          </mat-card-content>
+  <mat-card-content>
+    <h2>Scope</h2>
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-bar>
+    <h2>Progress</h2>
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-bar>
+  </mat-card-content>
 </mat-card>

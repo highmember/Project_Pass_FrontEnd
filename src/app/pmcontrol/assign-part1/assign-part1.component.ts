@@ -1,37 +1,26 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-@Component({
-  selector: 'app-dialog-draft',
-  templateUrl: './dialog-draft.component.html',
-  styleUrls: ['./dialog-draft.component.css']
-})
 
-/**
- * manage about sale dialog insert, edit, delete data
- */
-export class DialogDraftComponent implements OnInit {
-  name: any;
-  /**
-   *  variable 'form' use FormGroup for manage form
-  */
+@Component({
+  selector: 'app-assign-part1',
+  templateUrl: './assign-part1.component.html',
+  styleUrls: ['./assign-part1.component.css']
+})
+export class AssignPart1Component implements OnInit {
   public form: FormGroup;
-  public formDraft: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
-  public thirdFormGroup: FormGroup;
-  public draftName: String;
   public matNum: any[];
   public matItem: any[];
   public file: String;
   public scopeStart: Date;
   public scopeEnd: Date;
-  public nameDraft = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DialogDraftComponent>,
+    private dialogRef: MatDialogRef<AssignPart1Component>,
     private _formBuilder: FormBuilder
   ) { }
   /**
@@ -39,34 +28,23 @@ export class DialogDraftComponent implements OnInit {
   */
   ngOnInit() {
     this.form = this.formBuilder.group({});
-    this.formDraft = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draftName, Validators.required]
+      firstCtrl: [this.file, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: [this.file, Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.scopeEnd, Validators.required]
+      secondCtrl: [this.scopeEnd, Validators.required]
     });
   }
 
   next() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draftName, Validators.required]
+      firstCtrl: [this.file, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: [this.file, Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.scopeEnd, Validators.required]
+      secondCtrl: [this.scopeEnd, Validators.required]
     });
   }
 
-  selectDraft() {
-    this.draftName = this.formDraft.value.nameDraft;
-    this.next();
-  }
   selectFile() {
     this.file = 'test';
     this.next();
@@ -77,7 +55,6 @@ export class DialogDraftComponent implements OnInit {
 
   insertMat() {
   }
-
   /**
    * set value in close() for return
    */
@@ -89,11 +66,11 @@ export class DialogDraftComponent implements OnInit {
    */
   onSave() {
     const value = {
-      draftName: this.draftName,
-      draftFile: this.file,
-      draftStart: this.scopeStart,
-      draftEnd: this.scopeEnd,
+      file: this.file,
+      scopeStart: this.scopeStart,
       scopeEnd: this.scopeEnd,
+      matItem: this.matItem,
+      matNum: this.matNum
     };
     this.dialogRef.close(value);
   }

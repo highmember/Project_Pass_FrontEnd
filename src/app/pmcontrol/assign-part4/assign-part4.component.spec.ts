@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AssignPast2Component } from './assign-past2.component';
+import { AssignPart4Component } from './assign-part4.component';
 
-describe('AssignPast2Component', () => {
-  let component: AssignPast2Component;
-  let fixture: ComponentFixture<AssignPast2Component>;
+describe('AssignPast4Component', () => {
+  let component: AssignPart4Component;
+  let fixture: ComponentFixture<AssignPart4Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssignPast2Component ]
+      declarations: [ AssignPart4Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AssignPast2Component);
+    fixture = TestBed.createComponent(AssignPart4Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

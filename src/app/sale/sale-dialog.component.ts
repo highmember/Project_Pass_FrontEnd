@@ -30,9 +30,9 @@ export class SaleDialogComponent implements OnInit {
   public customerName: String;
   public pmName: String;
   public code: String;
-  public time: String;
-  public scope: Date;
-  public file = '-';
+  public scopeStart: Date;
+  public scopeEnd: Date;
+  public product = [];
   public typeProject = ['Project Jon', 'Mass', 'Auto Mobile'];
   public oldCustomer = ['สุทธิ ใจเย็น', 'สุขุม ว่องไว', 'มานะ ใจสั่น', 'นรากร สงคราม', 'วรชิตร สมควร'];
   public pm = ['นารีรัตน์ สุดใจ', 'วรวุฒิ สมใจ', 'สมพร เดโช', 'อรนงค์ สุดใจ', 'ประสงค์ เงินดี'];
@@ -61,7 +61,7 @@ export class SaleDialogComponent implements OnInit {
       firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
-      secondCtrl: [this.time, Validators.required]
+      secondCtrl: [this.scopeEnd, Validators.required]
     });
     this.fifthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
@@ -79,7 +79,7 @@ export class SaleDialogComponent implements OnInit {
       firstCtrl: [this.code, Validators.required]
     });
     this.fourthFormGroup = this._formBuilder.group({
-      secondCtrl: [this.time, Validators.required]
+      secondCtrl: [this.scopeEnd, Validators.required]
     });
     this.fifthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
@@ -97,7 +97,7 @@ export class SaleDialogComponent implements OnInit {
   }
 
   selectCustomer() {
-    this.customerName = this.formSelectCus.value.oldCustomer;
+    this.customerName = this.formSelectCus.value.customerName;
     this.customer = this.formSelectCus.value;
     this.next();
   }
@@ -108,13 +108,17 @@ export class SaleDialogComponent implements OnInit {
     this.next();
   }
 
+  addProduct() {
+    this.product.push(this.data.file);
+  }
+
   selectPM() {
     this.pmName = this.formPM.value.pm;
     this.next();
   }
 
   insertScope() {
-    console.log(this.scope)
+    this.next();
   }
   /**
    * set value in close() for return
@@ -126,13 +130,15 @@ export class SaleDialogComponent implements OnInit {
    * save value in variable and return
    */
   onSave() {
-    const value = [{
+    const value = {
       projectCode: this.code,
-      projectFile: this.file,
+      projectFile: this.product,
       projectType: this.type,
+      scopeStart: this.scopeStart,
+      scopeEnd: this.scopeEnd,
       customer: this.customer,
       pm: this.pmName
-    }];
+    };
     this.dialogRef.close(value);
   }
 

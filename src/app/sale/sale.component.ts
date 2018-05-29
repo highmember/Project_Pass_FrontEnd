@@ -32,14 +32,15 @@ export class SaleComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.rows.push({
+        this.rows = [{
           projectCode: result.projectCode,
           projectType: result.projectType,
           projectProgress: 0,
           projectFile: result.projectFile,
           customer: result.customer.customerName,
-          pm: result.pm
-        });
+          pm: result.pm,
+          scope: result.scope
+        }];
         // this.degreeService.addDegree(result).pipe(
         //   mergeMap(() => this.degreeService.getAllDegree()))
         //   .subscribe((results) => {
