@@ -39,6 +39,9 @@ import { CustomerDialogComponent } from './admin/customer-dialog.component';
 import { AdminSaleDialogComponent } from './admin/sale-dialog.component';
 import { AdminPmDialogComponent } from './admin/pm-dialog.component';
 import { AdminEmpDialogComponent } from './admin/emp-dialog.component';
+import { EmployeeService } from './shared/service/employee.service';
+import { SaleService } from './shared/service/sale.service';
+import { PmService } from './shared/service/pm.service';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -87,6 +90,9 @@ enableProdMode();
     TestService,
     CustomerService,
     ProjectService,
+    PmService,
+    SaleService,
+    EmployeeService
   ],
   entryComponents: [
     TestDialogComponent,
