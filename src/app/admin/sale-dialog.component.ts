@@ -2,28 +2,30 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-  selector: 'app-file-sale-dialog',
-  templateUrl: './sale-file-dialog.component.html',
-  styleUrls: ['./sale-file-dialog.component.css']
+  selector: 'app-sale-dialog',
+  templateUrl: './sale-dialog.component.html',
+  styleUrls: ['./sale-dialog.component.css']
 })
 
 /**
  * manage about sale dialog insert, edit, delete data
  */
-export class SaleFileDialogComponent implements OnInit {
+export class AdminSaleDialogComponent implements OnInit {
   /**
    *  variable 'form' use FormGroup for manage form
   */
-  public file: any[];
+  public form: FormGroup;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<SaleFileDialogComponent>,
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<AdminSaleDialogComponent>,
+    private _formBuilder: FormBuilder
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
-    this.file = this.data.file;
+    this.form = this.formBuilder.group({});
   }
   /**
    * set value in close() for return
@@ -35,7 +37,8 @@ export class SaleFileDialogComponent implements OnInit {
    * save value in variable and return
    */
   onSave() {
-    this.dialogRef.close();
+    const value = this.form.value;
+    this.dialogRef.close(value);
   }
 
 }

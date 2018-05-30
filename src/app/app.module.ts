@@ -17,7 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
-import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
 import { P1Component } from './p1/p1.component';
 import { P1DialogComponent } from './p1/p1-dialog.component';
 import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
@@ -31,6 +30,19 @@ import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.comp
 import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
 import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
 import { FristpageComponent } from './pmcontrol/fristpage/fristpage.component';
+
+import { ProjectService } from './shared/service/project.service';
+import { CustomerService } from './shared/service/customer.service';
+import { SaleFileDialogComponent } from './sale/sale-file-dialog.component';
+import { AdminComponent } from './admin/admin.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CustomerDialogComponent } from './admin/customer-dialog.component';
+import { AdminSaleDialogComponent } from './admin/sale-dialog.component';
+import { AdminPmDialogComponent } from './admin/pm-dialog.component';
+import { AdminEmpDialogComponent } from './admin/emp-dialog.component';
+import { EmployeeService } from './shared/service/employee.service';
+import { SaleService } from './shared/service/sale.service';
+import { PmService } from './shared/service/pm.service';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -55,6 +67,11 @@ enableProdMode();
     AssignPart3Component,
     AssignPart4Component,
     FristpageComponent,
+    AdminComponent,
+    CustomerDialogComponent,
+    AdminSaleDialogComponent,
+    AdminPmDialogComponent,
+    AdminEmpDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -67,11 +84,17 @@ enableProdMode();
     HttpModule,
     RouterModule.forRoot(appRoutes),
     MatInputModule,
+    MatTabsModule,
   ],
   providers: [
     JwtService,
     ApiService,
     TestService,
+    CustomerService,
+    ProjectService,
+    PmService,
+    SaleService,
+    EmployeeService
   ],
   entryComponents: [
     TestDialogComponent,
@@ -84,7 +107,11 @@ enableProdMode();
     AssignPart1Component,
     AssignPart2Component,
     AssignPart3Component,
-    AssignPart4Component
+    AssignPart4Component,
+    CustomerDialogComponent,
+    AdminSaleDialogComponent,
+    AdminPmDialogComponent,
+    AdminEmpDialogComponent,
   ],
   bootstrap: [AppComponent]
 })

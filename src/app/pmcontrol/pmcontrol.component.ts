@@ -25,7 +25,7 @@ export class PmcontrolComponent implements OnInit {
   ];
   color = 'primary';
   mode = 'determinate';
-  value = 50;
+  value = 100;
   constructor(
     private dialog: MatDialog,
   ) { }
