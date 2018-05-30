@@ -1,1 +1,6 @@
-<div>รายการไฟล์</div>
+<mat-card class="card">
+    <div *ngFor="let value of file">
+        <img [src]="value" height="70" width="70" />
+        {{ value }}
+    </div>
+</mat-card>

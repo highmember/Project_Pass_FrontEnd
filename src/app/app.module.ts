@@ -17,7 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
 import { SaleDialogComponent } from './sale/sale-dialog.component';
-import { SaleFileDialogComponent } from './sale/sale-File-dialog.component';
 import { P1Component } from './p1/p1.component';
 import { P1DialogComponent } from './p1/p1-dialog.component';
 import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
@@ -30,6 +29,9 @@ import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.comp
 import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
 import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
 import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
+import { ProjectService } from './shared/service/project.service';
+import { CustomerService } from './shared/service/customer.service';
+import { SaleFileDialogComponent } from './sale/sale-file-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -70,6 +72,8 @@ enableProdMode();
     JwtService,
     ApiService,
     TestService,
+    CustomerService,
+    ProjectService,
   ],
   entryComponents: [
     TestDialogComponent,
@@ -82,7 +86,7 @@ enableProdMode();
     AssignPart1Component,
     AssignPart2Component,
     AssignPart3Component,
-    AssignPart4Component
+    AssignPart4Component,
   ],
   bootstrap: [AppComponent]
 })

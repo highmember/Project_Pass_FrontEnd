@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SaleDialogComponent } from './sale-dialog.component';
-import { SaleFileDialogComponent } from './sale-File-dialog.component';
+import { SaleFileDialogComponent } from './sale-file-dialog.component';
+import { CustomerService } from '../shared/service/customer.service';
+import { ProjectService } from '../shared/service/project.service';
 
 @Component({
   selector: 'app-sale',
@@ -12,17 +14,14 @@ export class SaleComponent implements OnInit {
   public rows: any[];
   constructor(
     private dialog: MatDialog,
+    private customerService: CustomerService,
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
-    this.rows = [{
-      projectCode: 32321312312,
-      projectType: 'Mass',
-      projectProgress: 0,
-      projectFile: 'dsadassd',
-      customer: 'dsadsad',
-      pm: 'dsadadasd'
-    }];
+    this.projectService.getAllProject().subscribe((results) => {
+      this.rows = results;
+    });
   }
   insertProject(): void {
     const dialogRef = this.dialog.open(SaleDialogComponent, {
@@ -32,36 +31,29 @@ export class SaleComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.rows = [{
-          projectCode: result.projectCode,
-          projectType: result.projectType,
-          projectProgress: 0,
-          projectFile: result.projectFile,
-          customer: result.customer.customerName,
-          pm: result.pm,
-          scope: result.scope
-        }];
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        if (result.customer.customerPhone !== undefined) {
+          this.customerService.addCustomer(result.customer).mergeMap(() =>
+            this.customerService.getAllCustomer())
+            .subscribe((results) => {
+            });
+        }
+        this.projectService.addProject(result).mergeMap(() =>
+          this.projectService.getAllProject())
+          .subscribe((results) => {
+            this.rows = results;
+          });
       }
     });
   }
-  viewFile(): void {
+  viewFile(row): void {
     const dialogRef = this.dialog.open(SaleFileDialogComponent, {
       width: '1000px',
       data: {
+        file: row.projectFile
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
       }
     });
   }
