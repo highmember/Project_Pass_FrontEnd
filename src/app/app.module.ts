@@ -29,6 +29,7 @@ import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.comp
 import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
 import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
 import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
+import { FristpageComponent } from './pmcontrol/fristpage/fristpage.component';
 
 import { ProjectService } from './shared/service/project.service';
 import { CustomerService } from './shared/service/customer.service';
@@ -65,6 +66,7 @@ enableProdMode();
     AssignPart2Component,
     AssignPart3Component,
     AssignPart4Component,
+    FristpageComponent,
     AdminComponent,
     CustomerDialogComponent,
     AdminSaleDialogComponent,
