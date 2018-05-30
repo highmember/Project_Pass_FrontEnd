@@ -1,0 +1,70 @@
+<mat-tab-group>
+    <mat-tab label="คำสั่งของ">
+         <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="request">
+          <ngx-datatable-column name="รหัสการเบิก">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.reqID}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="รหัสโปรดัก">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.productID}}
+                </ng-template>
+              </ngx-datatable-column>
+          <ngx-datatable-column name="รหัสวัตถุดิบ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matID}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ชื่อวัตถุดิบ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.nameMat}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่เบิก">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.Amount}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="วันที่เบิก">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.Day_req}}
+                </ng-template>
+              </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+</mat-tab>
+<mat-tab label="TakeMat">
+        <mat-card-content>
+                <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="Back">
+                  <ngx-datatable-column name="รหัสการส่งวัตถุดิบ">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                      {{value.takeID}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="รหัสโปรดัก">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value.productID}}
+                        </ng-template>
+                      </ngx-datatable-column>
+                  <ngx-datatable-column name="ชื่อวัตถุดิบ">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                      {{value.nameMat}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="จำนวนที่เบิก">
+                    <ng-template let-value="value" ngx-datatable-cell-template>
+                      {{value.reqAmount}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="จำนวนที่ใช้ได้">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                          {{value.numTake}}
+                        </ng-template>
+                      </ngx-datatable-column>  
+                </ngx-datatable>
+              </mat-card-content>
+   <button mat-raised-button color="primary"  (click)="onSave()">บันทึก</button>
+</mat-tab>
+</mat-tab-group>

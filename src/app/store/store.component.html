@@ -1,0 +1,110 @@
+<mat-card>
+  <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+    <h2>Store</h2>
+    <div fxFlex></div>
+    <app-button-card-title (onClick)="insertMaterial()">
+        <mat-icon>add</mat-icon>Material</app-button-card-title>
+    </mat-card-subtitle>
+  <mat-tab-group>
+      <mat-tab label="วัสดุทั้งหมด">
+  <mat-card-content>
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
+      <ngx-datatable-column name="รหัสวัตถุดิบ" >
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.matID}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ชื่อวัตถุดิบ">
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.nameMat}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="สต้อก">
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.stock}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ราคา">
+          <ng-template let-value= "value" ngx-datatable-cell-template>
+            {{value.price}}
+          </ng-template>
+        </ngx-datatable-column>
+      <ngx-datatable-column name="แก้ไข">
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          <button mat-mini-fab color="primary" (click)="EditMat()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+  </mat-card-content>
+</mat-tab>
+ <mat-tab label="คำสั่งของ">
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="datamat">
+      <ngx-datatable-column name="รหัสโปรเจค"  >
+        <ng-template let-value= "value"  ngx-datatable-cell-template>
+          {{value.projectCode }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="ชื่อผู้จัดการ" >
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.pm}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="โปรดัก" >
+          <ng-template let-value= "value" ngx-datatable-cell-template>
+            {{value.product_ID}}
+          </ng-template>
+        </ngx-datatable-column>
+      <ngx-datatable-column name="วันที่" >
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.Day_Request}}
+        </ng-template>
+      </ngx-datatable-column>
+        <ngx-datatable-column name="สถานะ">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.status}}
+            </ng-template>
+          </ngx-datatable-column>
+      <ngx-datatable-column name=" " >
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          <button mat-mini-fab color="accent" (click)="viewreq()">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+</mat-tab>
+<mat-tab label="คำสั่งคืน">
+    <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="matback">
+          <ngx-datatable-column name="รหัสการคืน">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.backID}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="รหัสวัตถุดิบ">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.matID}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ชื่อวัตถุดิบ">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.nameMat}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่คืน">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.Amount}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="วันที่คืน">
+            <ng-template let-value= "value" ngx-datatable-cell-template>
+              {{value.Day_Back}}
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+</mat-tab>
+</mat-tab-group>
+</mat-card>
