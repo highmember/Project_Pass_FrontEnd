@@ -4,6 +4,11 @@ import { CustomerDialogComponent } from './customer-dialog.component';
 import { AdminSaleDialogComponent } from './sale-dialog.component';
 import { AdminPmDialogComponent } from './pm-dialog.component';
 import { AdminEmpDialogComponent } from './emp-dialog.component';
+import { PmService } from '../shared/service/pm.service';
+import { SaleService } from '../shared/service/sale.service';
+import { CustomerService } from '../shared/service/customer.service';
+import { EmployeeService } from '../shared/service/employee.service';
+import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
 
 
 @Component({
@@ -15,35 +20,28 @@ export class AdminComponent implements OnInit {
   public customer: any[];
   public sale: any[];
   public pm: any[];
-  public emp: any[];
-  public oldSale = ['ก้องภพ ลีลา', 'บุญฤทธิ์ วงศ์วาด', 'สุนทร ดิษช่วย', 'จิณณธรรม จักรวาฬ'];
-  public oldPM = ['พัชนิดา ฉิมติน', 'สมนึก ดิษช่วย', 'ธีธัช เหล็กกล้า', 'เขมวัฒน์ เสียงสุข', 'ไพเราะ แซ่หวาย'];
-  public oldEmployee = ['ศุกชัย แซ่ตั้ง', 'มานะ สลักคำ', 'ศุภโชค ชิงชัย', 'สิทธิ์สวัสดิ์ เอี่ยมลาภะ'];
+  public employee: any[];
   constructor(
     private dialog: MatDialog,
+    private customerService: CustomerService,
+    private saleService: SaleService,
+    private pmService: PmService,
+    private employeeService: EmployeeService,
   ) { }
 
   ngOnInit() {
-    this.customer = [{
-      customerName: 'สุทธิ ใจเย็น',
-      customerPhone: '0805215124',
-      customerAddress: 'dsadsadsad'
-    }];
-    this.sale = [{
-      saleName: 'บุญฤทธิ์ วงศ์วาด',
-      salePhone: '0815550322',
-      saleAddress: 'กรุงเทพ ประเวศ'
-    }];
-    this.pm = [{
-      pmName: 'บุญฤทธิ์ วงศ์วาด',
-      pmPhone: '0815550322',
-      pmAddress: 'กรุงเทพ ประเวศ'
-    }];
-    this.emp = [{
-      empName: 'สุนธร ดิษช่วยบากัส',
-      empPhone: '0811550342',
-      empAddress: 'กรุงเทพ ประเวศ บางนา'
-    }];
+    this.customerService.getAllCustomer().subscribe((results) => {
+      this.customer = results;
+    });
+    this.saleService.getAllSale().subscribe((results) => {
+      this.sale = results;
+    });
+    this.pmService.getAllPm().subscribe((results) => {
+      this.pm = results;
+    });
+    this.employeeService.getAllEmployee().subscribe((results) => {
+      this.employee = results;
+    });
   }
   openCusDialog() {
     const dialogRef = this.dialog.open(CustomerDialogComponent, {
@@ -53,27 +51,46 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.customerService.addCustomer(result).
+          mergeMap(() => this.customerService.getAllCustomer())
+          .subscribe((results) => {
+            this.customer = results;
+          });
       }
     });
   }
-  editCusDialog() {
+  editCusDialog(row) {
     const dialogRef = this.dialog.open(CustomerDialogComponent, {
       width: '1000px',
       data: {
+        customerName: row.customerName,
+        customerPhone: row.customerPhone,
+        customerAddress: row.customerAddress
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.customerService.updateCustomer(row._id, result).
+        mergeMap(() => this.customerService.getAllCustomer())
+          .subscribe((results) => {
+            this.customer = results;
+          });
+      }
+    });
+  }
+  confirmCusDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.status === true) {
+        this.customerService.deleteCustomer(row._id).
+        mergeMap(() => this.customerService.getAllCustomer())
+          .subscribe((results) => {
+            this.customer = results;
+          });
       }
     });
   }
@@ -85,27 +102,46 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.saleService.addSale(result).
+          mergeMap(() => this.saleService.getAllSale())
+          .subscribe((results) => {
+            this.sale = results;
+          });
       }
     });
   }
-  editSaleDialog() {
+  editSaleDialog(row) {
     const dialogRef = this.dialog.open(AdminSaleDialogComponent, {
       width: '1000px',
+      data: {
+        saleName: row.saleName,
+        salePhone: row.salePhone,
+        saleAddress: row.saleAddress
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.saleService.updateSale(row._id, result).
+        mergeMap(() => this.saleService.getAllSale())
+          .subscribe((results) => {
+            this.sale = results;
+          });
+      }
+    });
+  }
+  confirmSaleDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
       data: {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.saleService.deleteSale(row._id).
+        mergeMap(() => this.saleService.getAllSale())
+          .subscribe((results) => {
+            this.sale = results;
+          });
       }
     });
   }
@@ -117,27 +153,46 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.pmService.addPm(result).
+          mergeMap(() => this.pmService.getAllPm())
+          .subscribe((results) => {
+            this.pm = results;
+          });
       }
     });
   }
-  editPmDialog() {
+  editPmDialog(row) {
     const dialogRef = this.dialog.open(AdminPmDialogComponent, {
       width: '1000px',
       data: {
+        pmName: row.pmName,
+        pmPhone: row.pmPhone,
+        pmAddress: row.pmAddress
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.pmService.updatePm(row._id, result).
+        mergeMap(() => this.pmService.getAllPm())
+          .subscribe((results) => {
+            this.pm = results;
+          });
+      }
+    });
+  }
+  confirmPmDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.status === true) {
+        this.pmService.deletePm(row._id).
+        mergeMap(() => this.pmService.getAllPm())
+          .subscribe((results) => {
+            this.pm = results;
+          });
       }
     });
   }
@@ -149,27 +204,47 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.employeeService.addEmployee(result).
+          mergeMap(() => this.employeeService.getAllEmployee())
+          .subscribe((results) => {
+            this.employee = results;
+          });
       }
     });
   }
-  editEmpDialog() {
+  editEmpDialog(row) {
     const dialogRef = this.dialog.open(AdminEmpDialogComponent, {
       width: '1000px',
       data: {
+        employeeName: row.employeeName,
+        employeePhone: row.employeePhone,
+        employeeAddress: row.employeeAddress,
+        employeeType: row.employeeType
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.employeeService.updateEmployee(row._id, result).
+        mergeMap(() => this.employeeService.getAllEmployee())
+          .subscribe((results) => {
+            this.employee = results;
+          });
+      }
+    });
+  }
+  confirmEmpDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.status === true) {
+        this.employeeService.deleteEmployee(row._id).
+        mergeMap(() => this.employeeService.getAllEmployee())
+          .subscribe((results) => {
+            this.employee = results;
+          });
       }
     });
   }
