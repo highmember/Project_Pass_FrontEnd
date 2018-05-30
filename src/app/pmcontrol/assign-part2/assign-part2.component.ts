@@ -8,11 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./assign-part2.component.css']
 })
 export class AssignPart2Component implements OnInit {
+  public matFormGroup: FormGroup;
   public form: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
-  public matNum: any[];
-  public matItem: any[];
+  // public matNum: any[];
+  public matItemAll = [];
   public file: String;
   public scopeStart: Date;
   public scopeEnd: Date;
@@ -34,6 +35,7 @@ export class AssignPart2Component implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.scopeEnd, Validators.required]
     });
+    this.matFormGroup = this.formBuilder.group({});
   }
 
   next() {
@@ -45,6 +47,13 @@ export class AssignPart2Component implements OnInit {
     });
   }
 
+  addMat() {
+    this.matItemAll.push({
+      matT: this.matFormGroup.value.matItem,
+      numT: this.matFormGroup.value.matNum
+    });
+    console.log(this.matFormGroup.value);
+  }
   selectFile() {
     this.file = 'test';
     this.next();
@@ -69,9 +78,13 @@ export class AssignPart2Component implements OnInit {
       file: this.file,
       scopeStart: this.scopeStart,
       scopeEnd: this.scopeEnd,
-      matItem: this.matItem,
-      matNum: this.matNum
     };
     this.dialogRef.close(value);
+  }
+  onSaveMat() {
+    const vMat = {
+      matItemAll: this.matItemAll
+    };
+    this.dialogRef.close(vMat);
   }
 }
