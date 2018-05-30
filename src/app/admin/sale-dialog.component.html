@@ -1,0 +1,14 @@
+<app-dialog [title]="data.title">
+  <content fxLayout="column">
+    <app-input-text-normal [value]="data.saleName" name="saleName" placeholder="ชื่อ-นามสกุล" text="ชื่อ-นามสกุล" fxFlex
+      [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.salePhone" name="salePhone" placeholder="เบอร์โทรศัพท์" text="เบอร์โทรศัพท์"
+      fxFlex [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.saleAddress" name="saleAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex
+      [formGroup]='form'></app-input-text-normal>
+  </content>
+  <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+    <button mat-raised-button color="warn"  (click)="onClose()">ยกเลิก</button>
+  </footer>
+</app-dialog>
