@@ -88,8 +88,8 @@
     <div>ไฟล์:</div>
       <div *ngFor="let file of product">{{file}}</div>
     <div>ชนิดโปรเจค: {{type}}</div>
-    <div>ระยะเวลาเริ่มโปรเจค: {{scopeStart}}</div>
-    <div>ระยะเวลาสิ้นสุดโปรเจค: {{scopeEnd}}</div>
+    <div>ระยะเวลาเริ่มโปรเจค: {{scopeStart | date: "dd-MM-yyyy"}}</div>
+    <div>ระยะเวลาสิ้นสุดโปรเจค: {{scopeEnd | date: "dd-MM-yyyy"}}</div>
     <div>ลูกค้า: {{customerName}}</div>
     <div>ผู้จัดการ: {{pmName}}</div>
     <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">

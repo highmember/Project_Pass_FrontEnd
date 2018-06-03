@@ -30,6 +30,7 @@ import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.comp
 import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
 import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
 import { FristpageComponent } from './pmcontrol/fristpage/fristpage.component';
+import { MatListModule } from '@angular/material/list';
 
 import { ProjectService } from './shared/service/project.service';
 import { CustomerService } from './shared/service/customer.service';
@@ -43,6 +44,7 @@ import { AdminEmpDialogComponent } from './admin/emp-dialog.component';
 import { EmployeeService } from './shared/service/employee.service';
 import { SaleService } from './shared/service/sale.service';
 import { PmService } from './shared/service/pm.service';
+import { FristTimeProjectComponent } from './pmcontrol/frist-time-project/frist-time-project.component';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -72,6 +74,7 @@ enableProdMode();
     AdminSaleDialogComponent,
     AdminPmDialogComponent,
     AdminEmpDialogComponent,
+    FristTimeProjectComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -85,6 +88,7 @@ enableProdMode();
     RouterModule.forRoot(appRoutes),
     MatInputModule,
     MatTabsModule,
+    MatListModule
   ],
   providers: [
     JwtService,
