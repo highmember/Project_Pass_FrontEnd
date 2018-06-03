@@ -17,6 +17,8 @@ export class AssignPart2Component implements OnInit {
   public file: String;
   public scopeStart: Date;
   public scopeEnd: Date;
+  public scopeMat: Date;
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -50,7 +52,9 @@ export class AssignPart2Component implements OnInit {
   addMat() {
     this.matItemAll.push({
       matT: this.matFormGroup.value.matItem,
-      numT: this.matFormGroup.value.matNum
+      numT: this.matFormGroup.value.matNum,
+      dateT: this.scopeMat
+
     });
     console.log(this.matFormGroup.value);
   }

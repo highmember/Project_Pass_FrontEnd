@@ -23,6 +23,7 @@ export class AssignPart3Component implements OnInit {
   public matItemAll = [];
   public scopeStart: Date;
   public scopeEnd: Date;
+  public scopeMat: Date;
   public managerName = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
 
   constructor(
@@ -64,7 +65,9 @@ export class AssignPart3Component implements OnInit {
   addMat() {
     this.matItemAll.push({
       matT: this.matFormGroup.value.matItem,
-      numT: this.matFormGroup.value.matNum
+      numT: this.matFormGroup.value.matNum,
+      dateT: this.scopeMat
+
     });
     console.log(this.matFormGroup.value);
   }
