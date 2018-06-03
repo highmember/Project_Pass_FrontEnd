@@ -44,7 +44,14 @@ import { AdminEmpDialogComponent } from './admin/emp-dialog.component';
 import { EmployeeService } from './shared/service/employee.service';
 import { SaleService } from './shared/service/sale.service';
 import { PmService } from './shared/service/pm.service';
+
 import { FristTimeProjectComponent } from './pmcontrol/frist-time-project/frist-time-project.component';
+import { EditDialogComponent } from './store/edit-dialog.component';
+import { ViewdialogComponent } from './store/view-dialog.component';
+import { MatDialogComponent } from './store/material-dialog.component';
+import { StoreComponent } from './store/store.component';
+import { DraftComponent } from './draft/draft.component';
+import { DraftfileComponent } from './draft/draft-file-dailog.component';
 
 const appRoutes: Routes = [
   { path: 'test', component: AppComponent }
@@ -75,6 +82,12 @@ enableProdMode();
     AdminPmDialogComponent,
     AdminEmpDialogComponent,
     FristTimeProjectComponent,
+    EditDialogComponent,
+    ViewdialogComponent,
+    MatDialogComponent,
+    StoreComponent,
+    DraftComponent,
+    DraftfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -116,6 +129,10 @@ enableProdMode();
     AdminSaleDialogComponent,
     AdminPmDialogComponent,
     AdminEmpDialogComponent,
+    EditDialogComponent,
+    ViewdialogComponent,
+    MatDialogComponent,
+    DraftfileComponent
   ],
   bootstrap: [AppComponent]
 })
