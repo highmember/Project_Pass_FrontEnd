@@ -1,6 +1,9 @@
+<h2>โปรเจค {{codeProject}}</h2>
 <mat-card class="card">
-    <div *ngFor="let value of file">
-        <img [src]="value" height="70" width="70" />
-        {{ value }}
-    </div>
+    <mat-card class="content">
+        <mat-card-content *ngFor="let value of file">
+            โปรดัก {{value.codeProduct}} 
+            ไฟล์ <a href="{{value.file}}"> {{value.file}} </a>
+        </mat-card-content>
+    </mat-card>
 </mat-card>

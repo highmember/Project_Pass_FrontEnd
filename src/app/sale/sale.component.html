@@ -14,7 +14,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="ความคืบหน้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectProgress}}
+          <mat-progress-bar mode="determinate" value="{{value.projectProgress}}"></mat-progress-bar>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ชนิดโปรเจค">
@@ -36,6 +36,9 @@
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
           <button mat-mini-fab color="primary" (click)="viewFile(value)">
             <mat-icon>attachment</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" (click)="confirmDelete(value)">
+            <mat-icon>delete</mat-icon>
           </button>
         </ng-template>
       </ngx-datatable-column>
