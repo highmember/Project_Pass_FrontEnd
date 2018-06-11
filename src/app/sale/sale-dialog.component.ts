@@ -33,6 +33,7 @@ export class SaleDialogComponent implements OnInit {
   public scopeStart: Date;
   public scopeEnd: Date;
   public product = [];
+  public output = [];
   public typeProject = ['Project Jon', 'Mass', 'Auto Mobile'];
   public oldCustomer = ['สุทธิ ใจเย็น', 'สุขุม ว่องไว', 'มานะ ใจสั่น', 'นรากร สงคราม', 'วรชิตร สมควร'];
   public pm = ['นารีรัตน์ สุดใจ', 'วรวุฒิ สมใจ', 'สมพร เดโช', 'อรนงค์ สุดใจ', 'ประสงค์ เงินดี'];
@@ -109,7 +110,16 @@ export class SaleDialogComponent implements OnInit {
   }
 
   addProduct() {
-    this.product.push(this.data.file);
+    this.product.push({
+      codeProject: this.formProject.value.code,
+      codeProduct: this.formProject.value.codeProduct,
+      file: this.data.file
+    });
+    this.show();
+  }
+
+  show() {
+    this.output = this.product;
   }
 
   selectPM() {

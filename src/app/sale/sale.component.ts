@@ -4,6 +4,7 @@ import { SaleDialogComponent } from './sale-dialog.component';
 import { SaleFileDialogComponent } from './sale-file-dialog.component';
 import { CustomerService } from '../shared/service/customer.service';
 import { ProjectService } from '../shared/service/project.service';
+import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-sale',
@@ -55,6 +56,23 @@ export class SaleComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
+      }
+    });
+  }
+
+  confirmDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.status === true) {
+        this.projectService.deleteProject(row._id).
+          mergeMap(() => this.projectService.getAllProject())
+          .subscribe((results) => {
+            this.rows = results;
+          });
       }
     });
   }

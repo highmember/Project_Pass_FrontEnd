@@ -130,3 +130,14 @@ mat-grid-tile {
     /* justify-content: space-between; */
     
   }
+  div.ex3 {
+    background-color: lightblue;
+    width: 110px;
+    height: 110px;
+    overflow: auto;
+}
+.content {
+  width: 800px;
+  height: 150px;
+  overflow: auto;
+}
