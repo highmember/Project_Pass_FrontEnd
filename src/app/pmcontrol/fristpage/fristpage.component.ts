@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../shared/service/project.service';
 
 @Component({
   selector: 'app-fristpage',
@@ -7,16 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FristpageComponent implements OnInit {
   public rows: any[];
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.rows = [{
-      projectCode: 32321312312,
-      projectType: 'Mass',
-      projectProgress: 0,
-      projectFile: 'dsadassd',
-      deadLine: '22/12/61',
-      sale: 'Mr..... ......'
-    }];
+    this.projectService.getAllProject().subscribe((results) => {
+      this.rows = results;
+    });
   }
 }
