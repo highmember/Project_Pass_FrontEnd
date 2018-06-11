@@ -21,6 +21,7 @@ export class SaleComponent implements OnInit {
   ngOnInit() {
     this.projectService.getAllProject().subscribe((results) => {
       this.rows = results;
+      console.log(this.rows);
     });
   }
   insertProject(): void {

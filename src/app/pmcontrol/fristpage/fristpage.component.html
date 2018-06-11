@@ -23,7 +23,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="วันสิ้นสุดโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.deadLine}}
+          {{value.projectEnd | date: "dd-MM-yyyy"}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ผู้รับโปรเจค">
