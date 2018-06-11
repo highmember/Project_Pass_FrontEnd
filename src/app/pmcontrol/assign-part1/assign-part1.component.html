@@ -1,6 +1,6 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
-    <ng-template matStepLabel>Select File</ng-template>
+    <ng-template matStepLabel>Add Product & File</ng-template>
     <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="selectFile()">ต่อไป</button>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
@@ -25,12 +25,28 @@
   <mat-step [editable]="true">
     <ng-template matStepLabel>Select Material</ng-template>
     <h4>Add Material</h4>
-    <app-input-text-normal [value]="data.matItem" name="matItem" placeholder="Material" fxFlex [formGroup]='form'></app-input-text-normal>
-    <app-input-text-normal [value]="data.matNum" name="matNum" placeholder="Num" fxFlex [formGroup]='form'></app-input-text-normal>
+    
+    <app-input-text-normal [value]="data.matItem" name="matItem" placeholder="Material" fxFlex [formGroup]='matFormGroup'></app-input-text-normal>
+    <app-input-text-normal [value]="data.matNum" name="matNum" placeholder="Num" fxFlex [formGroup]='matFormGroup'></app-input-text-normal>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="Choose a Date" fxFlex [(ngModel)]="scopeMat">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
     <div>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+        <button mat-raised-button color="primary" (click)="addMat()" [disabled]="matFormGroup.invalid">Add</button>
       </footer>
     </div>
+    <mat-card>
+      <mat-list>
+          <h3>List of Material</h3>
+          <mat-list-item *ngFor="let mat of matItemAll">
+            {{mat.matT}} {{mat.numT}} {{scopeMat | date: "dd-MM-yyyy"}}
+          </mat-list-item>
+          <button mat-raised-button color="primary" (click)="onSaveMat()">Confirm</button>
+      </mat-list>
+    </mat-card>
+
   </mat-step>
 </mat-horizontal-stepper>

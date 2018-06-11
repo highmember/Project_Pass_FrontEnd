@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./assign-part3.component.css']
 })
 export class AssignPart3Component implements OnInit {
+  public matFormGroup: FormGroup;
   /**
    *  variable 'form' use FormGroup for manage form
   */
@@ -18,10 +19,11 @@ export class AssignPart3Component implements OnInit {
   public thirdFormGroup: FormGroup;
   public file: String;
   public manager: String;
-  public matNum: any[];
-  public matItem: any[];
+  // public matNum: any[];
+  public matItemAll = [];
   public scopeStart: Date;
   public scopeEnd: Date;
+  public scopeMat: Date;
   public managerName = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
 
   constructor(
@@ -45,6 +47,7 @@ export class AssignPart3Component implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.scopeEnd, Validators.required]
     });
+    this.matFormGroup = this.formBuilder.group({});
   }
 
   next() {
@@ -59,6 +62,15 @@ export class AssignPart3Component implements OnInit {
     });
   }
 
+  addMat() {
+    this.matItemAll.push({
+      matT: this.matFormGroup.value.matItem,
+      numT: this.matFormGroup.value.matNum,
+      dateT: this.scopeMat
+
+    });
+    console.log(this.matFormGroup.value);
+  }
   selectManager() {
     this.manager = this.formManager.value.managerName;
     this.next();
@@ -88,10 +100,14 @@ export class AssignPart3Component implements OnInit {
       file: this.file,
       scopeStart: this.scopeStart,
       scopeEnd: this.scopeEnd,
-      matItem: this.matItem,
-      matNum: this.matNum
     };
     this.dialogRef.close(value);
+  }
+  onSaveMat() {
+    const vMat = {
+      matItemAll: this.matItemAll
+    };
+    this.dialogRef.close(vMat);
   }
 }
 
