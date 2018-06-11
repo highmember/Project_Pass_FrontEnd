@@ -44,10 +44,19 @@
     <mat-card class="card">
       <content fxLayout="column">
         <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
-        <br>
-        <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+        <div fxlayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+            <app-input-text-normal [value]="data.codeProduct" name="codeProduct" placeholder="รหัสโปรดัก" text="รหัสโปรดัก" fxFlex [formGroup]='formProject'></app-input-text-normal>
+          <a>แนบไฟล์</a>
+          <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+          <button mat-raised-button color="primary" (click)="addProduct()">บันทึก</button>
+        </div>
+        <mat-card class="content">
+          <mat-card-content *ngFor="let value of output">
+                รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+          </mat-card-content>
+        </mat-card>
       </content>
-        <button mat-raised-button color="primary" (click)="addProduct()">บันทึก</button>
+      <br>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
       </footer>
@@ -85,8 +94,8 @@
   <mat-step>
     <ng-template matStepLabel>รายละเอียดโปรเจค</ng-template>
     <div>รหัสโปรเจค: {{code}}</div>
-    <div>ไฟล์:</div>
-      <div *ngFor="let file of product">{{file}}</div>
+    <!-- <div>ไฟล์:</div>
+      <div *ngFor="let file of product">{{file}}</div> -->
     <div>ชนิดโปรเจค: {{type}}</div>
     <div>ระยะเวลาเริ่มโปรเจค: {{scopeStart | date: "dd-MM-yyyy"}}</div>
     <div>ระยะเวลาสิ้นสุดโปรเจค: {{scopeEnd | date: "dd-MM-yyyy"}}</div>
