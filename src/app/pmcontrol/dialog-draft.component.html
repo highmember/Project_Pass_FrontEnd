@@ -1,4 +1,4 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
     <ng-template matStepLabel>Select Draft</ng-template>
     <mat-card class="card">
@@ -14,6 +14,13 @@
     <ng-template matStepLabel>Select Product</ng-template>
     <app-dropdown [data]="projectFile" [value]="data.projectFile" text="Product" placeholder="Select Product" name="projectFile" fxFlex [formGroup]='formFile'></app-dropdown>
     <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="selectFile()">ต่อไป</button>
+
+    <ng-template matStepLabel>Select File</ng-template>
+    <mat-card class="content">
+      <mat-card-content *ngFor="let value of product">
+            รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+      </mat-card-content>
+    </mat-card>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" [editable]="true">
     <ng-template matStepLabel>Scope Draft</ng-template>

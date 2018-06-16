@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../shared/service/employee.service';
+
+import { removeSummaryDuplicates } from '@angular/compiler';
 import { ProjectService } from '../shared/service/project.service';
 @Component({
   selector: 'app-dialog-draft',
@@ -35,12 +37,16 @@ export class DialogDraftComponent implements OnInit {
   public fileProject: any[];
   public nameDraft = [];
   public projectFile = [];
+  public nameEm = [];
+  public product = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DialogDraftComponent>,
+
     private _formBuilder: FormBuilder,
     private employeeService: EmployeeService,
+
     private projectService: ProjectService
   ) { }
   /**
@@ -67,7 +73,21 @@ export class DialogDraftComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.scopeEnd, Validators.required]
     });
-    this.matFormGroup = this.formBuilder.group({});
+    this.employeeService.getAllEmployee().subscribe((results) => {
+      this.nameEm = results;
+      this.checkName();
+    });
+    this.projectService.getAllProject().subscribe((results) => {
+      console.log(results)
+      this.product = results;
+    });
+  }
+  checkName() {
+    this.nameEm.forEach(element => {
+      if (element.employeeType === 'Draft') {
+        this.nameDraft.push(element.employeeName);
+      }
+    });
   }
   checkName() {
     this.nameEM.forEach(element => {
