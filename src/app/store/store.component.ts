@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { EditDialogComponent } from './edit-dialog.component';
 import { ViewdialogComponent } from './view-dialog.component';
 import { MatDialogComponent } from './material-dialog.component';
+import { StoreService } from '../shared/service/store.service';
+import { mergeMap } from 'rxjs/operators';
+import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-store',
@@ -18,44 +20,32 @@ export class StoreComponent implements OnInit {
   public customerName: String;
   constructor(
     private dialog: MatDialog,
+    private storeService: StoreService,
   ) { }
 
   ngOnInit() {
-    this.rows = [{
-      matID: 32321312312,
-      nameMat: 'Mass',
-      stock: 0,
-      price: 20,
-      Edit: 'dsadassd',
-    }];
-    this.datamat = [{
-      projectCode: 32321312312,
-      pm: 'Mass',
-      Amount: 25,
-      status: 'ว่าง',
-      Day_Request: 0,
-    }];
-    this.matback = [{
-     backID: 32321312312,
-     matID: '32321312312',
-     nameMat: 'Mass',
-     Amount: 25,
-     Day_Back: 0,
-    }];
+    this.storeService.getAllStore().subscribe((results) => {
+      this.rows = results;
+    });
   }
-  EditMat(): void {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
+  editMaterial(row): void {
+    const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '450px',
       data: {
+        materialId: row.materialId,
+        materialName: row.materialName,
+        materialNum: row.materialNum,
+        materialUnit: row.materialUnit,
+        materialPrice: row.materialPrice
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.storeService.updateStore(row._id, result).pipe(
+          mergeMap(() => this.storeService.getAllStore()))
+          .subscribe((results) => {
+            this.rows = results;
+          });
       }
     });
   }
@@ -67,11 +57,27 @@ export class StoreComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+          this.storeService.addStore(result).pipe(
+            mergeMap(() => this.storeService.getAllStore()))
+            .subscribe((results) => {
+              this.rows = results;
+            });
+        }
+    });
+  }
+  confirmMatDelete(row): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '500px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.status === true) {
+        this.storeService.deleteStore(row._id).
+        mergeMap(() => this.storeService.getAllStore())
+          .subscribe((results) => {
+            this.rows = results;
+          });
       }
     });
   }
@@ -82,13 +88,13 @@ export class StoreComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
-      }
+      // if (result !== undefined) {
+      //   this.storeService.addMaterial(result).pipe(
+      //     mergeMap(() => this.storeService.getAllMaterial()))
+      //     .subscribe((results) => {
+      //       this.rows = results;
+      //     });
+      // }
     });
   }
 }

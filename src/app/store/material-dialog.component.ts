@@ -34,7 +34,6 @@ export class MatDialogComponent implements OnInit {
      */
     onSave() {
         const value = this.form.value;
-        console.log(value);
         this.dialogRef.close(value);
     }
 }

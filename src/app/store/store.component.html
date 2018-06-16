@@ -2,38 +2,44 @@
   <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
     <h2>Store</h2>
     <div fxFlex></div>
-    <app-button-card-title (onClick)="insertMaterial()">
-        <mat-icon>add</mat-icon>Material</app-button-card-title>
     </mat-card-subtitle>
   <mat-tab-group>
       <mat-tab label="วัสดุทั้งหมด">
+      <app-button-card-title (onClick)="insertMaterial()">
+              <mat-icon>add</mat-icon>Material</app-button-card-title>
   <mat-card-content>
     <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
-      <ngx-datatable-column name="รหัสวัตถุดิบ" >
+      <ngx-datatable-column name="รหัสวัสดุ" >
         <ng-template let-value= "value" ngx-datatable-cell-template>
-          {{value.matID}}
+          {{value.materialId}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="ชื่อวัตถุดิบ">
+      <ngx-datatable-column name="ชื่อวัสดุ" >
         <ng-template let-value= "value" ngx-datatable-cell-template>
-          {{value.nameMat}}
+          {{value.materialName}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="สต้อก">
+      <ngx-datatable-column name="จำนวนที่มี">
         <ng-template let-value= "value" ngx-datatable-cell-template>
-          {{value.stock}}
+          {{value.materialNum}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="หน่วย">
+        <ng-template let-value= "value" ngx-datatable-cell-template>
+          {{value.materialUnit}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ราคา">
           <ng-template let-value= "value" ngx-datatable-cell-template>
-            {{value.price}}
+            {{value.materialPrice}}
           </ng-template>
         </ngx-datatable-column>
       <ngx-datatable-column name="แก้ไข">
         <ng-template let-value= "value" ngx-datatable-cell-template>
-          <button mat-mini-fab color="primary" (click)="EditMat()">
-            <mat-icon>edit</mat-icon>
-          </button>
+          <button mat-mini-fab color="primary" (click)="editMaterial(value)">
+            <mat-icon>edit</mat-icon></button>
+          <button mat-mini-fab color="warn" (click)="confirmMatDelete(value)">
+            <mat-icon>delete</mat-icon></button>
         </ng-template>
         </ngx-datatable-column>
     </ngx-datatable>
