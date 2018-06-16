@@ -1,0 +1,11 @@
+<content fxLayout="column">
+    <app-input-text-normal [value]="data.materialId" name="materialId" placeholder="รหัสวัสดุ" text="รหัสวัสดุ" fxFlex [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.materialName" name="materialName" placeholder="ชื่อวัสดุ" text="ชื่อวัสดุ" fxFlex [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.materialNum" name="materialNum" placeholder="จำนวน" text="จำนวน" fxFlex [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.materialUnit" name="materialUnit" placeholder="หน่วย" text="หน่วย" fxFlex [formGroup]='form'></app-input-text-normal>
+    <app-input-text-normal [value]="data.materialPrice" name="materialPrice" placeholder="ราคา/หน่วย" text="ราคา" fxFlex [formGroup]='form'></app-input-text-normal>
+</content>
+<footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+    <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
+</footer>
