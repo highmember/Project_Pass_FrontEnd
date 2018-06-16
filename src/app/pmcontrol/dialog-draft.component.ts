@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmployeeService } from '../shared/service/employee.service';
+import { removeSummaryDuplicates } from '@angular/compiler';
+import { ProjectService } from '../shared/service/project.service';
 @Component({
   selector: 'app-dialog-draft',
   templateUrl: './dialog-draft.component.html',
@@ -27,14 +30,16 @@ export class DialogDraftComponent implements OnInit {
   public file: String;
   public scopeStart: Date;
   public scopeEnd: Date;
-  public scopeMat: Date;
-  public nameDraft = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
-
+  public nameEm = [];
+  public nameDraft = [];
+  public product = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DialogDraftComponent>,
-    private _formBuilder: FormBuilder
+    private employeeService: EmployeeService,
+    private _formBuilder: FormBuilder,
+    private projectService: ProjectService
   ) { }
   /**
    * create from group and set data of sale
@@ -51,9 +56,22 @@ export class DialogDraftComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.scopeEnd, Validators.required]
     });
-    this.matFormGroup = this.formBuilder.group({});
+    this.employeeService.getAllEmployee().subscribe((results) => {
+      this.nameEm = results;
+      this.checkName();
+    });
+    this.projectService.getAllProject().subscribe((results) => {
+      console.log(results)
+      this.product = results;
+    });
   }
-
+  checkName() {
+    this.nameEm.forEach(element => {
+      if (element.employeeType === 'Draft') {
+        this.nameDraft.push(element.employeeName);
+      }
+    });
+  }
   next() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.draftName, Validators.required]

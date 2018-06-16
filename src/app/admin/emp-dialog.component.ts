@@ -15,6 +15,7 @@ export class AdminEmpDialogComponent implements OnInit {
    *  variable 'form' use FormGroup for manage form
   */
   public form: FormGroup;
+  public employeeType = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
