@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   public sale: any[];
   public pm: any[];
   public employee: any[];
+  public employeeType = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
   constructor(
     private dialog: MatDialog,
     private customerService: CustomerService,
