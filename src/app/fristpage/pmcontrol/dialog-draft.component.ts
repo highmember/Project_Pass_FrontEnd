@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../shared/service/employee.service';
 import { removeSummaryDuplicates } from '@angular/compiler';
-import { ProjectService } from '../shared/service/project.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
+
 @Component({
   selector: 'app-dialog-draft',
   templateUrl: './dialog-draft.component.html',
@@ -30,6 +31,7 @@ export class DialogDraftComponent implements OnInit {
   public file: String;
   public scopeStart: Date;
   public scopeEnd: Date;
+  public scopeMat: Date;
   public nameEm = [];
   public nameDraft = [];
   public product = [];
@@ -60,10 +62,9 @@ export class DialogDraftComponent implements OnInit {
       this.nameEm = results;
       this.checkName();
     });
-    this.projectService.getAllProject().subscribe((results) => {
-      console.log(results)
-      this.product = results;
-    });
+    // this.projectService.getAllProject().subscribe((results) => {
+    //   this.product = results;
+    // });
   }
   checkName() {
     this.nameEm.forEach(element => {
@@ -91,7 +92,6 @@ export class DialogDraftComponent implements OnInit {
       });
   }
   selectDraft() {
-    console.log(this.draftName);
     this.draftName = this.formDraft.value.nameDraft;
     this.next();
   }

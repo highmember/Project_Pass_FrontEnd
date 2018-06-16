@@ -33,7 +33,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="จัดการ" [maxWidth]="170">
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-          <button mat-mini-fab color="primary" (click)="viewFile()">
+          <button mat-mini-fab color="primary" (click)="editWork(value)"> 
             <mat-icon>build</mat-icon>
           </button>
         </ng-template>
