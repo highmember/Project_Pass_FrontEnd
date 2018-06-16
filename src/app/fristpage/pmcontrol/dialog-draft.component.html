@@ -3,7 +3,7 @@
     <ng-template matStepLabel>Select Draft</ng-template>
     <mat-card class="card">
       <content fxLayout="column">
-        <app-dropdown [data]="nameDraft" [value]="data.nameDraft" text="ขื่อ-นามสกุล" placeholder="Select Draft" name="nameDraft" fxFlex [formGroup]='formDraft'></app-dropdown>
+        <app-dropdown [data]="nameDraft" [value]="data.employeeName" text="ขื่อ-นามสกุล" placeholder="Select Draft" name="nameDraft" fxFlex [formGroup]='formDraft'></app-dropdown>
       </content>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" matStepperNext [disabled]="formDraft.invalid" (click)="selectDraft()">ต่อไป</button>
@@ -11,6 +11,10 @@
     </mat-card>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <ng-template matStepLabel>Select Product</ng-template>
+    <app-dropdown [data]="projectFile" [value]="data.projectFile" text="Product" placeholder="Select Product" name="projectFile" fxFlex [formGroup]='formFile'></app-dropdown>
+    <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="selectFile()">ต่อไป</button>
+
     <ng-template matStepLabel>Select File</ng-template>
     <!-- <mat-card class="content">
       <mat-card-content *ngFor="let value of product">

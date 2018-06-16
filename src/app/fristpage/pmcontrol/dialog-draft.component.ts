@@ -1,6 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
+=======
+import { EmployeeService } from '../shared/service/employee.service';
+
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
 import { removeSummaryDuplicates } from '@angular/compiler';
 import { EmployeeService } from '../../shared/service/employee.service';
 import { ProjectService } from '../../shared/service/project.service';
@@ -21,36 +26,55 @@ export class DialogDraftComponent implements OnInit {
   */
   public form: FormGroup;
   public formDraft: FormGroup;
+  public formFile: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
   public matFormGroup: FormGroup;
-  public draftName: String;
+  public draftN: String;
   // public matNum: any[];
   public matItemAll = [];
-  public file: String;
+  public file = [];
   public scopeStart: Date;
   public scopeEnd: Date;
   public scopeMat: Date;
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
   public nameEm = [];
+=======
+  public nameEM: any[];
+  public fileProject: any[];
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
   public nameDraft = [];
+  public projectFile = [];
+  public nameEm = [];
   public product = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DialogDraftComponent>,
-    private employeeService: EmployeeService,
+
     private _formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
+
     private projectService: ProjectService
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
+    this.employeeService.getAllEmployee().subscribe((results) => {
+      this.nameEM = results;
+      this.checkName();
+    });
+    this.projectService.getAllProject().subscribe((results) => {
+      this.fileProject = results;
+      this.checkFile();
+    });
     this.form = this.formBuilder.group({});
     this.formDraft = this.formBuilder.group({});
+    this.formFile = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draftName, Validators.required]
+      firstCtrl: [this.nameEM, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.file, Validators.required]
@@ -73,9 +97,21 @@ export class DialogDraftComponent implements OnInit {
       }
     });
   }
+  checkName() {
+    this.nameEM.forEach(element => {
+      this.nameDraft.push(element.employeeName);
+    });
+  }
+  checkFile() {
+    this.fileProject.forEach(element => {
+       this.projectFile.push(element.projectFile);
+       console.log(this.projectFile);
+    });
+    // console.log(this.fileProject);
+  }
   next() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.draftName, Validators.required]
+      firstCtrl: [this.nameEM, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.file, Validators.required]
@@ -85,18 +121,23 @@ export class DialogDraftComponent implements OnInit {
     });
   }
   addMat() {
-      this.matItemAll.push({
-        matT: this.matFormGroup.value.matItem,
-        numT: this.matFormGroup.value.matNum,
-        dateT: this.scopeMat
-      });
+    this.matItemAll.push({
+      matT: this.matFormGroup.value.matItem,
+      numT: this.matFormGroup.value.matNum,
+      dateT: this.scopeMat
+    });
   }
   selectDraft() {
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
     this.draftName = this.formDraft.value.nameDraft;
+=======
+    this.draftN = this.formDraft.value.nameDraft;
+    console.log(this.draftN);
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
     this.next();
   }
   selectFile() {
-    this.file = 'test';
+    // this.file =
     this.next();
   }
   selectDate() {
@@ -113,7 +154,7 @@ export class DialogDraftComponent implements OnInit {
    */
   onSave() {
     const value = {
-      draftName: this.draftName,
+      draftName: this.draftN,
       draftFile: this.file,
       draftStart: this.scopeStart,
       draftEnd: this.scopeEnd,
