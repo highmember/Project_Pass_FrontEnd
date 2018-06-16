@@ -78,7 +78,7 @@ export class DialogDraftComponent implements OnInit {
       this.checkName();
     });
     this.projectService.getAllProject().subscribe((results) => {
-      console.log(results)
+      console.log(results);
       this.product = results;
     });
   }
