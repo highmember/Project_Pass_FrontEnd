@@ -21,22 +21,16 @@ import { P1Component } from './p1/p1.component';
 import { P1DialogComponent } from './p1/p1-dialog.component';
 import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
 import { P1UpdateDialogComponent } from './p1/p1-update.dialog.component';
-import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
-import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
 import { MatInputModule } from '@angular/material/input';
 import { enableProdMode } from '@angular/core';
-import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.component';
-import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
-import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
-import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
-import { FristpageComponent } from './pmcontrol/fristpage/fristpage.component';
+import { FristpageComponent } from './fristpage/fristpage.component';
 import { MatListModule } from '@angular/material/list';
 
 import { ProjectService } from './shared/service/project.service';
 import { CustomerService } from './shared/service/customer.service';
 import { SaleFileDialogComponent } from './sale/sale-file-dialog.component';
 import { AdminComponent } from './admin/admin.component';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { CustomerDialogComponent } from './admin/customer-dialog.component';
 import { AdminSaleDialogComponent } from './admin/sale-dialog.component';
 import { AdminPmDialogComponent } from './admin/pm-dialog.component';
@@ -45,16 +39,22 @@ import { EmployeeService } from './shared/service/employee.service';
 import { SaleService } from './shared/service/sale.service';
 import { PmService } from './shared/service/pm.service';
 
-import { FristTimeProjectComponent } from './pmcontrol/frist-time-project/frist-time-project.component';
 import { ViewdialogComponent } from './store/view-dialog.component';
 import { MatDialogComponent } from './store/material-dialog.component';
 import { StoreComponent } from './store/store.component';
 import { DraftComponent } from './draft/draft.component';
 import { DraftfileComponent } from './draft/draft-file-dailog.component';
 import { StoreService } from './shared/service/store.service';
+import { DialogDraftComponent } from './fristpage/pmcontrol/dialog-draft.component';
+import { AssignPart1Component } from './fristpage/pmcontrol/assign-part1/assign-part1.component';
+import { AssignPart3Component } from './fristpage/pmcontrol/assign-part3/assign-part3.component';
+import { AssignPart4Component } from './fristpage/pmcontrol/assign-part4/assign-part4.component';
+import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-part2.component';
 
 const appRoutes: Routes = [
-  { path: 'test', component: AppComponent }
+  { path: '', component: AppComponent},
+  // { path: 'admin', component: AdminComponent },
+  // { path: 'Pmcontrol', component: PmcontrolComponent },
 ];
 enableProdMode();
 @NgModule({
@@ -69,7 +69,6 @@ enableProdMode();
     P1DialogComponent,
     P1FileDialogComponent,
     P1UpdateDialogComponent,
-    PmcontrolComponent,
     DialogDraftComponent,
     AssignPart1Component,
     AssignPart2Component,
@@ -81,7 +80,6 @@ enableProdMode();
     AdminSaleDialogComponent,
     AdminPmDialogComponent,
     AdminEmpDialogComponent,
-    FristTimeProjectComponent,
     ViewdialogComponent,
     MatDialogComponent,
     StoreComponent,
@@ -97,10 +95,13 @@ enableProdMode();
     BrowserModule,
     HttpClientModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true }
+    ),
     MatInputModule,
     MatTabsModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [
     JwtService,

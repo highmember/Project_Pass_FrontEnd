@@ -1,10 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
+=======
 import { EmployeeService } from '../shared/service/employee.service';
 
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
 import { removeSummaryDuplicates } from '@angular/compiler';
-import { ProjectService } from '../shared/service/project.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
+
 @Component({
   selector: 'app-dialog-draft',
   templateUrl: './dialog-draft.component.html',
@@ -33,8 +38,12 @@ export class DialogDraftComponent implements OnInit {
   public scopeStart: Date;
   public scopeEnd: Date;
   public scopeMat: Date;
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
+  public nameEm = [];
+=======
   public nameEM: any[];
   public fileProject: any[];
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
   public nameDraft = [];
   public projectFile = [];
   public nameEm = [];
@@ -77,10 +86,9 @@ export class DialogDraftComponent implements OnInit {
       this.nameEm = results;
       this.checkName();
     });
-    this.projectService.getAllProject().subscribe((results) => {
-      console.log(results)
-      this.product = results;
-    });
+    // this.projectService.getAllProject().subscribe((results) => {
+    //   this.product = results;
+    // });
   }
   checkName() {
     this.nameEm.forEach(element => {
@@ -120,8 +128,12 @@ export class DialogDraftComponent implements OnInit {
     });
   }
   selectDraft() {
+<<<<<<< HEAD:src/app/fristpage/pmcontrol/dialog-draft.component.ts
+    this.draftName = this.formDraft.value.nameDraft;
+=======
     this.draftN = this.formDraft.value.nameDraft;
     console.log(this.draftN);
+>>>>>>> 55b433f5cdf6205ca4176b141239850d57eaf07e:src/app/pmcontrol/dialog-draft.component.ts
     this.next();
   }
   selectFile() {

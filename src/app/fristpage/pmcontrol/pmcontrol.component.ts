@@ -5,6 +5,7 @@ import { AssignPart1Component } from './assign-part1/assign-part1.component';
 import { AssignPart2Component } from './assign-part2/assign-part2.component';
 import { AssignPart3Component } from './assign-part3/assign-part3.component';
 import { AssignPart4Component } from './assign-part4/assign-part4.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class PmcontrolComponent implements OnInit {
   public rows: any[];
   public projectCode: String;
   public customer: String;
+  public programsId;
   tiles = [
     { text: 'Draft', cols: 1, rows: 1, color: 'lightblue' },
     { text: 'Part1', cols: 1, rows: 1, color: 'lightblue' },
@@ -27,8 +29,10 @@ export class PmcontrolComponent implements OnInit {
   mode = 'determinate';
   value = 100;
   constructor(
+    private route: ActivatedRoute,
     private dialog: MatDialog,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.projectCode = '32321312312';
