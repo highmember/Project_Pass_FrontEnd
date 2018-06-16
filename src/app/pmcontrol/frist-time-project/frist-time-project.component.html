@@ -17,19 +17,18 @@
         <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-              {{value.name}}
+              {{value.codeProduct}}
             </mat-panel-title>
             <mat-panel-description>
-              จำนวนแบบ: {{value.files.length}}
+              <!-- จำนวนแบบ: {{value.file.length}} -->
             </mat-panel-description>
           </mat-expansion-panel-header>
       <mat-list role="list1">
-      <div *ngIf="value.name==='wheels'">
-        <div *ngFor="let val of product01">
+        <div *ngFor="let val of products">
           {{val.file}}
         </div>
-      </div>
-      <div *ngIf="value.name==='door_left'">
+      
+      <!-- <div *ngIf="value.name==='door_left'">
           <div *ngFor="let val of product02">
             {{val.file}}
           </div>
@@ -38,7 +37,7 @@
             <div *ngFor="let val of product03">
               {{val.file}}
             </div>
-          </div> 
+          </div>  -->
       </mat-list>
     </mat-expansion-panel>
     </ng-template>

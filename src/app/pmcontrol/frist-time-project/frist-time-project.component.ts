@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../shared/service/project.service';
 
 @Component({
   selector: 'app-frist-time-project',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frist-time-project.component.css']
 })
 export class FristTimeProjectComponent implements OnInit {
+  output: any;
   public rows: any[];
   public products: any[];
   public product01: any[];
@@ -20,9 +22,13 @@ export class FristTimeProjectComponent implements OnInit {
     'P3',
     'P4'
   ];
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
+    this.projectService.getAllProject().subscribe((results) => {
+      this.products = results;
+    });
+
     console.log(this.product01);
     this.projectCode = '0306001';
     this.saleName = 'Mr...... ......';
@@ -71,20 +77,20 @@ export class FristTimeProjectComponent implements OnInit {
       }
     ];
 
-    this.products = [
-      {
-        name: 'wheels',
-        files: this.product01
-      },
-      {
-        name: 'door_left',
-        files: this.product02
-      },
-      {
-        name: 'door_right',
-        files: this.product03
-      }
-    ];
+    // this.products = [
+    //   {
+    //     name: 'wheels',
+    //     files: this.product01
+    //   },
+    //   {
+    //     name: 'door_left',
+    //     files: this.product02
+    //   },
+    //   {
+    //     name: 'door_right',
+    //     files: this.product03
+    //   }
+    // ];
     console.log(this.product01);
 
     this.rows = [{
@@ -97,6 +103,9 @@ export class FristTimeProjectComponent implements OnInit {
     }];
 
 
+  }
+  show() {
+    this.output = this.products;
   }
 
 }
