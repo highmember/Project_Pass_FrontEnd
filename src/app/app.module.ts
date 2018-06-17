@@ -50,6 +50,8 @@ import { AssignPart1Component } from './fristpage/pmcontrol/assign-part1/assign-
 import { AssignPart3Component } from './fristpage/pmcontrol/assign-part3/assign-part3.component';
 import { AssignPart4Component } from './fristpage/pmcontrol/assign-part4/assign-part4.component';
 import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-part2.component';
+import { PmcontrolComponent } from './fristpage/pmcontrol/pmcontrol.component';
+import { AssignService } from './shared/service/assign.service';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent},
@@ -84,7 +86,8 @@ enableProdMode();
     MatDialogComponent,
     StoreComponent,
     DraftComponent,
-    DraftfileComponent
+    DraftfileComponent,
+    PmcontrolComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -112,7 +115,8 @@ enableProdMode();
     PmService,
     SaleService,
     EmployeeService,
-    StoreService
+    StoreService,
+    AssignService
   ],
   entryComponents: [
     TestDialogComponent,

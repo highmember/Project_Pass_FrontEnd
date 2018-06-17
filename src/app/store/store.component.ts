@@ -12,8 +12,8 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
   styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit {
-
-  public rows: any[];
+  public temp: any[];
+  public rows = [];
   public datamat: any[];
   public matback: any[];
   public customer: any[];
@@ -25,7 +25,15 @@ export class StoreComponent implements OnInit {
 
   ngOnInit() {
     this.storeService.getAllStore().subscribe((results) => {
-      this.rows = results;
+      this.temp = results;
+      this.check();
+    });
+  }
+  check() {
+    this.temp.forEach(element => {
+      if (element.materialName !== 'อื่นๆ') {
+        this.rows.push(element);
+      }
     });
   }
   editMaterial(row): void {
@@ -57,12 +65,12 @@ export class StoreComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-          this.storeService.addStore(result).pipe(
-            mergeMap(() => this.storeService.getAllStore()))
-            .subscribe((results) => {
-              this.rows = results;
-            });
-        }
+        this.storeService.addStore(result).pipe(
+          mergeMap(() => this.storeService.getAllStore()))
+          .subscribe((results) => {
+            this.rows = results;
+          });
+      }
     });
   }
   confirmMatDelete(row): void {
@@ -74,7 +82,7 @@ export class StoreComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.status === true) {
         this.storeService.deleteStore(row._id).
-        mergeMap(() => this.storeService.getAllStore())
+          mergeMap(() => this.storeService.getAllStore())
           .subscribe((results) => {
             this.rows = results;
           });
