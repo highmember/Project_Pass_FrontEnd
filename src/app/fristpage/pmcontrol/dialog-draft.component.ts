@@ -35,7 +35,6 @@ export class DialogDraftComponent implements OnInit {
   public scopeMat: Date;
   public scopeMatNew: Date;
   public nameEm = [];
-  public nameEM: any[];
   public fileProject: any[];
   public nameDraft = [];
   public productCode = [];
@@ -60,7 +59,7 @@ export class DialogDraftComponent implements OnInit {
   */
   ngOnInit() {
     this.employeeService.getAllEmployee().subscribe((results) => {
-      this.nameEM = results;
+      this.nameEm = results;
       this.checkName();
     });
     this.projectService.getAllProject().subscribe((results) => {
@@ -73,17 +72,13 @@ export class DialogDraftComponent implements OnInit {
     this.matFormGroup = this.formBuilder.group({});
     this.matNewFormGroup = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.nameEM, Validators.required]
+      firstCtrl: [this.nameEm, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.file, Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.scopeEnd, Validators.required]
-    });
-    this.employeeService.getAllEmployee().subscribe((results) => {
-      this.nameEm = results;
-      this.checkName();
     });
   }
   checkName() {
@@ -105,7 +100,7 @@ export class DialogDraftComponent implements OnInit {
 
   next() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.nameEM, Validators.required]
+      firstCtrl: [this.nameEm, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: [this.file, Validators.required]
@@ -117,17 +112,19 @@ export class DialogDraftComponent implements OnInit {
   addMat() {
     this.matItemAll.push({
       matId: this.data.matItem,
-      matT: this.data.matItem.materialName,
-      numT: this.matFormGroup.value.matNum,
-      dateT: this.scopeMat
+      matItem: this.data.matItem.materialName,
+      matType: this.matFormGroup.value.typeMat,
+      matNum: this.matFormGroup.value.matNum,
+      matDate: this.scopeMat
     });
   }
   addMatNew() {
     this.matItemAll.push({
       matId: '',
-      matT: this.matNewFormGroup.value.matItemNew,
-      numT: this.matNewFormGroup.value.matNumNew,
-      dateT: this.scopeMatNew
+      matItem: this.matNewFormGroup.value.matItemNew,
+      matType: this.matNewFormGroup.value.matTypeNew,
+      matNum: this.matNewFormGroup.value.matNumNew,
+      matDate: this.scopeMatNew
     });
   }
   selectDraft() {

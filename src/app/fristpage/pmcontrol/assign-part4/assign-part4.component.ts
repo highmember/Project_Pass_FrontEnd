@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmployeeService } from '../../../shared/service/employee.service';
+import { ProjectService } from '../../../shared/service/project.service';
 
 @Component({
   selector: 'app-assign-part4',
@@ -8,106 +10,137 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./assign-part4.component.css']
 })
 export class AssignPart4Component implements OnInit {
-  matFormGroup: FormGroup;
-  /**
- *  variable 'form' use FormGroup for manage form
-*/
-  public formManager: FormGroup;
-  public form: FormGroup;
+  public formEmp: FormGroup;
+  public formFile: FormGroup;
+  public matFormGroup: FormGroup;
+  public matNewFormGroup: FormGroup;
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
-  public file: String;
-  public manager: String;
-  // public matNum: any[];
+  public empName: any[];
+  public empP4 = [];
+  public projectFile: any[];
+  public productCode = [];
+  public products = [];
+  public empN: String;
+  public partScopeStart: Date;
+  public partScopeEnd: Date;
+  public partNote: String;
   public matItemAll = [];
-  public scopeStart: Date;
-  public scopeEnd: Date;
-  public scopeMat: Date;
-  public managerName = ['Mr.AAAAA AAAAA', 'Mr.BBBBB BBBBB', 'Mr.CCCCC CCCCC', 'Mr.DDDDD DDDDD'];
+  public matScope: Date;
+  public matScopeNew: Date;
+  public matType = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AssignPart4Component>,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private employeeService: EmployeeService,
+    private projectService: ProjectService,
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
-    this.form = this.formBuilder.group({});
-    this.formManager = this.formBuilder.group({});
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.manager, Validators.required]
+    this.formEmp = this.formBuilder.group({});
+    this.employeeService.getAllEmployee().subscribe((results) => {
+      this.empName = results;
+      this.checkName();
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: [this.file, Validators.required]
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.scopeEnd, Validators.required]
+    this.formFile = this.formBuilder.group({});
+    this.projectService.getAllProject().subscribe((results) => {
+      this.projectFile = results;
+      this.checkFile();
     });
     this.matFormGroup = this.formBuilder.group({});
+    this.matNewFormGroup = this.formBuilder.group({});
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: [this.empName, Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: [this.projectFile, Validators.required]
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      firstCtrl: [this.partScopeEnd, Validators.required]
+    });
   }
 
   next() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: [this.manager, Validators.required]
+      firstCtrl: [this.empName, Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: [this.file, Validators.required]
+      secondCtrl: [this.projectFile, Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
-      firstCtrl: [this.scopeEnd, Validators.required]
+      firstCtrl: [this.partScopeEnd, Validators.required]
     });
   }
 
+  // -------------------------------------------------------------------------------------------------------------------
+  checkName() {
+    this.empName.forEach(element => {
+      if (element.employeeType === 'Part4') {
+        this.empP4.push(element.employeeName);
+      }
+    });
+  }
+  selectEmp() {
+    this.empN = this.formEmp.value.empP4;
+    this.next();
+  }
+// -------------------------------------------------------------------------------------------------------------------
+  checkFile() {
+    this.projectFile.forEach(element => {
+      if (element.projectCode === '010618001') {
+        element.projectFile.forEach(value => {
+          this.productCode.push(value.codeProduct);
+        });
+      }
+    });
+  }
+  addProducts() {
+    this.products.push(this.formFile.value.productCode);
+  }
+  checkProductFile() {
+    this.next();
+  }
+  // -------------------------------------------------------------------------------------------------------------------
   addMat() {
     this.matItemAll.push({
-      matT: this.matFormGroup.value.matItem,
-      numT: this.matFormGroup.value.matNum,
-      dateT: this.scopeMat
-
+      matId: this.data.matItem,
+      matItem: this.data.matItem.materialName,
+      matType: this.matFormGroup.value.matType,
+      matNum: this.matFormGroup.value.matNum,
+      matDate: this.matScope
     });
-    console.log(this.matFormGroup.value);
   }
-  selectManager() {
-    this.manager = this.formManager.value.managerName;
-    this.next();
+  addMatNew() {
+    this.matItemAll.push({
+      matId: '',
+      matItem: this.matNewFormGroup.value.matItemNew,
+      matType: this.matNewFormGroup.value.matTypeNew,
+      matNum: this.matNewFormGroup.value.matNumNew,
+      matDate: this.matScopeNew
+    });
   }
-  selectFile() {
-    this.file = 'test';
-    this.next();
-  }
-  selectDate() {
-    this.next();
-  }
-  insertMat() {
-
-  }
-
-  /**
-   * set value in close() for return
-   */
-  onClose() {
-    this.dialogRef.close(/*sent value to tab-supervision*/);
-  }
-  /**
-   * save value in variable and return
-   */
+  // -------------------------------------------------------------------------------------------------------------------
   onSave() {
     const value = {
-      file: this.file,
-      scopeStart: this.scopeStart,
-      scopeEnd: this.scopeEnd,
+      assignProject: this.data.project[0]._id,
+      assignPMName: this.data.project[0].pm,
+      assignEmpName: this.empN,
+      assignFile: this.products,
+      assignScopeStart: this.partScopeStart,
+      assignScopeEnd: this.partScopeEnd,
+      assignMat: this.matItemAll,
+      assignProgress: this.data.project[0].projectProgress,
+      assignNote: this.partNote,
+      assignEmpType: 'Part4',
     };
     this.dialogRef.close(value);
   }
-  onSaveMat() {
-    const vMat = {
-      matItemAll: this.matItemAll
-    };
-    this.dialogRef.close(vMat);
-  }
 }
+
 

@@ -1,3 +1,4 @@
+<h1>Draft</h1>
 <mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
     <ng-template matStepLabel>Select Draft</ng-template>
@@ -85,7 +86,7 @@
         <div fxLayout="row">
           <app-input-text-normal [value]="data.matItemNew" name="matItemNew" placeholder="วัสดุ" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
           <app-input-text-normal [value]="data.matNumNew" name="matNumNew" placeholder="จำนวน" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
-          <app-input-text-normal [value]="data.typeMatNew" name="typeMat" placeholder="หน่วย" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
+          <app-input-text-normal [value]="data.matTypeNew" name="matTypeNew" placeholder="หน่วย" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
           <ul></ul>
           <mat-form-field>
             <input matInput [matDatepicker]="picker4" placeholder="Choose a Date" fxFlex [(ngModel)]="scopeMatNew" name="scopeMatNew">
@@ -105,7 +106,7 @@
         <h3>List of Material</h3>
         <mat-card class="content">
           <mat-card-content *ngFor="let mat of matItemAll">
-            {{mat.matT}} {{mat.numT}} {{scopeMat | date: "dd-MM-yyyy"}}
+            {{mat.matItem}} {{mat.matNum}} {{mat.matType}} {{scopeMat | date: "dd-MM-yyyy"}}
           </mat-card-content>
         </mat-card>
         <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">

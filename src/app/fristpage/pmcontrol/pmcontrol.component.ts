@@ -79,15 +79,21 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart1Component, {
       width: '1000px',
       data: {
+        project: this.rows
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.assignService.addAssign(result).pipe(
+          mergeMap(() => this.assignService.getAllAssign()))
+          .subscribe((results) => {
+            this.assign = results;
+            this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
+              this.projectService.getAllProject())
+              .subscribe((results1) => {
+                this.rows = results1;
+              });
+          });
       }
     });
   }
@@ -95,15 +101,21 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart2Component, {
       width: '1000px',
       data: {
+        project: this.rows
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.assignService.addAssign(result).pipe(
+          mergeMap(() => this.assignService.getAllAssign()))
+          .subscribe((results) => {
+            this.assign = results;
+            this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
+              this.projectService.getAllProject())
+              .subscribe((results1) => {
+                this.rows = results1;
+              });
+          });
       }
     });
   }
@@ -111,15 +123,21 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart3Component, {
       width: '1000px',
       data: {
+        project: this.rows
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+       this.assignService.addAssign(result).pipe(
+          mergeMap(() => this.assignService.getAllAssign()))
+          .subscribe((results) => {
+            this.assign = results;
+            this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
+              this.projectService.getAllProject())
+              .subscribe((results1) => {
+                this.rows = results1;
+              });
+          });
       }
     });
   }
@@ -127,15 +145,21 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart4Component, {
       width: '1000px',
       data: {
+        project: this.rows
       }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        // this.degreeService.addDegree(result).pipe(
-        //   mergeMap(() => this.degreeService.getAllDegree()))
-        //   .subscribe((results) => {
-        //     this.rows = results;
-        //   });
+        this.assignService.addAssign(result).pipe(
+          mergeMap(() => this.assignService.getAllAssign()))
+          .subscribe((results) => {
+            this.assign = results;
+            this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
+              this.projectService.getAllProject())
+              .subscribe((results1) => {
+                this.rows = results1;
+              });
+          });
       }
     });
   }
