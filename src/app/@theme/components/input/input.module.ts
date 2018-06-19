@@ -11,6 +11,7 @@ import { DateTimeComponent } from './date-time/date-time.component';
 import { MatNativeDateModule } from '@angular/material';
 import { NumberComponent } from './number/number.component';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { AutocompleteStoreComponent } from './autocomplete-Store/autocomplete-Store.component';
 @NgModule({
   imports: [
     MaterialModule,
@@ -28,6 +29,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     DateTimeComponent,
     NumberComponent,
     RadioButtonComponent,
+    AutocompleteStoreComponent
   ],
   exports: [
     TextNormalComponent,
@@ -37,6 +39,7 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     DateTimeComponent,
     NumberComponent,
     RadioButtonComponent,
+    AutocompleteStoreComponent
   ]
 })
 export class InputModule { }

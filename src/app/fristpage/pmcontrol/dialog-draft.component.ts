@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../shared/service/employee.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
+import { StoreService } from '../../shared/service/store.service';
 
-import { removeSummaryDuplicates } from '@angular/compiler';
-import { ProjectService } from '../shared/service/project.service';
 @Component({
   selector: 'app-dialog-draft',
   templateUrl: './dialog-draft.component.html',
@@ -15,7 +15,6 @@ import { ProjectService } from '../shared/service/project.service';
  * manage about sale dialog insert, edit, delete data
  */
 export class DialogDraftComponent implements OnInit {
-  name: any;
   /**
    *  variable 'form' use FormGroup for manage form
   */
@@ -26,19 +25,26 @@ export class DialogDraftComponent implements OnInit {
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
   public matFormGroup: FormGroup;
+  public matNewFormGroup: FormGroup;
   public draftN: String;
-  // public matNum: any[];
   public matItemAll = [];
   public file = [];
   public scopeStart: Date;
   public scopeEnd: Date;
+  public note: String;
   public scopeMat: Date;
+  public scopeMatNew: Date;
+  public nameEm = [];
   public nameEM: any[];
   public fileProject: any[];
   public nameDraft = [];
-  public projectFile = [];
-  public nameEm = [];
+  public productCode = [];
   public product = [];
+  public matItem = [];
+  public matShow = [];
+  public products = [];
+  public matCheck = [];
+  public typeMat = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -46,7 +52,7 @@ export class DialogDraftComponent implements OnInit {
 
     private _formBuilder: FormBuilder,
     private employeeService: EmployeeService,
-
+    private storeService: StoreService,
     private projectService: ProjectService
   ) { }
   /**
@@ -65,6 +71,7 @@ export class DialogDraftComponent implements OnInit {
     this.formDraft = this.formBuilder.group({});
     this.formFile = this.formBuilder.group({});
     this.matFormGroup = this.formBuilder.group({});
+    this.matNewFormGroup = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.nameEM, Validators.required]
     });
@@ -78,23 +85,25 @@ export class DialogDraftComponent implements OnInit {
       this.nameEm = results;
       this.checkName();
     });
-    this.projectService.getAllProject().subscribe((results) => {
-      console.log(results);
-      this.product = results;
-    });
+
   }
   checkName() {
-    this.nameEM.forEach(element => {
-      this.nameDraft.push(element.employeeName);
+    this.nameEm.forEach(element => {
+      if (element.employeeType === 'Draft') {
+        this.nameDraft.push(element.employeeName);
+      }
     });
   }
   checkFile() {
     this.fileProject.forEach(element => {
-       this.projectFile.push(element.projectFile);
-       console.log(this.projectFile);
+      if (element.projectCode === '111111122123213') {
+        element.projectFile.forEach(value => {
+          this.productCode.push(value.codeProduct);
+        });
+      }
     });
-    // console.log(this.fileProject);
   }
+
   next() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.nameEM, Validators.required]
@@ -108,46 +117,43 @@ export class DialogDraftComponent implements OnInit {
   }
   addMat() {
     this.matItemAll.push({
-      matT: this.matFormGroup.value.matItem,
+      matId: this.data.matItem,
+      matT: this.data.matItem.materialName,
       numT: this.matFormGroup.value.matNum,
       dateT: this.scopeMat
     });
   }
+  addMatNew() {
+    this.matItemAll.push({
+      matId: '',
+      matT: this.matNewFormGroup.value.matItemNew,
+      numT: this.matNewFormGroup.value.matNumNew,
+      dateT: this.scopeMatNew
+    });
+  }
   selectDraft() {
     this.draftN = this.formDraft.value.nameDraft;
-    console.log(this.draftN);
     this.next();
   }
-  selectFile() {
-    // this.file =
-    this.next();
-  }
-  selectDate() {
-    this.next();
-  }
-  /**
-   * set value in close() for return
-   */
-  onClose() {
-    this.dialogRef.close(/*sent value to tab-supervision*/);
+  addProducts() {
+    this.products.push(this.formFile.value.productCode);
   }
   /**
    * save value in variable and return
    */
   onSave() {
     const value = {
-      draftName: this.draftN,
-      draftFile: this.file,
-      draftStart: this.scopeStart,
-      draftEnd: this.scopeEnd,
-      scopeEnd: this.scopeEnd,
+      assignProject: this.data.project[0]._id,
+      assignPMName: this.data.project[0].pm,
+      assignEmpName: this.draftN,
+      assignFile: this.products,
+      assignScopeStart: this.scopeStart,
+      assignScopeEnd: this.scopeEnd,
+      assignMat: this.matItemAll,
+      assignProgress: this.data.project[0].projectProgress,
+      assignNote: this.note,
+      assignEmpType: 'Draft',
     };
     this.dialogRef.close(value);
-  }
-  onSaveMat() {
-    const vMat = {
-      matItemAll: this.matItemAll
-    };
-    this.dialogRef.close(vMat);
   }
 }
