@@ -52,6 +52,12 @@ import { AssignPart4Component } from './fristpage/pmcontrol/assign-part4/assign-
 import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-part2.component';
 import { PmcontrolComponent } from './fristpage/pmcontrol/pmcontrol.component';
 import { AssignService } from './shared/service/assign.service';
+import { ViewdraftComponent } from './fristpage/pmview/viewdraft/viewdraft.component';
+import { ViewPart1Component } from './fristpage/pmview/view-part1/view-part1.component';
+import { Viewpart2Component } from './fristpage/pmview/viewpart2/viewpart2.component';
+import { Viewpart1Component } from './fristpage/pmview/viewpart1/viewpart1.component';
+import { Viewpart3Component } from './fristpage/pmview/viewpart3/viewpart3.component';
+import { Viewpart4Component } from './fristpage/pmview/viewpart4/viewpart4.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent},
@@ -87,7 +93,13 @@ enableProdMode();
     StoreComponent,
     DraftComponent,
     DraftfileComponent,
-    PmcontrolComponent
+    PmcontrolComponent,
+    ViewdraftComponent,
+    ViewPart1Component,
+    Viewpart2Component,
+    Viewpart1Component,
+    Viewpart3Component,
+    Viewpart4Component
   ],
   imports: [
     BrowserAnimationsModule,
