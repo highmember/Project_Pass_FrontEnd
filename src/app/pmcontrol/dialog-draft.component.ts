@@ -64,6 +64,7 @@ export class DialogDraftComponent implements OnInit {
     this.form = this.formBuilder.group({});
     this.formDraft = this.formBuilder.group({});
     this.formFile = this.formBuilder.group({});
+    this.matFormGroup = this.formBuilder.group({});
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.nameEM, Validators.required]
     });
@@ -80,13 +81,6 @@ export class DialogDraftComponent implements OnInit {
     this.projectService.getAllProject().subscribe((results) => {
       console.log(results);
       this.product = results;
-    });
-  }
-  checkName() {
-    this.nameEm.forEach(element => {
-      if (element.employeeType === 'Draft') {
-        this.nameDraft.push(element.employeeName);
-      }
     });
   }
   checkName() {
