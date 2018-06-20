@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProjectService } from '../../../shared/service/project.service';
-import { EmployeeService } from '../../../shared/service/employee.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
 
 @Component({
-  selector: 'app-assign-part2',
-  templateUrl: './assign-part2.component.html',
-  styleUrls: ['./assign-part2.component.css']
+  selector: 'app-assign-part1',
+  templateUrl: './assign-part1.component.html',
+  styleUrls: ['./assign-part1.component.css']
 })
-export class AssignPart2Component implements OnInit {
+export class AssignPart1Component implements OnInit {
   public formEmp: FormGroup;
   public formFile: FormGroup;
   public matFormGroup: FormGroup;
@@ -17,8 +17,8 @@ export class AssignPart2Component implements OnInit {
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
-  public empName: any[];
-  public empP2 = [];
+  public empName = [];
+  public empP1 = [];
   public projectFile: any[];
   public productCode = [];
   public products = [];
@@ -36,7 +36,7 @@ export class AssignPart2Component implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AssignPart2Component>,
+    private dialogRef: MatDialogRef<AssignPart1Component>,
     private _formBuilder: FormBuilder,
     private employeeService: EmployeeService,
     private projectService: ProjectService,
@@ -80,23 +80,22 @@ export class AssignPart2Component implements OnInit {
       firstCtrl: [this.partScopeEnd, Validators.required]
     });
   }
-
   // -------------------------------------------------------------------------------------------------------------------
   checkName() {
     this.empName.forEach(element => {
-      if (element.employeeType === 'Part2') {
-        this.empP2.push(element.employeeName);
+      if (element.employeeType === 'Part1') {
+        this.empP1.push(element.employeeName);
       }
     });
   }
   selectEmp() {
-    this.empN = this.formEmp.value.empP2;
+    this.empN = this.formEmp.value.empP1;
     this.next();
   }
   // -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
-      if (element.projectCode === '010618001') {
+      if (element.projectCode === '12345678') {
         element.projectFile.forEach(value => {
           this.productCode.push(value.codeProduct);
         });
@@ -113,10 +112,12 @@ export class AssignPart2Component implements OnInit {
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
   }
+
   deleteMsg(msg: String) {
     const index: number = this.assignFileNgx.indexOf(msg);
     this.assignFileNgx.splice(index, 1);
   }
+
   checkProductFile() {
     this.next();
   }
@@ -141,6 +142,7 @@ export class AssignPart2Component implements OnInit {
       matDate: this.matScopeNew
     });
     this.assignMatNgx = this.matItemAll;
+    console.log(this.assignMatNgx);
   }
   deleteMat(msg: String) {
     const index: number = this.assignMatNgx.indexOf(msg);
@@ -159,7 +161,7 @@ export class AssignPart2Component implements OnInit {
       assignMat: this.assignMatNgx,
       assignProgress: this.data.project[0].projectProgress,
       assignNote: this.partNote,
-      assignEmpType: 'Part2',
+      assignEmpType: 'Part1',
     };
     this.dialogRef.close(value);
   }

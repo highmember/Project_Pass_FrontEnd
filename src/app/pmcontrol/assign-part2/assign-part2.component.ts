@@ -1,20 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../shared/service/employee.service';
 import { ProjectService } from '../../shared/service/project.service';
-import { StoreService } from '../../shared/service/store.service';
+import { EmployeeService } from '../../shared/service/employee.service';
 
 @Component({
-  selector: 'app-dialog-draft',
-  templateUrl: './dialog-draft.component.html',
-  styleUrls: ['./dialog-draft.component.css']
+  selector: 'app-assign-part2',
+  templateUrl: './assign-part2.component.html',
+  styleUrls: ['./assign-part2.component.css']
 })
-
-/**
- * manage about sale dialog insert, edit, delete data
- */
-export class DialogDraftComponent implements OnInit {
+export class AssignPart2Component implements OnInit {
   public formEmp: FormGroup;
   public formFile: FormGroup;
   public matFormGroup: FormGroup;
@@ -23,7 +18,7 @@ export class DialogDraftComponent implements OnInit {
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
   public empName: any[];
-  public empDraft = [];
+  public empP2 = [];
   public projectFile: any[];
   public productCode = [];
   public products = [];
@@ -41,7 +36,7 @@ export class DialogDraftComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DialogDraftComponent>,
+    private dialogRef: MatDialogRef<AssignPart2Component>,
     private _formBuilder: FormBuilder,
     private employeeService: EmployeeService,
     private projectService: ProjectService,
@@ -71,6 +66,7 @@ export class DialogDraftComponent implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.partScopeEnd, Validators.required]
     });
+
   }
 
   next() {
@@ -88,16 +84,16 @@ export class DialogDraftComponent implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   checkName() {
     this.empName.forEach(element => {
-      if (element.employeeType === 'Draft') {
-        this.empDraft.push(element.employeeName);
+      if (element.employeeType === 'Part2') {
+        this.empP2.push(element.employeeName);
       }
     });
   }
   selectEmp() {
-    this.empN = this.formEmp.value.empDraft;
+    this.empN = this.formEmp.value.empP2;
     this.next();
   }
-// -------------------------------------------------------------------------------------------------------------------
+  // -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
       if (element.projectCode === '010618001') {
@@ -111,7 +107,8 @@ export class DialogDraftComponent implements OnInit {
     this.products.push({
       productCodeR: this.formFile.value.productCodeR,
       productCode: this.formFile.value.productCode,
-      fileNum: this.formFile.value.fileNum
+      fileNum: this.formFile.value.fileNum,
+      fileRecive: 0,
     });
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
@@ -133,6 +130,7 @@ export class DialogDraftComponent implements OnInit {
       matDate: this.matScope
     });
     this.assignMatNgx = this.matItemAll;
+    console.log(this.assignMatNgx);
   }
   addMatNew() {
     this.matItemAll.push({
@@ -161,10 +159,9 @@ export class DialogDraftComponent implements OnInit {
       assignMat: this.assignMatNgx,
       assignProgress: this.data.project[0].projectProgress,
       assignNote: this.partNote,
-      assignEmpType: 'Draft',
+      assignEmpType: 'Part2',
     };
     this.dialogRef.close(value);
   }
 }
-
 

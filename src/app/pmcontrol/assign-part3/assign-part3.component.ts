@@ -1,15 +1,15 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../../shared/service/employee.service';
-import { ProjectService } from '../../../shared/service/project.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
 
 @Component({
-  selector: 'app-assign-part1',
-  templateUrl: './assign-part1.component.html',
-  styleUrls: ['./assign-part1.component.css']
+  selector: 'app-assign-part3',
+  templateUrl: './assign-part3.component.html',
+  styleUrls: ['./assign-part3.component.css']
 })
-export class AssignPart1Component implements OnInit {
+export class AssignPart3Component implements OnInit {
   public formEmp: FormGroup;
   public formFile: FormGroup;
   public matFormGroup: FormGroup;
@@ -17,8 +17,8 @@ export class AssignPart1Component implements OnInit {
   public firstFormGroup: FormGroup;
   public secondFormGroup: FormGroup;
   public thirdFormGroup: FormGroup;
-  public empName = [];
-  public empP1 = [];
+  public empName: any[];
+  public empP3 = [];
   public projectFile: any[];
   public productCode = [];
   public products = [];
@@ -36,14 +36,12 @@ export class AssignPart1Component implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<AssignPart1Component>,
+    private dialogRef: MatDialogRef<AssignPart3Component>,
     private _formBuilder: FormBuilder,
     private employeeService: EmployeeService,
     private projectService: ProjectService,
   ) { }
-  /**
-   * create from group and set data of sale
-  */
+
   ngOnInit() {
     this.formEmp = this.formBuilder.group({});
     this.employeeService.getAllEmployee().subscribe((results) => {
@@ -66,7 +64,6 @@ export class AssignPart1Component implements OnInit {
     this.thirdFormGroup = this._formBuilder.group({
       firstCtrl: [this.partScopeEnd, Validators.required]
     });
-
   }
 
   next() {
@@ -80,22 +77,22 @@ export class AssignPart1Component implements OnInit {
       firstCtrl: [this.partScopeEnd, Validators.required]
     });
   }
-  // -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
   checkName() {
     this.empName.forEach(element => {
-      if (element.employeeType === 'Part1') {
-        this.empP1.push(element.employeeName);
+      if (element.employeeType === 'Part3') {
+        this.empP3.push(element.employeeName);
       }
     });
   }
   selectEmp() {
-    this.empN = this.formEmp.value.empP1;
+    this.empN = this.formEmp.value.empP3;
     this.next();
   }
-  // -------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
-      if (element.projectCode === '12345678') {
+      if (element.projectCode === '010618001') {
         element.projectFile.forEach(value => {
           this.productCode.push(value.codeProduct);
         });
@@ -112,12 +109,10 @@ export class AssignPart1Component implements OnInit {
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
   }
-
   deleteMsg(msg: String) {
     const index: number = this.assignFileNgx.indexOf(msg);
     this.assignFileNgx.splice(index, 1);
   }
-
   checkProductFile() {
     this.next();
   }
@@ -131,7 +126,6 @@ export class AssignPart1Component implements OnInit {
       matDate: this.matScope
     });
     this.assignMatNgx = this.matItemAll;
-    console.log(this.assignMatNgx);
   }
   addMatNew() {
     this.matItemAll.push({
@@ -142,7 +136,6 @@ export class AssignPart1Component implements OnInit {
       matDate: this.matScopeNew
     });
     this.assignMatNgx = this.matItemAll;
-    console.log(this.assignMatNgx);
   }
   deleteMat(msg: String) {
     const index: number = this.assignMatNgx.indexOf(msg);
@@ -161,7 +154,7 @@ export class AssignPart1Component implements OnInit {
       assignMat: this.assignMatNgx,
       assignProgress: this.data.project[0].projectProgress,
       assignNote: this.partNote,
-      assignEmpType: 'Part1',
+      assignEmpType: 'Part3',
     };
     this.dialogRef.close(value);
   }
