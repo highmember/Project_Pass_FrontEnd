@@ -14,6 +14,7 @@ export class P1Component implements OnInit {
   public rows = [];
   public rowss = [];
   public rowsss: any[];
+  public note: String;
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
@@ -23,6 +24,7 @@ export class P1Component implements OnInit {
     this.assignService.getAllAssign().subscribe((results) => {
       console.log(results)
       this.rows = results;
+      console.log(this.rows);
       this.checkAssign();
     });
   }

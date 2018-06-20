@@ -8,7 +8,7 @@
       <app-button-card-title (onClick)="insertMaterial()">
         <mat-icon>add</mat-icon>Material</app-button-card-title>
       <mat-card-content>
-        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rowss">
           <ngx-datatable-column name="รหัสวัสดุ">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.materialId}}
@@ -47,21 +47,23 @@
         </ngx-datatable>
       </mat-card-content>
     </mat-tab>
-    <mat-tab label="คำสั่งของ">
-      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="datamat">
+    <mat-tab label="คำสั่งของ"(click)="checkAssignMat()">
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="temp3">
         <ngx-datatable-column name="รหัสโปรเจค">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.projectCode }}
+            {{value.assignProjectCode }}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="ชื่อผู้จัดการ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.pm}}
+            {{value.assignPMName}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="โปรดัก">
+        <ngx-datatable-column name="รหัสโปรดักส์">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.product_ID}}
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data}}</a>
+            </div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="วันที่">

@@ -5,6 +5,7 @@ import { MatDialogComponent } from './material-dialog.component';
 import { StoreService } from '../shared/service/store.service';
 import { mergeMap } from 'rxjs/operators';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { AssignService } from '../shared/service/assign.service';
 
 @Component({
   selector: 'app-store',
@@ -13,24 +14,43 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 })
 export class StoreComponent implements OnInit {
   public temp: any[];
+  public temp2: any[];
   public rows = [];
+  public temp3: any[];
+  public row3 = [];
   public datamat: any[];
   public matback: any[];
   public customer: any[];
   public customerName: String;
+  public rowss: any[];
   constructor(
     private dialog: MatDialog,
     private storeService: StoreService,
+    private assignService: AssignService,
   ) { }
 
   ngOnInit() {
     this.storeService.getAllStore().subscribe((results) => {
       this.temp = results;
+      console.log(this.temp);
       this.check();
+    });
+    this.assignService.getAllAssign().subscribe((results2) => {
+      this.temp2 = results2;
+       console.log(this.temp2);
+      this.checkas();
     });
   }
   check() {
     this.temp.forEach(element => {
+      if (element.materialName !== 'อื่นๆ') {
+        this.rows.push(element);
+      }
+    });
+     this.rowss = this.rows;
+  }
+  checkas() {
+    this.temp2.forEach(element => {
       if (element.materialName !== 'อื่นๆ') {
         this.rows.push(element);
       }
@@ -104,5 +124,13 @@ export class StoreComponent implements OnInit {
       //     });
       // }
     });
+  }
+  checkAssignMat() {
+    this.temp2.forEach(element => {
+      if (element.assignMat !== null) {
+        this.row3.push(element.assignMat);
+      }
+    });
+    this.temp3 = this.row3 ;
   }
 }
