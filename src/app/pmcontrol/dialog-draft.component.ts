@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../shared/service/employee.service';
-import { ProjectService } from '../../shared/service/project.service';
-import { StoreService } from '../../shared/service/store.service';
+import { EmployeeService } from '../shared/service/employee.service';
+import { ProjectService } from '../shared/service/project.service';
+import { StoreService } from '../shared/service/store.service';
 
 @Component({
   selector: 'app-dialog-draft',

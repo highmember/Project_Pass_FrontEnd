@@ -1,9 +1,18 @@
 <!-- <app-p1></app-p1> -->
 <!-- <app-file-p1-dialog></app-file-p1-dialog> -->
- <app-pmcontrol></app-pmcontrol>
+<!-- <app-pmcontrol></app-pmcontrol> -->
 <!-- <app-sale></app-sale> -->
 <!-- <app-sale></app-sale> -->
 <!-- <app-admin></app-admin> -->
-<app-store></app-store>
+<!-- <app-store></app-store> -->
 <!-- <app-draft></app-draft> -->
 <!-- <app-fristpage></app-fristpage> -->
+<mat-card>
+    <nav>
+        <a routerLink="app-admin" routerLinkActive="active">Admin</a>
+        <a routerLink="app-sale" routerLinkActive="active">Sale</a>
+        <a routerLink="app-store" routerLinkActive="active">Store</a>
+        <a routerLink="app-fristpage" routerLinkActive="active">PM</a>
+    </nav>
+</mat-card>
+<router-outlet></router-outlet>

@@ -45,18 +45,20 @@ import { StoreComponent } from './store/store.component';
 import { DraftComponent } from './draft/draft.component';
 import { DraftfileComponent } from './draft/draft-file-dailog.component';
 import { StoreService } from './shared/service/store.service';
-import { DialogDraftComponent } from './fristpage/pmcontrol/dialog-draft.component';
-import { AssignPart1Component } from './fristpage/pmcontrol/assign-part1/assign-part1.component';
-import { AssignPart3Component } from './fristpage/pmcontrol/assign-part3/assign-part3.component';
-import { AssignPart4Component } from './fristpage/pmcontrol/assign-part4/assign-part4.component';
-import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-part2.component';
-import { PmcontrolComponent } from './fristpage/pmcontrol/pmcontrol.component';
+import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
+import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.component';
+import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
+import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
+import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
+import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
 import { AssignService } from './shared/service/assign.service';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent},
-  // { path: 'admin', component: AdminComponent },
-  // { path: 'Pmcontrol', component: PmcontrolComponent },
+  { path: 'app-admin', component: AdminComponent },
+  { path: 'app-sale', component: SaleComponent },
+  { path: 'app-store', component: StoreComponent },
+  { path: 'app-fristpage', component: FristpageComponent },
+  { path: 'app-pmcontrol/:id', component: PmcontrolComponent },
 ];
 enableProdMode();
 @NgModule({
