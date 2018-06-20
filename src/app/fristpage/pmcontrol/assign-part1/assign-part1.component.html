@@ -5,8 +5,8 @@
     <ng-template matStepLabel>Select Manager</ng-template>
     <mat-card class="card">
       <content fxLayout="column">
-        <app-dropdown [data]="empP1" [value]="data.employeeName" text="ขื่อ-นามสกุล" placeholder="Select Manager" name="empP1"
-          fxFlex [formGroup]='formEmp'></app-dropdown>
+        <app-dropdown [data]="empP1" [value]="data.employeeName" text="ขื่อ-นามสกุล" placeholder="Select Manager" name="empP1" fxFlex
+          [formGroup]='formEmp'></app-dropdown>
       </content>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" matStepperNext [disabled]="formEmp.invalid" (click)="selectEmp()">ต่อไป</button>
@@ -17,17 +17,34 @@
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
     <ng-template matStepLabel>Select Product</ng-template>
     <div fxLayout="row">
-      <app-dropdown [data]="productCode" [value]="data.productCode" text="Product" placeholder="Select Product" name="productCode"
-        fxFlex [formGroup]='formFile'></app-dropdown>
+      <app-input-text-normal [value]="data.productCodeR" name="productCodeR" placeholder="Select Product" fxFlex [formGroup]='formFile'></app-input-text-normal>
+      <app-dropdown [data]="productCode" [value]="data.productCode" placeholder="Select File" name="productCode" fxFlex [formGroup]='formFile'></app-dropdown>
+      <app-input-text-normal [value]="data.fileNum" name="fileNum" placeholder="จำนวน" fxFlex [formGroup]='formFile'></app-input-text-normal>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" (click)="addProducts()" [disabled]="formFile.invalid">Add</button>
       </footer>
     </div>
     <h3>List of Products</h3>
-    <mat-card class="content">
-      <mat-card-content *ngFor="let value of products">
-        รหัสโปรดัก {{value}}
-      </mat-card-content>
+    <mat-card>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="product">Product</th>
+          <th mat-sort-header="file">File</th>
+          <th mat-sort-header="num">Num</th>
+          <th mat-sort-header="del">Del</th>
+        </tr>
+
+        <tr *ngFor="let value of assignFileNgx">
+          <td>{{value.productCodeR}}</td>
+          <td>{{value.productCode}}</td>
+          <td>{{value.fileNum}}</td>
+          <td>
+            <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
     </mat-card>
     <br>
     <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
@@ -53,7 +70,7 @@
     </div>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput #message maxlength="500" placeholder="Note" [(ngModel)]="note" name="note">
+        <input matInput #message maxlength="500" placeholder="Note" [(ngModel)]="partNote" name="partNote">
         <mat-hint align="start">
           <strong>หมายเหตุ</strong>
         </mat-hint>
@@ -109,9 +126,27 @@
       <mat-list>
         <h3>List of Material</h3>
         <mat-card class="content">
-          <mat-card-content *ngFor="let mat of matItemAll">
-            {{mat.matItem}} {{mat.matNum}} {{mat.matType}} {{mat.matDate | date: "dd-MM-yyyy"}}
-          </mat-card-content>
+          <table matSort (matSortChange)="sortData($event)">
+            <tr>
+              <th mat-sort-header="matItem">Item</th>
+              <th mat-sort-header="matType">Unit</th>
+              <th mat-sort-header="matNum">Num</th>
+              <th mat-sort-header="matDate">Date</th>
+              <th mat-sort-header="Del">Del</th>
+            </tr>
+
+            <tr *ngFor="let mat of assignMatNgx">
+              <td>{{mat.matItem}}</td>
+              <td>{{mat.matType}}</td>
+              <td>{{mat.matNum}}</td>
+              <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
+              <td>
+                <button mat-mini-fab color="warn" (click)="deleteMat(mat)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </table>
         </mat-card>
         <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
           <button mat-raised-button color="primary" (click)="onSave()">Confirm</button>

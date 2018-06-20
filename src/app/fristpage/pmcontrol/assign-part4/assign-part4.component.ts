@@ -30,6 +30,8 @@ export class AssignPart4Component implements OnInit {
   public matScope: Date;
   public matScopeNew: Date;
   public matType = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
+  public assignFileNgx: any[];
+  public assignMatNgx: any[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -101,7 +103,18 @@ export class AssignPart4Component implements OnInit {
     });
   }
   addProducts() {
-    this.products.push(this.formFile.value.productCode);
+    this.products.push({
+      productCodeR: this.formFile.value.productCodeR,
+      productCode: this.formFile.value.productCode,
+      fileNum: this.formFile.value.fileNum,
+      fileRecive: 0,
+    });
+    this.assignFileNgx = this.products;
+    console.log(this.assignFileNgx);
+  }
+  deleteMsg(msg: String) {
+    const index: number = this.assignFileNgx.indexOf(msg);
+    this.assignFileNgx.splice(index, 1);
   }
   checkProductFile() {
     this.next();
@@ -115,6 +128,7 @@ export class AssignPart4Component implements OnInit {
       matNum: this.matFormGroup.value.matNum,
       matDate: this.matScope
     });
+    this.assignMatNgx = this.matItemAll;
   }
   addMatNew() {
     this.matItemAll.push({
@@ -124,6 +138,12 @@ export class AssignPart4Component implements OnInit {
       matNum: this.matNewFormGroup.value.matNumNew,
       matDate: this.matScopeNew
     });
+    this.assignMatNgx = this.matItemAll;
+  }
+  deleteMat(msg: String) {
+    const index: number = this.assignMatNgx.indexOf(msg);
+    this.assignMatNgx.splice(index, 1);
+    console.log(this.assignMatNgx);
   }
   // -------------------------------------------------------------------------------------------------------------------
   onSave() {
@@ -131,10 +151,10 @@ export class AssignPart4Component implements OnInit {
       assignProject: this.data.project[0]._id,
       assignPMName: this.data.project[0].pm,
       assignEmpName: this.empN,
-      assignFile: this.products,
+      assignFile: this.assignFileNgx,
       assignScopeStart: this.partScopeStart,
       assignScopeEnd: this.partScopeEnd,
-      assignMat: this.matItemAll,
+      assignMat: this.assignMatNgx,
       assignProgress: this.data.project[0].projectProgress,
       assignNote: this.partNote,
       assignEmpType: 'Part4',
