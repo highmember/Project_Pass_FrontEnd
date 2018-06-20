@@ -44,18 +44,13 @@ import { StoreComponent } from './store/store.component';
 import { DraftComponent } from './draft/draft.component';
 import { DraftfileComponent } from './draft/draft-file-dailog.component';
 import { StoreService } from './shared/service/store.service';
-import { DialogDraftComponent } from './fristpage/pmcontrol/dialog-draft.component';
-import { AssignPart1Component } from './fristpage/pmcontrol/assign-part1/assign-part1.component';
-import { AssignPart3Component } from './fristpage/pmcontrol/assign-part3/assign-part3.component';
-import { AssignPart4Component } from './fristpage/pmcontrol/assign-part4/assign-part4.component';
-import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-part2.component';
-import { PmcontrolComponent } from './fristpage/pmcontrol/pmcontrol.component';
+import { DialogDraftComponent } from './pmcontrol/dialog-draft.component';
+import { AssignPart1Component } from './pmcontrol/assign-part1/assign-part1.component';
+import { AssignPart3Component } from './pmcontrol/assign-part3/assign-part3.component';
+import { AssignPart4Component } from './pmcontrol/assign-part4/assign-part4.component';
+import { AssignPart2Component } from './pmcontrol/assign-part2/assign-part2.component';
+import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
 import { AssignService } from './shared/service/assign.service';
-import { ViewdraftComponent } from './fristpage/pmcontrol/pmview/viewdraft/viewdraft.component';
-import { Viewpart2Component } from './fristpage/pmcontrol/pmview/viewpart2/viewpart2.component';
-import { Viewpart1Component } from './fristpage/pmcontrol/pmview/viewpart1/viewpart1.component';
-import { Viewpart3Component } from './fristpage/pmcontrol/pmview/viewpart3/viewpart3.component';
-import { Viewpart4Component } from './fristpage/pmcontrol/pmview/viewpart4/viewpart4.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
 import { P3Component } from './p3/p3.component';
@@ -68,12 +63,24 @@ import { BillComponent } from './bill/bill.component';
 import { P2Component } from './p2/p2.component';
 import { P2DialogComponent } from './p2/p2-dialog.component';
 import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
-
+import { ViewdraftComponent } from './pmcontrol/pmview/viewdraft/viewdraft.component';
+import { Viewpart2Component } from './pmcontrol/pmview/viewpart2/viewpart2.component';
+import { Viewpart3Component } from './pmcontrol/pmview/viewpart3/viewpart3.component';
+import { Viewpart1Component } from './pmcontrol/pmview/viewpart1/viewpart1.component';
+import { Viewpart4Component } from './pmcontrol/pmview/viewpart4/viewpart4.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent},
-  // { path: 'admin', component: AdminComponent },
-  // { path: 'Pmcontrol', component: PmcontrolComponent },
+  { path: 'app-admin', component: AdminComponent },
+  { path: 'app-sale', component: SaleComponent },
+  { path: 'app-store', component: StoreComponent },
+  { path: 'app-fristpage', component: FristpageComponent },
+  { path: 'app-pmcontrol/:id', component: PmcontrolComponent },
+  { path: 'app-draft', component: DraftComponent },
+  { path: 'app-p1', component: P1Component },
+  { path: 'app-p2', component: P2Component },
+  { path: 'app-p3', component: P3Component },
+  { path: 'app-p4', component: P4Component },
+  { path: 'app-bill', component: BillComponent },
 ];
 enableProdMode();
 @NgModule({
@@ -179,6 +186,7 @@ enableProdMode();
     Viewpart1Component,
     Viewpart3Component,
     Viewpart4Component,
+    P2FileDialogComponent,
     P2DialogComponent,
     P4FileDialogComponent,
     P4DialogComponent,

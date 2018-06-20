@@ -5,7 +5,8 @@
     <h4>Hello Mr......... ..........</h4>
   </mat-card-subtitle>
   <mat-card-content>
-    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows" [limit]="10">
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows"
+      [limit]="10">
       <ngx-datatable-column name="รหัสโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value.projectCode}}
@@ -33,9 +34,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="จัดการ" [maxWidth]="170">
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-          <button mat-mini-fab color="primary" (click)="editWork(value)"> 
-            <mat-icon>build</mat-icon>
-          </button>
+          <a  routerLink="/app-pmcontrol/{{value.projectCode}}"><mat-icon>build</mat-icon></a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

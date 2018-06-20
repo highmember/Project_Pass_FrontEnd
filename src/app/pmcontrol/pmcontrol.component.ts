@@ -6,12 +6,11 @@ import { AssignPart2Component } from './assign-part2/assign-part2.component';
 import { AssignPart3Component } from './assign-part3/assign-part3.component';
 import { AssignPart4Component } from './assign-part4/assign-part4.component';
 import { ActivatedRoute } from '@angular/router';
-import { AssignService } from '../../shared/service/assign.service';
+import { AssignService } from '../shared/service/assign.service';
 import { mergeMap } from 'rxjs/operators';
-import { StoreService } from '../../shared/service/store.service';
-import { ProjectService } from '../../shared/service/project.service';
+import { ProjectService } from '../shared/service/project.service';
+import { Location } from '@angular/common';
 import { Viewpart1Component } from './pmview/viewpart1/viewpart1.component';
-
 
 @Component({
   selector: 'app-pmcontrol',
@@ -37,7 +36,9 @@ export class PmcontrolComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
+    private location: Location
   ) {
   }
 
@@ -53,6 +54,14 @@ export class PmcontrolComponent implements OnInit {
       customer: 'dsadsad',
       pm: 'dsadadasd'
     }];
+    this.getNext();
+  }
+  getNext(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    console.log(id);
+  }
+  goBack(): void {
+    this.location.back();
   }
   editDraft(): void {
     const dialogRef = this.dialog.open(DialogDraftComponent, {

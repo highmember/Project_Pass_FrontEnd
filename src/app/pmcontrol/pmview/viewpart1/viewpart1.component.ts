@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AssignService } from '../../../../shared/service/assign.service';
+import { AssignService } from '../../../shared/service/assign.service';
 import { Data } from '@angular/router';
 
 @Component({

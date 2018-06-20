@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../../shared/service/employee.service';
-import { ProjectService } from '../../../shared/service/project.service';
+import { EmployeeService } from '../../shared/service/employee.service';
+import { ProjectService } from '../../shared/service/project.service';
 
 @Component({
   selector: 'app-assign-part4',
