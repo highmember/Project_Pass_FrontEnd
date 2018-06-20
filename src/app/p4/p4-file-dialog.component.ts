@@ -2,10 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-  selector: 'app-flie-p1-dialog',
-  templateUrl: './p1-flie-dialog.component.html',
+  selector: 'app-file-p4-dialog',
+  templateUrl: './p4-file-dialog.component.html',
 })
-export class P1FileDialogComponent implements OnInit {
+export class P4FileDialogComponent implements OnInit {
   public file: any[];
   public form: FormGroup;
   /**
@@ -14,7 +14,7 @@ export class P1FileDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<P1FileDialogComponent>,
+    private dialogRef: MatDialogRef<P4FileDialogComponent>,
     private _formBuilder: FormBuilder
   ) { }
   /**
