@@ -10,6 +10,7 @@ import { AssignService } from '../../shared/service/assign.service';
 import { mergeMap } from 'rxjs/operators';
 import { StoreService } from '../../shared/service/store.service';
 import { ProjectService } from '../../shared/service/project.service';
+import { Viewpart1Component } from './pmview/viewpart1/viewpart1.component';
 
 
 @Component({
@@ -97,6 +98,29 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+  viewPart1(row) {
+    const dialogRef = this.dialog.open(Viewpart1Component, {
+      width: '1000px',
+      data: {
+        assignProject: row.assignProject,
+        assignPMName: row.assignPMName,
+        assignEmpName: row.assignEmpName,
+        assignFile: row.assignFile,
+        assignScopeStart: row.assignScopeStart,
+        assignScopeEnd: row.assignScopeEnd,
+        assignMat: row.assignMat,
+        assignProgress: row.assignProgress,
+        assignNote: row.assignNote,
+        assignEmpType: row.assignEmpType,
+      }
+    });
+    console.log(row);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+
+      }
+    });
+  }
   editPart2(): void {
     const dialogRef = this.dialog.open(AssignPart2Component, {
       width: '1000px',
@@ -128,7 +152,7 @@ export class PmcontrolComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-       this.assignService.addAssign(result).pipe(
+        this.assignService.addAssign(result).pipe(
           mergeMap(() => this.assignService.getAllAssign()))
           .subscribe((results) => {
             this.assign = results;
