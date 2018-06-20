@@ -14,7 +14,7 @@
         <ngx-datatable-column name="รหัสโปรดักส์">
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
-              <a *ngIf="data !== undefined;">{{data}}</a>
+              <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
             </div>
           </ng-template>
         </ngx-datatable-column>
@@ -37,7 +37,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="รายละเอียดไฟล์งาน" [maxWidth]="170">
           <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-            <button mat-mini-fab color="primary" (click)="detailAssignProject()">
+            <button mat-mini-fab color="primary" (click)="detailAssignProject(value)">
               <mat-icon>edit</mat-icon>
             </button>
           </ng-template>

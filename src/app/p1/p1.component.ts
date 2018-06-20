@@ -11,7 +11,7 @@ import { AssignService } from '../shared/service/assign.service';
   styleUrls: ['./p1.component.css']
 })
 export class P1Component implements OnInit {
-  public rows = [];
+  public rows: any[];
   public rowss = [];
   public rowsss: any[];
   constructor(
@@ -26,10 +26,21 @@ export class P1Component implements OnInit {
       this.checkAssign();
     });
   }
-  detailAssignProject(): void {
+  checkAssign() {
+    this.rows.forEach(element => {
+      if (element.assignEmpType === 'Part1') {
+        this.rowss.push(element);
+        console.log(this.rowss);
+      }
+    });
+    this.rowsss = this.rowss;
+    console.log(this.rowsss);
+  }
+  detailAssignProject(row): void {
     const dialogRef = this.dialog.open(P1DialogComponent, {
       width: '1000px',
       data: {
+        fileName: row.assignFile,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -51,14 +62,7 @@ export class P1Component implements OnInit {
       }
     });
 }
-checkAssign() {
-  this.rows.forEach(element => {
-    if (element.assignEmpType === 'Part1') {
-      this.rowss.push(element);
-    }
-  });
-  this.rowsss = this.rowss;
-}
+
 
 viewFile(): void {
   const dialogRef = this.dialog.open(P1FileDialogComponent, {

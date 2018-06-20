@@ -8,7 +8,7 @@
       <app-button-card-title (onClick)="insertMaterial()">
         <mat-icon>add</mat-icon>Material</app-button-card-title>
       <mat-card-content>
-        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rowss">
           <ngx-datatable-column name="รหัสวัสดุ">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.materialId}}

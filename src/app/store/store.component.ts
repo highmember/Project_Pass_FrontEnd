@@ -14,6 +14,7 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 export class StoreComponent implements OnInit {
   public temp: any[];
   public rows = [];
+  public rowss: any[];
   public datamat: any[];
   public matback: any[];
   public customer: any[];
@@ -35,6 +36,7 @@ export class StoreComponent implements OnInit {
         this.rows.push(element);
       }
     });
+    this.rowss = this.rows;
   }
   editMaterial(row): void {
     const dialogRef = this.dialog.open(MatDialogComponent, {
@@ -52,7 +54,7 @@ export class StoreComponent implements OnInit {
         this.storeService.updateStore(row._id, result).pipe(
           mergeMap(() => this.storeService.getAllStore()))
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });
@@ -68,7 +70,7 @@ export class StoreComponent implements OnInit {
         this.storeService.addStore(result).pipe(
           mergeMap(() => this.storeService.getAllStore()))
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });
@@ -84,7 +86,7 @@ export class StoreComponent implements OnInit {
         this.storeService.deleteStore(row._id).
           mergeMap(() => this.storeService.getAllStore())
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });
