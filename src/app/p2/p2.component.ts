@@ -53,13 +53,12 @@ export class P2Component implements OnInit {
   }
   checkAssign() {
     this.rows.forEach(element => {
-      if (element.assignEmpType === 'Part2') {
+      if (element.assignEmpType === 'Part1') {
         this.rowss.push(element);
-        console.log(element)
       }
     });
     this.rowsss = this.rowss;
-  }
+  }  
   viewFile(): void {
     const dialogRef = this.dialog.open(P2FileDialogComponent, {
       width: '1000px',
