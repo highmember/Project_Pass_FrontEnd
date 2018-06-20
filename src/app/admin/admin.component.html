@@ -1,0 +1,171 @@
+<h2>Admin manage</h2>
+<mat-tab-group>
+  <mat-tab label="Customer">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+        <h2>Customer</h2>
+        <div fxFlex></div>
+        <app-button-card-title (onClick)="openCusDialog()">
+          <mat-icon>add</mat-icon>Customer</app-button-card-title>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="customer"
+          [limit]="10">
+          <ngx-datatable-column name="ชื่อลูกค้า">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เบอร์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerPhone}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ที่อยู่">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
+            <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="primary" (click)="editCusDialog(value)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="confirmCusDelete(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-tab>
+
+  <mat-tab label="Sale">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+        <h2>Sale</h2>
+        <div fxFlex></div>
+        <app-button-card-title (onClick)="openSaleDialog()">
+          <mat-icon>add</mat-icon>Sale</app-button-card-title>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="sale"
+          [limit]="10">
+          <ngx-datatable-column name="ชื่อเซลล์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.saleName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เบอร์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.salePhone}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ที่อยู่">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.saleAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
+            <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="primary" (click)="editSaleDialog(value)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="confirmSaleDelete(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="PM">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+        <h2>PM</h2>
+        <div fxFlex></div>
+        <app-button-card-title (onClick)="openPmDialog()">
+          <mat-icon>add</mat-icon>PM</app-button-card-title>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="pm"
+          [limit]="10">
+          <ngx-datatable-column name="ชื่อผู้จัดการโปรเจค">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เบอร์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmPhone}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ที่อยู่">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
+            <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="primary" (click)="editPmDialog(value)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="confirmPmDelete(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Employee">
+    <mat-card>
+      <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+        <h2>Employee</h2>
+        <div fxFlex></div>
+        <app-button-card-title (onClick)="openEmpDialog()">
+          <mat-icon>add</mat-icon>Employee</app-button-card-title>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="employee"
+          [limit]="10">
+          <ngx-datatable-column name="ชื่อพนักงาน">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeName}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เบอร์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeePhone}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ที่อยู่">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ตำแหน่ง">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeType}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
+            <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="primary" (click)="editEmpDialog(value)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" (click)="confirmEmpDelete(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>

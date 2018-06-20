@@ -1,0 +1,48 @@
+<p>
+  <mat-card>
+    <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+      <h2>MG Part 2</h2>
+      <div fxFlex></div>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="rowsss">
+        <ngx-datatable-column name="รหัสโปรเจค">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.assignProjectCode}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="รหัสโปรดักส์">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data}}</a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ความคืบหน้า">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.assignProgress}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ผู้จัดการ">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.assignPMName}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="รายละเอียดงาน" [maxWidth]="170">
+          <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+            <button mat-mini-fab color="primary" (click)="viewFile()">
+              <mat-icon>attachment</mat-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="รายละเอียดไฟล์งาน" [maxWidth]="170">
+          <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+            <button mat-mini-fab color="primary" (click)="detailAssignProject()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </mat-card-content>
+  </mat-card>
+</p>

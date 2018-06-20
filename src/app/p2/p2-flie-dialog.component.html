@@ -1,0 +1,30 @@
+<mat-card>
+        <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="file">
+            
+            <ngx-datatable-column name="ชื่อไฟล์">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.productFileName}}
+                </ng-template>
+              </ngx-datatable-column>
+             <ngx-datatable-column name="ชื่อไฟล์">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{value.productFileName2}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ชื่อไฟล์">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{value.productFileName3}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ชื่อไฟล์">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                {{value.productFileName4}}
+              </ng-template>
+            </ngx-datatable-column>
+            
+                
+          </ngx-datatable>
+          
+        </mat-card-content>
+        </mat-card>

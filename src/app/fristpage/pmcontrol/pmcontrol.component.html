@@ -1,0 +1,74 @@
+<mat-card>
+  <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+    <h1>PM</h1>
+    <div fxFlex></div>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="ID_Project:" disabled value={{projectCode}}>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Cus_Name:" disabled value={{customer}}>
+    </mat-form-field>
+    <div fxFlex></div>
+    <mat-grid-list cols="5" rowHeight="100px">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+        <div *ngIf="tile.text==='Draft'">
+          <label style="text-align: center;">Draft</label>
+          <button mat-mini-fab color="accent" (click)="editDraft()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFile()">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part1'">
+          <label style="text-align: center;">Part1</label>
+          <button mat-mini-fab color="accent" (click)="editPart1(value)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewPart1(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part2'">
+          <label style="text-align: center;">Part2</label>
+          <button mat-mini-fab color="accent" (click)="editPart2()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart2()">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part3'">
+          <label style="text-align: center;">Part3</label>
+          <button mat-mini-fab color="accent" (click)="editPart3()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart3()">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part4'">
+          <label style="text-align: center;">Part4</label>
+          <button mat-mini-fab color="accent" (click)="editPart4()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" (click)="viewFilePart4()">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <h2>Scope</h2>
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-bar>
+    <h2>Progress</h2>
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+    </mat-progress-bar>
+  </mat-card-content>
+</mat-card>

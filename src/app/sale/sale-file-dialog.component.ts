@@ -14,17 +14,20 @@ export class SaleFileDialogComponent implements OnInit {
   /**
    *  variable 'form' use FormGroup for manage form
   */
+  public codeProject: String;
+  public file: any[];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<SaleFileDialogComponent>,
-    private _formBuilder: FormBuilder
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
+    this.file = this.data.file;
+    this.codeProject = this.file[0].codeProject;
   }
+
   /**
    * set value in close() for return
    */

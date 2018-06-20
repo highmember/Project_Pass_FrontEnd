@@ -31,7 +31,7 @@
     <div *ngIf="type!=='Project Jon'">
       <ng-template matStepLabel>เลือกลูกค้า</ng-template>
       <content fxLayout="column">
-        <app-dropdown [data]="oldCustomer" [value]="data.oldCustomer" text="ขื่อ-นามสกุล" placeholder="เลือกลูกค้า" name="oldCustomer"
+        <app-dropdown [data]="oldCustomer" [value]="data.customerName" text="ขื่อ-นามสกุล" placeholder="เลือกลูกค้า" name="customerName"
           fxFlex [formGroup]='formSelectCus'></app-dropdown>
       </content>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
@@ -44,14 +44,43 @@
     <mat-card class="card">
       <content fxLayout="column">
         <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
-        <app-upload-file>อัพโหลดไฟล์</app-upload-file>
+        <div fxlayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+            <app-input-text-normal [value]="data.codeProduct" name="codeProduct" placeholder="รหัสโปรดัก" text="รหัสโปรดัก" fxFlex [formGroup]='formProject'></app-input-text-normal>
+          <a>แนบไฟล์</a>
+          <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+          <button mat-raised-button color="primary" (click)="addProduct()">บันทึก</button>
+        </div>
+        <mat-card class="content">
+          <mat-card-content *ngFor="let value of output">
+                รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+          </mat-card-content>
+        </mat-card>
       </content>
+      <br>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
       </footer>
     </mat-card>
   </mat-step>
   <mat-step [stepControl]="fourthFormGroup" [editable]="true">
+    <ng-template matStepLabel>เลือกระยะเวลาโปรเจค</ng-template>
+    <label>เริ่มต้น</label>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="scopeStart">
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <label>สิ้นสุด</label>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Choose a date"  [(ngModel)]="scopeEnd">
+      <mat-datepicker-toggle matSuffix [for]="picker1" ></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-raised-button color="primary" matStepperNext (click)="insertScope()">ต่อไป</button>
+    </footer>
+  </mat-step>
+  <mat-step [stepControl]="fifthFormGroup" [editable]="true">
     <ng-template matStepLabel>เลือกผู้จัดการ</ng-template>
     <mat-card class="card">
       <content fxLayout="column">
@@ -65,8 +94,11 @@
   <mat-step>
     <ng-template matStepLabel>รายละเอียดโปรเจค</ng-template>
     <div>รหัสโปรเจค: {{code}}</div>
-    <div>ไฟล์: {{file}}</div>
+    <!-- <div>ไฟล์:</div>
+      <div *ngFor="let file of product">{{file}}</div> -->
     <div>ชนิดโปรเจค: {{type}}</div>
+    <div>ระยะเวลาเริ่มโปรเจค: {{scopeStart | date: "dd-MM-yyyy"}}</div>
+    <div>ระยะเวลาสิ้นสุดโปรเจค: {{scopeEnd | date: "dd-MM-yyyy"}}</div>
     <div>ลูกค้า: {{customerName}}</div>
     <div>ผู้จัดการ: {{pmName}}</div>
     <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
