@@ -1,3 +1,4 @@
+<!-- <h1>Draft</h1>
 <mat-horizontal-stepper [linear]="false" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
     <ng-template matStepLabel>Select Draft</ng-template>
@@ -85,7 +86,7 @@
         <div fxLayout="row">
           <app-input-text-normal [value]="data.matItemNew" name="matItemNew" placeholder="วัสดุ" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
           <app-input-text-normal [value]="data.matNumNew" name="matNumNew" placeholder="จำนวน" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
-          <app-input-text-normal [value]="data.typeMatNew" name="typeMat" placeholder="หน่วย" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
+          <app-input-text-normal [value]="data.matTypeNew" name="matTypeNew" placeholder="หน่วย" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
           <ul></ul>
           <mat-form-field>
             <input matInput [matDatepicker]="picker4" placeholder="Choose a Date" fxFlex [(ngModel)]="scopeMatNew" name="scopeMatNew">
@@ -105,8 +106,165 @@
         <h3>List of Material</h3>
         <mat-card class="content">
           <mat-card-content *ngFor="let mat of matItemAll">
-            {{mat.matT}} {{mat.numT}} {{scopeMat | date: "dd-MM-yyyy"}}
+            {{mat.matItem}} {{mat.matNum}} {{mat.matType}} {{scopeMat | date: "dd-MM-yyyy"}}
           </mat-card-content>
+        </mat-card>
+        <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" (click)="onSave()">Confirm</button>
+        </footer>
+      </mat-list>
+    </mat-card>
+  </mat-step>
+</mat-horizontal-stepper> -->
+<h1>Draft</h1>
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <mat-step [stepControl]="firstFormGroup" [editable]="true">
+    <ng-template matStepLabel>Select Manager</ng-template>
+    <mat-card class="card">
+      <content fxLayout="column">
+        <app-dropdown [data]="empDraft" [value]="data.employeeName" text="ขื่อ-นามสกุล" placeholder="Select Manager" name="empDraft" fxFlex
+          [formGroup]='formEmp'></app-dropdown>
+      </content>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" matStepperNext [disabled]="formEmp.invalid" (click)="selectEmp()">ต่อไป</button>
+      </footer>
+    </mat-card>
+  </mat-step>
+  <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <mat-step [stepControl]="secondFormGroup" [editable]="true">
+    <ng-template matStepLabel>Select Product</ng-template>
+    <div fxLayout="row">
+      <app-input-text-normal [value]="data.productCodeR" name="productCodeR" placeholder="Select Product" fxFlex [formGroup]='formFile'></app-input-text-normal>
+      <app-dropdown [data]="productCode" [value]="data.productCode" placeholder="Select File" name="productCode" fxFlex [formGroup]='formFile'></app-dropdown>
+      <app-input-text-normal [value]="data.fileNum" name="fileNum" placeholder="จำนวน" fxFlex [formGroup]='formFile'></app-input-text-normal>
+      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <button mat-raised-button color="primary" (click)="addProducts()" [disabled]="formFile.invalid">Add</button>
+      </footer>
+    </div>
+    <h3>List of Products</h3>
+    <mat-card>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="product">Product</th>
+          <th mat-sort-header="file">File</th>
+          <th mat-sort-header="num">Num</th>
+          <th mat-sort-header="del">Del</th>
+        </tr>
+
+        <tr *ngFor="let value of assignFileNgx">
+          <td>{{value.productCodeR}}</td>
+          <td>{{value.productCode}}</td>
+          <td>{{value.fileNum}}</td>
+          <td>
+            <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </mat-card>
+    <br>
+    <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" [disabled]="formFile.invalid" (click)="checkProductFile()">ต่อไป</button>
+    </footer>
+  </mat-step>
+  <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <mat-step [stepControl]="thirdFormGroup" [editable]="true">
+    <ng-template matStepLabel>Scope Draft</ng-template>
+    <div fxLayout="row">
+      <h4>Start</h4>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Choose a Date" [(ngModel)]="partScopeStart" name="partScopeStart">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <h4>End</h4>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Choose a Date" [(ngModel)]="partScopeEnd" name="partScopeEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput #message maxlength="500" placeholder="Note" [(ngModel)]="partNote" name="partNote">
+        <mat-hint align="start">
+          <strong>หมายเหตุ</strong>
+        </mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
+      </mat-form-field>
+    </form>
+    <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-button matStepperNext class="buttonC" mat-raised-button color="primary" (click)="next()">ต่อไป</button>
+    </footer>
+  </mat-step>
+  <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
+  <mat-step [editable]="true">
+    <ng-template matStepLabel>Select Material</ng-template>
+    <h4>Add Material</h4>
+    <mat-tab-group>
+      <mat-tab label="วัสดุเก่า">
+        <div fxLayout="row">
+          <app-autocomplete-Store title="" [(selectedStore)]="data.matItem" name="matItem" placeholder="เลือกวัสดุ" (selectedStoreChange)="status($event)"
+            fxFlex></app-autocomplete-Store>
+          <app-input-text-normal [value]="data.matNum" name="matNum" placeholder="จำนวน" fxFlex [formGroup]='matFormGroup'></app-input-text-normal>
+          <app-dropdown [data]="matType" [value]="data.matType" name="matType" placeholder="หน่วย" fxFlex [formGroup]='matFormGroup'></app-dropdown>
+          <ul></ul>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker3" placeholder="Choose a Date" [(ngModel)]="matScope" name="matScope">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" (click)="addMat()" [disabled]="matFormGroup.invalid">Add</button>
+        </footer>
+      </mat-tab>
+      <mat-tab label="วัสดุใหม่">
+        <div fxLayout="row">
+          <app-input-text-normal [value]="data.matItemNew" name="matItemNew" placeholder="วัสดุ" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
+          <app-input-text-normal [value]="data.matNumNew" name="matNumNew" placeholder="จำนวน" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
+          <app-input-text-normal [value]="data.matTypeNew" name="matTypeNew" placeholder="หน่วย" fxFlex [formGroup]='matNewFormGroup'></app-input-text-normal>
+          <ul></ul>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker4" placeholder="Choose a Date" fxFlex [(ngModel)]="matScopeNew" name="matScopeNew">
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" (click)="addMatNew()" [disabled]="matNewFormGroup.invalid">Add</button>
+          </footer>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <mat-card>
+      <mat-list>
+        <h3>List of Material</h3>
+        <mat-card class="content">
+          <table matSort (matSortChange)="sortData($event)">
+            <tr>
+              <th mat-sort-header="matItem">Item</th>
+              <th mat-sort-header="matType">Unit</th>
+              <th mat-sort-header="matNum">Num</th>
+              <th mat-sort-header="matDate">Date</th>
+              <th mat-sort-header="Del">Del</th>
+            </tr>
+
+            <tr *ngFor="let mat of assignMatNgx">
+              <td>{{mat.matItem}}</td>
+              <td>{{mat.matType}}</td>
+              <td>{{mat.matNum}}</td>
+              <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
+              <td>
+                <button mat-mini-fab color="warn" (click)="deleteMat(mat)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </table>
         </mat-card>
         <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
           <button mat-raised-button color="primary" (click)="onSave()">Confirm</button>

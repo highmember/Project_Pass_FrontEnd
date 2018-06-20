@@ -1,0 +1,95 @@
+<mat-card>
+ 
+      <div id="page-wrap">
+    
+        <textarea id="header">INVOICE</textarea>
+        
+        <div id="identity">
+        
+                <textarea id="address">70/4 ม.6
+    ต.บางเสาธง อ.บางเสาธง
+    จ.สมุทรปราการ 10540
+    
+    โทรศัพท์: 063-1925733</textarea>
+        
+        </div>
+        
+        <div style="clear:both"></div>
+        
+        <div id="customer">
+    
+                <textarea id="customer-title">P.A.S.S
+     Company Limited</textarea>
+    
+                <table id="meta">
+                    <tr>
+                        <td class="meta-head"  >บิลที่#</td>
+                        <td><textarea>{{value.billid}}</textarea></td>
+                    </tr>
+                    <tr>
+    
+                        <td class="meta-head">วันที่</td>
+                        <td><textarea id="date">{{value.billdate}}</textarea></td>
+                    </tr>
+                    <tr>
+                        <td class="meta-head">ราคารวม</td>
+                        <td><div class="due">{{value.priceall}}</div></td>
+                    </tr>
+    
+                </table>
+        
+        </div>
+        
+        <table id="items">
+        
+          <tr>
+              <th>รายการ</th>
+              <th>รายละเอียด</th>
+              <th>จำนวน</th>
+              <th>ราคา/หน่วย</th>
+              <th>ราคารวม</th>
+          </tr>
+          
+          <tr class="item-row">
+              <td class="item-name"><textarea>{{value.list}}</textarea></td>
+              <td class="description"><textarea>{{value.description}}</textarea></td>
+              <td><textarea class="cost">{{value.cost}}</textarea></td>
+              <td><textarea class="qty">{{value.qty}}</textarea></td>
+              <td><span class="price">{{value.pricelist}}</span></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="blank"> </td>
+              <td colspan="2" class="total-line">รวมเป็นเงิน</td>
+              <td class="total-value"><div id="subtotal">{{value.subtotal}}</div></td>
+          </tr>
+          <tr>
+    
+              <td colspan="2" class="blank"> </td>
+              <td colspan="2" class="total-line">ภาษีมูลค่าเพิ่ม</td>
+              <td class="total-value"><div id="total">{{value.VAT}}</div></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="blank"> </td>
+              <td colspan="2" class="total-line">ส่วนลด</td>
+              <td class="total-value"><textarea id="paid">{{value.coupon}}</textarea></td>
+          </tr>
+          <tr>
+              <td colspan="2" class="blank"> </td>
+              <td colspan="2" class="total-line balance">รวมเป็นเงิน</td>
+              <td class="total-value balance"><div class="due">{{value.priceall}}</div></td>
+          </tr>
+        
+        </table>
+        
+        <div id="terms">
+          <h5>Thank You</h5>
+          <textarea>Paint Application Systems</textarea>
+        </div>
+      
+      </div>
+      
+ 
+     
+     
+      
+</mat-card>

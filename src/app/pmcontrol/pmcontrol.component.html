@@ -28,10 +28,10 @@
         </div>
         <div *ngIf="tile.text==='Part1'">
           <label style="text-align: center;">Part1</label>
-          <button mat-mini-fab color="accent" (click)="editPart1()">
+          <button mat-mini-fab color="accent" (click)="editPart1(value)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" (click)="viewFilePart1()">
+          <button mat-mini-fab color="accent" (click)="viewPart1(value)">
             <mat-icon>pageview</mat-icon>
           </button>
         </div>

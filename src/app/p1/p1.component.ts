@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { P1DialogComponent } from './p1-dialog.component';
 import { P1FileDialogComponent } from './p1-flie-dialog.component';
-import { P1UpdateDialogComponent} from './p1-update.dialog.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AssignService } from '../shared/service/assign.service';
 
 @Component({
   selector: 'app-p1',
@@ -10,20 +11,20 @@ import { P1UpdateDialogComponent} from './p1-update.dialog.component';
   styleUrls: ['./p1.component.css']
 })
 export class P1Component implements OnInit {
-  public rows: any[];
+  public rows = [];
+  public rowss = [];
+  public rowsss: any[];
   constructor(
     private dialog: MatDialog,
+    private assignService: AssignService,
   ) { }
 
   ngOnInit() {
-    this.rows = [{
-      projectCode: 32321312312,
-      projectType: 'Mass',
-      projectProgress: 0,
-      projectFile: 'dsadassd',
-      customer: 'dsadsad',
-      pm: 'dsadadasd'
-    }];
+    this.assignService.getAllAssign().subscribe((results) => {
+      console.log(results)
+      this.rows = results;
+      this.checkAssign();
+    });
   }
   detailAssignProject(): void {
     const dialogRef = this.dialog.open(P1DialogComponent, {
@@ -36,6 +37,7 @@ export class P1Component implements OnInit {
         this.rows.push({
           projectCode: result.projectCode,
           projectType: result.projectType,
+          productCode: result.productCode,
           projectProgress: 0,
           projectFile: result.projectFile,
           customer: result.customer.customerName,
@@ -49,6 +51,15 @@ export class P1Component implements OnInit {
       }
     });
 }
+checkAssign() {
+  this.rows.forEach(element => {
+    if (element.assignEmpType === 'Part1') {
+      this.rowss.push(element);
+    }
+  });
+  this.rowsss = this.rowss;
+}
+
 viewFile(): void {
   const dialogRef = this.dialog.open(P1FileDialogComponent, {
     width: '1000px',
@@ -65,23 +76,5 @@ viewFile(): void {
     }
   });
 }
-updateAssignProject(): void {
-  const dialogRef = this.dialog.open(P1UpdateDialogComponent, {
-    width: '1000px',
-    data: {
-    }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-      this.rows.push({
-        doSuccess: result.doSuccess,
-      });
-      // this.degreeService.addDegree(result).pipe(
-      //   mergeMap(() => this.degreeService.getAllDegree()))
-      //   .subscribe((results) => {
-      //     this.rows = results;
-      //   });
-    }
-  });
-}
+
 }
