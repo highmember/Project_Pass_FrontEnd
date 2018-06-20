@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { P1DialogComponent } from './p1-dialog.component';
-import { P1FileDialogComponent } from './p1-flie-dialog.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { P3DialogComponent } from './p3-dialog.component';
+import { P3FileDialogComponent } from './p3-file-dialog.component';
 import { AssignService } from '../shared/service/assign.service';
 
 @Component({
-  selector: 'app-p1',
-  templateUrl: './p1.component.html',
-  styleUrls: ['./p1.component.css']
+  selector: 'app-p3',
+  templateUrl: './p3.component.html',
+  styleUrls: ['./p3.component.css']
 })
-export class P1Component implements OnInit {
+export class P3Component implements OnInit {
   public rows = [];
   public rowss = [];
   public rowsss: any[];
@@ -27,7 +26,7 @@ export class P1Component implements OnInit {
     });
   }
   detailAssignProject(): void {
-    const dialogRef = this.dialog.open(P1DialogComponent, {
+    const dialogRef = this.dialog.open(P3DialogComponent, {
       width: '1000px',
       data: {
       }
@@ -53,15 +52,15 @@ export class P1Component implements OnInit {
 }
 checkAssign() {
   this.rows.forEach(element => {
-    if (element.assignEmpType === 'Part1') {
+    if (element.assignEmpType === 'Part3') {
       this.rowss.push(element);
+      console.log(element)
     }
   });
   this.rowsss = this.rowss;
 }
-
 viewFile(): void {
-  const dialogRef = this.dialog.open(P1FileDialogComponent, {
+  const dialogRef = this.dialog.open(P3FileDialogComponent, {
     width: '1000px',
     data: {
     }
@@ -78,3 +77,4 @@ viewFile(): void {
 }
 
 }
+

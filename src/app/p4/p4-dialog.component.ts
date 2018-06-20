@@ -2,11 +2,11 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-    selector: 'app-p1-dialog',
-    templateUrl: './p1-dialog.component.html',
-    styleUrls: ['./p1-dialog.component.css']
+    selector: 'app-p4-dialog',
+    templateUrl: './p4-dialog.component.html',
+    styleUrls: ['./p4-dialog.component.css']
   })
-  export class P1DialogComponent implements OnInit {
+  export class P4DialogComponent implements OnInit {
     public assign: any[];
     /**
      *  variable 'form' use FormGroup for manage form
@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
       private formBuilder: FormBuilder,
-      private dialogRef: MatDialogRef<P1DialogComponent>,
+      private dialogRef: MatDialogRef<P4DialogComponent>,
       private _formBuilder: FormBuilder
     ) { }
     /**

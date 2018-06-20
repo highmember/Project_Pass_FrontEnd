@@ -20,7 +20,6 @@ import { SaleDialogComponent } from './sale/sale-dialog.component';
 import { P1Component } from './p1/p1.component';
 import { P1DialogComponent } from './p1/p1-dialog.component';
 import { P1FileDialogComponent } from './p1/p1-flie-dialog.component';
-import { P1UpdateDialogComponent } from './p1/p1-update.dialog.component';
 import { MatInputModule } from '@angular/material/input';
 import { enableProdMode } from '@angular/core';
 import { FristpageComponent } from './fristpage/fristpage.component';
@@ -53,11 +52,20 @@ import { AssignPart2Component } from './fristpage/pmcontrol/assign-part2/assign-
 import { PmcontrolComponent } from './fristpage/pmcontrol/pmcontrol.component';
 import { AssignService } from './shared/service/assign.service';
 import { ViewdraftComponent } from './fristpage/pmview/viewdraft/viewdraft.component';
-import { ViewPart1Component } from './fristpage/pmview/view-part1/view-part1.component';
 import { Viewpart2Component } from './fristpage/pmview/viewpart2/viewpart2.component';
 import { Viewpart1Component } from './fristpage/pmview/viewpart1/viewpart1.component';
 import { Viewpart3Component } from './fristpage/pmview/viewpart3/viewpart3.component';
 import { Viewpart4Component } from './fristpage/pmview/viewpart4/viewpart4.component';
+import { P3Component } from './p3/p3.component';
+import { P3DialogComponent } from './p3/p3-dialog.component';
+import { P3FileDialogComponent } from './p3/p3-file-dialog.component';
+import { P4Component } from './p4/p4.component';
+import { P4DialogComponent } from './p4/p4-dialog.component';
+import { P4FileDialogComponent } from './p4/p4-file-dialog.component';
+import { BillComponent } from './bill/bill.component';
+import { P2Component } from './p2/p2.component';
+import { P2DialogComponent } from './p2/p2-dialog.component';
+import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent},
@@ -76,7 +84,6 @@ enableProdMode();
     P1Component,
     P1DialogComponent,
     P1FileDialogComponent,
-    P1UpdateDialogComponent,
     DialogDraftComponent,
     AssignPart1Component,
     AssignPart2Component,
@@ -95,11 +102,21 @@ enableProdMode();
     DraftfileComponent,
     PmcontrolComponent,
     ViewdraftComponent,
-    ViewPart1Component,
     Viewpart2Component,
     Viewpart1Component,
     Viewpart3Component,
-    Viewpart4Component
+    Viewpart4Component,
+    P1Component,
+    P3Component,
+    P3DialogComponent,
+    P3FileDialogComponent,
+    P4Component,
+    P4FileDialogComponent,
+    P4DialogComponent,
+    BillComponent,
+    P2Component,
+    P2DialogComponent,
+    P2FileDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -128,7 +145,7 @@ enableProdMode();
     SaleService,
     EmployeeService,
     StoreService,
-    AssignService
+    AssignService,
   ],
   entryComponents: [
     TestDialogComponent,
@@ -136,7 +153,6 @@ enableProdMode();
     SaleFileDialogComponent,
     P1DialogComponent,
     P1FileDialogComponent,
-    P1UpdateDialogComponent,
     DialogDraftComponent,
     AssignPart1Component,
     AssignPart2Component,
@@ -148,7 +164,13 @@ enableProdMode();
     AdminEmpDialogComponent,
     ViewdialogComponent,
     MatDialogComponent,
-    DraftfileComponent
+    DraftfileComponent,
+    P2FileDialogComponent,
+    P2DialogComponent,
+    P4FileDialogComponent,
+    P4DialogComponent,
+    P3FileDialogComponent,
+    P3DialogComponent,
   ],
   bootstrap: [AppComponent]
 })

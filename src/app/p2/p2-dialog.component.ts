@@ -2,44 +2,42 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-    selector: 'app-p1-update.dialog.component',
-    templateUrl: './p1-update.dialog.component.html',
-
+    selector: 'app-p2-dialog',
+    templateUrl: './p2-dialog.component.html',
+    styleUrls: ['./p2-dialog.component.css']
   })
-  export class P1UpdateDialogComponent implements OnInit {
+  export class P2DialogComponent implements OnInit {
     public assign: any[];
     /**
      *  variable 'form' use FormGroup for manage form
     */
-    public formUpdate: FormGroup;
-    public pmName: String;
-    public code: String;
-    public file = '-';
       // deadline:10-05-2018,
-    public doSuccess: Number;
+      public form: FormGroup;
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
       private formBuilder: FormBuilder,
-      private dialogRef: MatDialogRef<P1UpdateDialogComponent>,
+      private dialogRef: MatDialogRef<P2DialogComponent>,
       private _formBuilder: FormBuilder
     ) { }
     /**
      * create from group and set data of sale
     */
     ngOnInit() {
-        this.formUpdate = this.formBuilder.group({});
+      this.form = this.formBuilder.group({});
         this.assign = [{
             goalTarget: 20,
+            doSuccess: 10,
             assignProgress: 0,
-            // de line:10-05-2018,
-            placeAssign: 'Part1',
+            // deadline: 10-05-2018,
+            placeAssign: 'Part2',
             noteAssign: 'Note',
             productName: 'เหล็กกันชน',
+            productFileName: 'File001',
           }];
     }
-     updateAssignProject() {
-      this.doSuccess = this.formUpdate.value.doSuccess;
-     }
+    // updateAssignProject() {
+    //   this.doSuccess = this.formUpdate.value.doSuccess;
+    // }
     /**
      * set value in close() for return
      */
@@ -50,9 +48,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
      * save value in variable and return
      */
     onSave() {
-      const value = [{
-        doSuccess: this.doSuccess,
-      }];
+      const value = this.form.value;
       this.dialogRef.close(value);
     }
   }
