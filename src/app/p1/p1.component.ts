@@ -30,7 +30,7 @@ export class P1Component implements OnInit {
     this.rows.forEach(element => {
       if (element.assignEmpType === 'Part1') {
         this.rowss.push(element);
-        console.log(this.rowss);
+        // console.log(this.rowss);
       }
     });
     this.rowsss = this.rowss;
@@ -51,7 +51,7 @@ export class P1Component implements OnInit {
           productCode: result.productCode,
           projectProgress: 0,
           projectFile: result.projectFile,
-          customer: result.customer.customerName,
+          // customer: result.customer.customerName,
           pm: result.pm
         });
         // this.degreeService.addDegree(result).pipe(

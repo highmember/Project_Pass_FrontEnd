@@ -1,3 +1,19 @@
+<!-- <mat-card>
+  <mat-form-field>
+  <div *ngFor="let value of data.fileName">
+    <a *ngIf="value !== undefined;">{{}}
+      <mat-input-container>
+        <input mdInput type="number" id="value.productCodeR">
+
+      </mat-input-container>
+    </a>
+  </div>
+</mat-form-field>
+</mat-card> -->
+
+
+
+
 <mat-card>
   <mat-card-content>
     <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="assign">
@@ -31,7 +47,8 @@
         <ng-template let-value="value" ngx-datatable-cell-template>
           <div *ngFor="let value of data.fileName">
             <a *ngIf="value !== undefined;">
-              {{value.fileRecive}}</a>
+                <input matInput type="number" name="fileRecive" [(ngModel)]="value.fileRecive" >
+            </a>
           </div>
         </ng-template>
       </ngx-datatable-column>
@@ -45,14 +62,19 @@
           {{value.noteAssign}}
         </ng-template>
       </ngx-datatable-column>
-
+      <ngx-datatable-column name="แก้ไข">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+          <button mat-raised-button color="warn" (click)="onUpdate()">บันทึก</button>
+          </ng-template>
+        </ngx-datatable-column>
+      
     </ngx-datatable>
-
-
     <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
-      <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
-    </footer>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+        <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
+      </footer>
+
+    
 
   </mat-card-content>
 </mat-card>

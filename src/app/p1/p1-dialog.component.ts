@@ -12,7 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
      *  variable 'form' use FormGroup for manage form
     */
       // deadline:10-05-2018,
-      public form: FormGroup;
+    public form: FormGroup;
+    public fileRecive: Number;
     constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
       private formBuilder: FormBuilder,
@@ -24,16 +25,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     */
     ngOnInit() {
       this.form = this.formBuilder.group({});
+      console.log(this.assign)
         this.assign = [{
-            goalTarget: 20,
-            doSuccess: 10,
-            assignProgress: 0,
-            // deadline: 10-05-2018,
-            placeAssign: 'Part1',
-            noteAssign: 'Note',
-            productName: 'เหล็กกันชน',
-            productFileName: 'File001',
+          fileRecive: this.fileRecive,
           }];
+      console.log(this.assign)
     }
     // updateAssignProject() {
     //   this.doSuccess = this.formUpdate.value.doSuccess;
@@ -48,7 +44,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
      * save value in variable and return
      */
     onSave() {
-      const value = this.form.value;
+      const value = {
+        fileRecive: this.fileRecive,
+      };
+      console.log(value);
       this.dialogRef.close(value);
+    }
+    onUpdate(){
+      this.assign = [{
+        fileRecive: this.fileRecive,
+        }];
+    console.log(this.assign)
     }
   }
