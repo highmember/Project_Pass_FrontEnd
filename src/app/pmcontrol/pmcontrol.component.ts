@@ -11,6 +11,10 @@ import { mergeMap } from 'rxjs/operators';
 import { ProjectService } from '../shared/service/project.service';
 import { Location } from '@angular/common';
 import { Viewpart1Component } from './pmview/viewpart1/viewpart1.component';
+import { Viewpart2Component } from './pmview/viewpart2/viewpart2.component';
+import { Viewpart3Component } from './pmview/viewpart3/viewpart3.component';
+import { Viewpart4Component } from './pmview/viewpart4/viewpart4.component';
+import { ViewdraftComponent } from './pmview/viewdraft/viewdraft.component';
 
 @Component({
   selector: 'app-pmcontrol',
@@ -63,6 +67,8 @@ export class PmcontrolComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+// tslint:disable-next-line:max-line-length
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------------
   editDraft(): void {
     const dialogRef = this.dialog.open(DialogDraftComponent, {
       width: '1000px',
@@ -85,6 +91,31 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+  viewDraft(row): void {
+    const dialogRef = this.dialog.open(ViewdraftComponent, {
+      width: '1000px',
+      data: {
+        assignProject: row.assignProject,
+        assignPMName: row.assignPMName,
+        assignEmpName: row.assignEmpName,
+        assignFile: row.assignFile,
+        assignScopeStart: row.assignScopeStart,
+        assignScopeEnd: row.assignScopeEnd,
+        assignMat: row.assignMat,
+        assignProgress: row.assignProgress,
+        assignNote: row.assignNote,
+        assignEmpType: row.assignEmpType,
+      }
+    });
+    console.log(row);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+
+      }
+    });
+  }
+// tslint:disable-next-line:max-line-length
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------------
   editPart1(): void {
     const dialogRef = this.dialog.open(AssignPart1Component, {
       width: '1000px',
@@ -107,6 +138,7 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+  // ---------------------------------------------------------------------------------------------------------------------
   viewPart1(row) {
     const dialogRef = this.dialog.open(Viewpart1Component, {
       width: '1000px',
@@ -130,6 +162,7 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+    // ---------------------------------------------------------------------------------------------------------------------
   editPart2(): void {
     const dialogRef = this.dialog.open(AssignPart2Component, {
       width: '1000px',
@@ -152,6 +185,53 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+    // ---------------------------------------------------------------------------------------------------------------------
+    viewPart2(row) {
+      const dialogRef = this.dialog.open(Viewpart2Component, {
+        width: '1000px',
+        data: {
+          assignProject: row.assignProject,
+          assignPMName: row.assignPMName,
+          assignEmpName: row.assignEmpName,
+          assignFile: row.assignFile,
+          assignScopeStart: row.assignScopeStart,
+          assignScopeEnd: row.assignScopeEnd,
+          assignMat: row.assignMat,
+          assignProgress: row.assignProgress,
+          assignNote: row.assignNote,
+          assignEmpType: row.assignEmpType,
+        }
+      });
+      console.log(row);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+        }
+      });
+    }
+    // -----------------------------------------------------------------------------------------------------------------------------
+    viewPart3(row) {
+      const dialogRef = this.dialog.open(Viewpart3Component, {
+        width: '1000px',
+        data: {
+          assignProject: row.assignProject,
+          assignPMName: row.assignPMName,
+          assignEmpName: row.assignEmpName,
+          assignFile: row.assignFile,
+          assignScopeStart: row.assignScopeStart,
+          assignScopeEnd: row.assignScopeEnd,
+          assignMat: row.assignMat,
+          assignProgress: row.assignProgress,
+          assignNote: row.assignNote,
+          assignEmpType: row.assignEmpType,
+        }
+      });
+      console.log(row);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+        }
+      });
+    }
+    // -----------------------------------------------------------------------------------------------------------------------------
   editPart3(): void {
     const dialogRef = this.dialog.open(AssignPart3Component, {
       width: '1000px',
@@ -174,6 +254,30 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+    // ---------------------------------------------------------------------------------------------------------------------
+    viewPart4(row) {
+      const dialogRef = this.dialog.open(Viewpart4Component, {
+        width: '1000px',
+        data: {
+          assignProject: row.assignProject,
+          assignPMName: row.assignPMName,
+          assignEmpName: row.assignEmpName,
+          assignFile: row.assignFile,
+          assignScopeStart: row.assignScopeStart,
+          assignScopeEnd: row.assignScopeEnd,
+          assignMat: row.assignMat,
+          assignProgress: row.assignProgress,
+          assignNote: row.assignNote,
+          assignEmpType: row.assignEmpType,
+        }
+      });
+      console.log(row);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+        }
+      });
+    }
+    // -----------------------------------------------------------------------------------------------------------------------------
   editPart4(): void {
     const dialogRef = this.dialog.open(AssignPart4Component, {
       width: '1000px',
@@ -196,4 +300,5 @@ export class PmcontrolComponent implements OnInit {
       }
     });
   }
+    // ---------------------------------------------------------------------------------------------------------------------
 }

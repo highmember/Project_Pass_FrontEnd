@@ -96,7 +96,7 @@ export class AssignPart2Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
-      if (element.projectCode === '010618001') {
+      if (element.projectCode === '17146') {
         element.projectFile.forEach(value => {
           this.productCode.push(value.codeProduct);
         });
