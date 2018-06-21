@@ -8,7 +8,7 @@
       <app-button-card-title (onClick)="insertMaterial()">
         <mat-icon>add</mat-icon>Material</app-button-card-title>
       <mat-card-content>
-        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rowss">
           <ngx-datatable-column name="รหัสวัสดุ">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.materialId}}
@@ -48,30 +48,35 @@
       </mat-card-content>
     </mat-tab>
     <mat-tab label="คำสั่งของ">
-      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="datamat">
-        <ngx-datatable-column name="รหัสโปรเจค">
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="assignMat">
+        <ngx-datatable-column name="รหัสวัตุดิบ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.projectCode }}
+            {{value.matId }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ชื่อผู้จัดการ">
+        <ngx-datatable-column name="ชื่อ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.pm}}
+            {{value.matItem}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="โปรดัก">
+        <ngx-datatable-column name="ชนิด">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.product_ID}}
+            {{value.matType}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="จำนวน">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.matNum}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="วันที่">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.Day_Request}}
+            {{value.matDate}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="สถานะ">
+        <ngx-datatable-column name="Part">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.status}}
+            {{matPart}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name=" ">

@@ -5,6 +5,7 @@ import { MatDialogComponent } from './material-dialog.component';
 import { StoreService } from '../shared/service/store.service';
 import { mergeMap } from 'rxjs/operators';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { AssignService } from '../shared/service/assign.service';
 
 @Component({
   selector: 'app-store',
@@ -14,19 +15,33 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 export class StoreComponent implements OnInit {
   public temp: any[];
   public rows = [];
-  public datamat: any[];
+  public dataMat = [];
   public matback: any[];
   public customer: any[];
   public customerName: String;
+  public matPart: String;
+  public rowss: any[];
+  public temp2: any[];
+  public rows2 = [];
+  public rowss2: any[];
+  public assignMat: any[];
   constructor(
     private dialog: MatDialog,
     private storeService: StoreService,
+    private assignService: AssignService,
   ) { }
 
   ngOnInit() {
     this.storeService.getAllStore().subscribe((results) => {
       this.temp = results;
       this.check();
+    });
+    this.assignService.getAllAssign().subscribe((results) => {
+      this.assignMat = results;
+      this.rowss2 = results;
+    //  console.log(this.assignMat)
+      this.checkAssign();
+      this.checkpart();
     });
   }
   check() {
@@ -35,6 +50,26 @@ export class StoreComponent implements OnInit {
         this.rows.push(element);
       }
     });
+    this.rowss = this.rows;
+  }
+  checkAssign() {
+    this.assignMat.forEach(element => {
+      if (element.assignMat !== null) {
+        element.assignMat.forEach(value => {
+          this.dataMat.push(value);
+        });
+      }
+    });
+    this.assignMat = this.dataMat;
+  }
+  checkpart() {
+    this.rowss2.forEach(element => {
+      if (element.assignMat !== null) {
+        this.rows2.push(element.assignEmpType)
+        this.matPart = element.assignEmpType;
+      }
+    });
+    // this.rowss2 = this.rows2;
   }
   editMaterial(row): void {
     const dialogRef = this.dialog.open(MatDialogComponent, {
@@ -52,7 +87,7 @@ export class StoreComponent implements OnInit {
         this.storeService.updateStore(row._id, result).pipe(
           mergeMap(() => this.storeService.getAllStore()))
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });
@@ -68,7 +103,7 @@ export class StoreComponent implements OnInit {
         this.storeService.addStore(result).pipe(
           mergeMap(() => this.storeService.getAllStore()))
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });
@@ -84,7 +119,7 @@ export class StoreComponent implements OnInit {
         this.storeService.deleteStore(row._id).
           mergeMap(() => this.storeService.getAllStore())
           .subscribe((results) => {
-            this.rows = results;
+            this.rowss = results;
           });
       }
     });

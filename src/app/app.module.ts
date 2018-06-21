@@ -58,11 +58,6 @@ import { Viewpart3Component } from './fristpage/pmcontrol/pmview/viewpart3/viewp
 import { Viewpart4Component } from './fristpage/pmcontrol/pmview/viewpart4/viewpart4.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
-import { ViewdraftComponent } from './fristpage/pmview/viewdraft/viewdraft.component';
-import { Viewpart2Component } from './fristpage/pmview/viewpart2/viewpart2.component';
-import { Viewpart1Component } from './fristpage/pmview/viewpart1/viewpart1.component';
-import { Viewpart3Component } from './fristpage/pmview/viewpart3/viewpart3.component';
-import { Viewpart4Component } from './fristpage/pmview/viewpart4/viewpart4.component';
 import { P3Component } from './p3/p3.component';
 import { P3DialogComponent } from './p3/p3-dialog.component';
 import { P3FileDialogComponent } from './p3/p3-file-dialog.component';
@@ -183,8 +178,7 @@ enableProdMode();
     Viewpart2Component,
     Viewpart1Component,
     Viewpart3Component,
-    Viewpart4Component
-    P2FileDialogComponent,
+    Viewpart4Component,
     P2DialogComponent,
     P4FileDialogComponent,
     P4DialogComponent,
