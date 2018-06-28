@@ -34,9 +34,19 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="จัดการ" [maxWidth]="170">
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-          <a  routerLink="/app-pmcontrol/{{value.projectCode}}"><mat-icon>build</mat-icon></a>
+          <a routerLink="/app-pmcontrol/{{value.projectCode}}">
+            <mat-icon>build</mat-icon>
+          </a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
   </mat-card-content>
+</mat-card>
+<mat-card>
+  <div *ngFor="let value of product">
+    {{value[0]}}
+    <div *ngFor="let val of value">
+      {{val}}
+    </div>
+  </div>
 </mat-card>
