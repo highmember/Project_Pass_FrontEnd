@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class FristpageComponent implements OnInit {
   public rows: any[];
+  public product = [];
   constructor(
     private projectService: ProjectService,
   ) { }
@@ -16,7 +17,15 @@ export class FristpageComponent implements OnInit {
   ngOnInit() {
     this.projectService.getAllProject().subscribe((results) => {
       this.rows = results;
+      this.getProduct();
     });
+  }
+
+  getProduct() {
+    this.rows.forEach(element => {
+      this.product.push(element.projectFile);
+    });
+    console.log(this.product[0][0])
   }
 
 }
