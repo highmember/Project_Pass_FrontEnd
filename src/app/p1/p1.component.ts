@@ -37,6 +37,7 @@ export class P1Component implements OnInit {
     console.log(this.rowsss);
   }
   detailAssignProject(row): void {
+    console.log(row.assignFile)
     const dialogRef = this.dialog.open(P1DialogComponent, {
       width: '1000px',
       data: {

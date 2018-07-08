@@ -23,9 +23,13 @@ export class FristpageComponent implements OnInit {
 
   getProduct() {
     this.rows.forEach(element => {
-      this.product.push(element.projectFile);
+      this.product.push(Object.keys(element.projectFile[0]));
     });
-    console.log(this.product[0][0])
+    console.log(this.product);
+  }
+
+  pmControl(pa) {
+    console.log(pa);
   }
 
 }

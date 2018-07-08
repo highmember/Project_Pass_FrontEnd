@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../shared/service/employee.service';
 import { ProjectService } from '../../shared/service/project.service';
+import { elementAt } from 'rxjs/operator/elementAt';
 
 @Component({
   selector: 'app-assign-part1',
@@ -21,6 +22,9 @@ export class AssignPart1Component implements OnInit {
   public empP1 = [];
   public projectFile: any[];
   public productCode = [];
+  public codeProducts: String;
+  public fileProduct: any[];
+  public productCodes = [];
   public products = [];
   public empN: String;
   public partScopeStart: Date;
@@ -53,6 +57,7 @@ export class AssignPart1Component implements OnInit {
     this.formFile = this.formBuilder.group({});
     this.projectService.getAllProject().subscribe((results) => {
       this.projectFile = results;
+      console.log(this.projectFile);
       this.checkFile();
     });
     this.matFormGroup = this.formBuilder.group({});
@@ -95,22 +100,38 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
-      if (element.projectCode === '17146') {
+      if (element.projectCode === this.data.projectCode) {
         element.projectFile.forEach(value => {
-          this.productCode.push(value.codeProduct);
+          console.log(value);
+          console.log(Object.keys(value));
+          this.fileProduct = Object.values(value);
+          this.productCode.push(Object.keys(value));
         });
       }
     });
+    console.log(this.fileProduct);
   }
   addProducts() {
     this.products.push({
-      productCodeR: this.formFile.value.productCodeR,
-      productCode: this.formFile.value.productCode,
+      productCodeR: this.codeProducts,
+      productFile: this.formFile.value.productCodeR,
       fileNum: this.formFile.value.fileNum,
       fileRecive: 0,
     });
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
+  }
+  selectFile() {
+    this.productCodes = [];
+    this.fileProduct.forEach(element => {
+      element.forEach(val => {
+        if (val.codeProduct === this.codeProducts) {
+          console.log(Object.values(val.codeProduct));
+          this.productCodes.push(val.file);
+        }
+      });
+    });
+    console.log(this.productCodes);
   }
 
   deleteMsg(msg: String) {
@@ -152,14 +173,14 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   onSave() {
     const value = {
-      assignProject: this.data.project[0]._id,
-      assignPMName: this.data.project[0].pm,
+      assignProject: this.data.projectCode,
+      assignPMName: this.data.namePm,
       assignEmpName: this.empN,
       assignFile: this.assignFileNgx,
       assignScopeStart: this.partScopeStart,
       assignScopeEnd: this.partScopeEnd,
       assignMat: this.assignMatNgx,
-      assignProgress: this.data.project[0].projectProgress,
+      assignProgress: this.data.projProgress,
       assignNote: this.partNote,
       assignEmpType: 'Part1',
     };

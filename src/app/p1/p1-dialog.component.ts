@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   })
   export class P1DialogComponent implements OnInit {
     public assign: any[];
+    public assignn: any[];
     /**
      *  variable 'form' use FormGroup for manage form
     */
@@ -24,12 +25,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
      * create from group and set data of sale
     */
     ngOnInit() {
+      console.log(this.data.fileName)
       this.form = this.formBuilder.group({});
-      console.log(this.assign)
+      // console.log(this.assign)
+      this.data.fileName.forEach(ele => {
+        console.log(ele.productCodeR)
         this.assign = [{
-          fileRecive: this.fileRecive,
-          }];
+          productCodeR: ele.productCodeR,
+          productFile: ele.productFile,
+          fileNum: ele.fileNum,
+          fileRecive: ele.fileRecive
+        }]
+        console.log(this.assign)
+      });
       console.log(this.assign)
+      console.log(Object.values(this.assign))
     }
     // updateAssignProject() {
     //   this.doSuccess = this.formUpdate.value.doSuccess;
@@ -50,10 +60,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       console.log(value);
       this.dialogRef.close(value);
     }
-    onUpdate(){
-      this.assign = [{
-        fileRecive: this.fileRecive,
-        }];
-    console.log(this.assign)
+    onUpdate() {
+      console.log(this.fileRecive)
+      // this.assign = [{
+      //   fileRecive: this.fileRecive,
+      //   }];
+    // console.log(this.assign)
+      // this.assign.forEach(element => {
+      //   console.log(element);
+      //     // console.log(this.rowss);
+      // });
     }
   }
