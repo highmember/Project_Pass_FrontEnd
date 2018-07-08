@@ -17,8 +17,7 @@
 <mat-card>
   <mat-card-content>
     <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="assign">
-
-      <ngx-datatable-column name="ชื่อไฟล์">
+      <ngx-datatable-column name="รหัสโปรดักส์">
         <!-- <ng-template let-value="value" ngx-datatable-cell-template>
           {{data.fileName}}
         </ng-template> -->
@@ -28,9 +27,11 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="ชื่อโปรดักส์">
+      <ngx-datatable-column name="ชื่อไฟล์">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.productName}}
+          <div *ngFor="let value of data.fileName">
+            <a href="{{value.productFile}}" *ngIf="value !== undefined;" target="_blank">{{value.productFile}}</a>
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="จำนวนที่สั่ง">
@@ -45,11 +46,12 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="จำนวนที่ทำได้">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          <div *ngFor="let value of data.fileName">
-            <a *ngIf="value !== undefined;">
-                <input matInput type="number" name="fileRecive" [(ngModel)]="value.fileRecive" >
-            </a>
-          </div>
+          <!-- <div *ngFor="let value of data.fileName">
+            <a *ngIf="value !== undefined;"> -->
+              <input matInput type="number" name="fileRec
+              ive" (change)="onUpdate()" [(ngModel)]="fileRecive">
+            <!-- </a>
+          </div> -->
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ความคืบหน้า">
@@ -57,24 +59,19 @@
           {{value.assignProgress}}
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="โน้ต">
+      <ngx-datatable-column name="แก้ไข">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.noteAssign}}
+          <button mat-raised-button color="warn" (click)="onUpdate()">บันทึก</button>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="แก้ไข">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-          <button mat-raised-button color="warn" (click)="onUpdate()">บันทึก</button>
-          </ng-template>
-        </ngx-datatable-column>
-      
+
     </ngx-datatable>
     <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
-        <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
-      </footer>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+      <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
+    </footer>
 
-    
+
 
   </mat-card-content>
 </mat-card>

@@ -18,11 +18,15 @@ export class ProjectService {
   getAllProject(): Observable<any> {
     return this.apiService.get(`project`);
   }
+  getIdProject(id: String): Observable<any> {
+    return this.apiService.get(`project/` + id);
+  }
   /**
    * @param data
    * insert data in database of Project collection
    * @returns current data in database of Project collection
    */
+
   addProject(data): Observable<any> {
     return this.apiService.post('project', data);
   }

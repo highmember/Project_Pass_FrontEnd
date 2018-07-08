@@ -24,8 +24,10 @@ import { ViewdraftComponent } from './pmview/viewdraft/viewdraft.component';
 export class PmcontrolComponent implements OnInit {
   public rows: any[];
   public assign: any[];
-  public projectCode: String;
+  public projectCode: Number;
   public customer: String;
+  public namePm: String;
+  public projProgress: Number;
   public programsId;
   tiles = [
     { text: 'Draft', cols: 1, rows: 1, color: 'lightblue' },
@@ -47,22 +49,22 @@ export class PmcontrolComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectCode = '32321312312';
-    this.customer = 'Mr..... ......';
-    this.rows = [{
-      _id: '5b1d5d53445f870968d3c1a6',
-      projectCode: '111111122123213',
-      projectType: 'Mass',
-      projectProgress: 0,
-      projectFile: 'dsadassd',
-      customer: 'dsadsad',
-      pm: 'dsadadasd'
-    }];
     this.getNext();
+    // console.log(this.rowss);
   }
   getNext(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    const id = this.route.snapshot.paramMap.get('id');
+    // const cus = +this.route.snapshot.paramMap.get('customer');
+    this.projectService.getIdProject(id).subscribe((results) => {
+      this.rows = results;
+      console.log(results);
+      this.projectCode = results.projectCode;
+      this.customer = results.customer;
+      this.namePm = results.pm;
+      this.projProgress = results.projectProgress;
+    });
+    // console.log(cus);
+    // console.log(Object.keys(id));
   }
   goBack(): void {
     this.location.back();
@@ -73,7 +75,9 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDraftComponent, {
       width: '1000px',
       data: {
-        project: this.rows
+        projectCode: this.projectCode,
+        namePm: this.namePm,
+        projProgress: this.projProgress
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -120,7 +124,9 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart1Component, {
       width: '1000px',
       data: {
-        project: this.rows
+        projectCode: this.projectCode,
+        namePm: this.namePm,
+        projProgress: this.projProgress
       }
     });
     dialogRef.afterClosed().subscribe(result => {
