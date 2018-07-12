@@ -115,8 +115,10 @@ export class AssignPart1Component implements OnInit {
     this.products.push({
       productCodeR: this.codeProducts,
       productFile: this.formFile.value.productCodeR,
-      fileNum: this.formFile.value.fileNum,
+      // tslint:disable-next-line:radix
+      fileNum: parseInt(this.formFile.value.fileNum),
       fileRecive: 0,
+      fileProgress: 0
     });
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
@@ -173,7 +175,7 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   onSave() {
     const value = {
-      assignProject: this.data.projectCode,
+      assignProject: this.data.project_id,
       assignPMName: this.data.namePm,
       assignEmpName: this.empN,
       assignFile: this.assignFileNgx,

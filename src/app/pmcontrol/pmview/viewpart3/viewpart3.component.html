@@ -1,4 +1,4 @@
-<h1>Detail</h1>
+<h1>Detail Part3</h1>
 <div fxLayout="row">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Manager" disabled [(ngModel)]="assignEmpName" name="assignEmpName">
@@ -30,14 +30,28 @@
       <tr>
         <th mat-sort-header="product">Product</th>
         <th mat-sort-header="file">File</th>
-        <th mat-sort-header="num">Num</th>
+        <th mat-sort-header="num">Order</th>
+        <th mat-sort-header="num">Recive</th>
+        <th mat-sort-header="num">Percent Per Order</th>
       </tr>
 
       <tr *ngFor="let product of assignFile">
         <td>{{product.productCodeR}}</td>
-        <td>{{product.productCode}}</td>
-        <td>{{product.fileNum}}</td>
+        <td>{{product.productFile}}</td>
+        <td>{{product.fileNum}} Piece</td>
+        <td>{{product.fileRecive}} Piece</td>
+        <td>{{product.fileProgress}} %</td>
       </tr>
     </table>
   </mat-expansion-panel>
+</div>
+<br>
+<div>
+  <mat-card>
+    <mat-card-content>
+      <h3>Progress</h3>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="progressBar">
+      </mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
 </div>

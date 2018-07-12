@@ -32,6 +32,9 @@ export class AssignPart3Component implements OnInit {
   public matType = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
   public assignFileNgx: any[];
   public assignMatNgx: any[];
+  public fileProduct: any[];
+  public codeProducts: String;
+  public productCodes = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -90,32 +93,52 @@ export class AssignPart3Component implements OnInit {
     this.next();
   }
 // -------------------------------------------------------------------------------------------------------------------
-  checkFile() {
-    this.projectFile.forEach(element => {
-      if (element.projectCode === '17146') {
-        element.projectFile.forEach(value => {
-          this.productCode.push(value.codeProduct);
-        });
+checkFile() {
+  this.projectFile.forEach(element => {
+    if (element.projectCode === this.data.projectCode) {
+      element.projectFile.forEach(value => {
+        console.log(value);
+        console.log(Object.keys(value));
+        this.fileProduct = Object.values(value);
+        this.productCode.push(Object.keys(value));
+      });
+    }
+  });
+  console.log(this.fileProduct);
+}
+addProducts() {
+  this.products.push({
+    productCodeR: this.codeProducts,
+    productFile: this.formFile.value.productCodeR,
+    // tslint:disable-next-line:radix
+    fileNum: parseInt(this.formFile.value.fileNum),
+    fileRecive: 0,
+    fileProgress: 0
+  });
+  this.assignFileNgx = this.products;
+  console.log(this.assignFileNgx);
+}
+selectFile() {
+  this.productCodes = [];
+  this.fileProduct.forEach(element => {
+    element.forEach(val => {
+      if (val.codeProduct === this.codeProducts) {
+        console.log(Object.values(val.codeProduct));
+        this.productCodes.push(val.file);
       }
     });
-  }
-  addProducts() {
-    this.products.push({
-      productCodeR: this.formFile.value.productCodeR,
-      productCode: this.formFile.value.productCode,
-      fileNum: this.formFile.value.fileNum,
-      fileRecive: 0,
-    });
-    this.assignFileNgx = this.products;
-    console.log(this.assignFileNgx);
-  }
-  deleteMsg(msg: String) {
-    const index: number = this.assignFileNgx.indexOf(msg);
-    this.assignFileNgx.splice(index, 1);
-  }
-  checkProductFile() {
-    this.next();
-  }
+  });
+  console.log(this.productCodes);
+}
+
+deleteMsg(msg: String) {
+  const index: number = this.assignFileNgx.indexOf(msg);
+  this.assignFileNgx.splice(index, 1);
+}
+
+checkProductFile() {
+  this.next();
+}
   // -------------------------------------------------------------------------------------------------------------------
   addMat() {
     this.matItemAll.push({
@@ -145,14 +168,14 @@ export class AssignPart3Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   onSave() {
     const value = {
-      assignProject: this.data.project[0]._id,
-      assignPMName: this.data.project[0].pm,
+      assignProject: this.data.project_id,
+      assignPMName: this.data.namePm,
       assignEmpName: this.empN,
       assignFile: this.assignFileNgx,
       assignScopeStart: this.partScopeStart,
       assignScopeEnd: this.partScopeEnd,
       assignMat: this.assignMatNgx,
-      assignProgress: this.data.project[0].projectProgress,
+      assignProgress: this.data.projProgress,
       assignNote: this.partNote,
       assignEmpType: 'Part3',
     };

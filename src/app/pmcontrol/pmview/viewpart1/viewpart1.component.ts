@@ -16,6 +16,9 @@ export class Viewpart1Component implements OnInit {
   public assignScopeEnd: Data;
   public assignFile = [];
   public assignFileNum = 1;
+  public progressBar = 0;
+  public progressBarr = 0;
+  public numLen = 0;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,23 +36,27 @@ export class Viewpart1Component implements OnInit {
   }
 
   checkAssign() {
+    console.log(this.data);
     this.assign.forEach(element => {
-      if (element.assignEmpType === 'Part1') {
+      console.log(element);
+      if (element.assignEmpType === 'Part1' && element.assignProject === this.data.project_id) {
         this.assignScopeStart = element.assignScopeStart;
         this.assignScopeEnd = element.assignScopeEnd;
         this.assignEmpName = element.assignEmpName;
         element.assignFile.forEach(value => {
           this.assignFile.push({
             productCodeR: value.productCodeR,
-            productCode: value.productCode,
-            fileNum: value.fileNum
+            productFile: value.productFile,
+            fileNum: value.fileNum,
+            fileRecive: value.fileRecive,
+            fileProgress: value.fileProgress
           });
-          console.log(this.assignFile);
-
+          this.progressBarr += value.fileProgress;
         });
+        this.numLen = element.assignFile.length;
       }
     });
+    this.progressBar = (this.progressBarr / this.numLen);
     this.assignFileNum = this.assignFile.length;
-    console.log(this.assign);
   }
 }
