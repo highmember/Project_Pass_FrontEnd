@@ -37,7 +37,7 @@
         </div>
         <div *ngIf="tile.text==='Part2'">
           <label style="text-align: center;">Part2</label>
-          <button mat-mini-fab color="accent" (click)="editPart2()">
+          <button mat-mini-fab color="accent" (click)="editPart2(value)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-mini-fab color="accent" (click)="viewPart2(value)">
@@ -46,7 +46,7 @@
         </div>
         <div *ngIf="tile.text==='Part3'">
           <label style="text-align: center;">Part3</label>
-          <button mat-mini-fab color="accent" (click)="editPart3()">
+          <button mat-mini-fab color="accent" (click)="editPart3(value)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-mini-fab color="accent" (click)="viewPart3(value)">
@@ -55,7 +55,7 @@
         </div>
         <div *ngIf="tile.text==='Part4'">
           <label style="text-align: center;">Part4</label>
-          <button mat-mini-fab color="accent" (click)="editPart4()">
+          <button mat-mini-fab color="accent" (click)="editPart4(value)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-mini-fab color="accent" (click)="viewPart4(value)">

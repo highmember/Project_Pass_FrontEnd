@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
-/**
+/**1
  * service of Store page
 */
 export class AssignService {

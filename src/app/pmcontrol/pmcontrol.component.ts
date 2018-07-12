@@ -25,6 +25,7 @@ export class PmcontrolComponent implements OnInit {
   public rows: any[];
   public assign: any[];
   public projectCode: Number;
+  public project_id: String;
   public customer: String;
   public namePm: String;
   public projProgress: Number;
@@ -62,6 +63,7 @@ export class PmcontrolComponent implements OnInit {
       this.customer = results.customer;
       this.namePm = results.pm;
       this.projProgress = results.projectProgress;
+      this.project_id = results._id;
     });
     // console.log(cus);
     // console.log(Object.keys(id));
@@ -125,8 +127,9 @@ export class PmcontrolComponent implements OnInit {
       width: '1000px',
       data: {
         projectCode: this.projectCode,
+        project_id: this.project_id,
         namePm: this.namePm,
-        projProgress: this.projProgress
+        projProgress: this.projProgress,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -145,23 +148,16 @@ export class PmcontrolComponent implements OnInit {
     });
   }
   // ---------------------------------------------------------------------------------------------------------------------
-  viewPart1(row) {
+  viewPart1() {
     const dialogRef = this.dialog.open(Viewpart1Component, {
       width: '1000px',
       data: {
-        assignProject: row.assignProject,
-        assignPMName: row.assignPMName,
-        assignEmpName: row.assignEmpName,
-        assignFile: row.assignFile,
-        assignScopeStart: row.assignScopeStart,
-        assignScopeEnd: row.assignScopeEnd,
-        assignMat: row.assignMat,
-        assignProgress: row.assignProgress,
-        assignNote: row.assignNote,
-        assignEmpType: row.assignEmpType,
+        projectCode: this.projectCode,
+        namePm: this.namePm,
+        projProgress: this.projProgress,
+        project_id: this.project_id
       }
     });
-    console.log(row);
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
 
@@ -173,7 +169,10 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart2Component, {
       width: '1000px',
       data: {
-        project: this.rows
+        projectCode: this.projectCode,
+        project_id: this.project_id,
+        namePm: this.namePm,
+        projProgress: this.projProgress,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -192,46 +191,32 @@ export class PmcontrolComponent implements OnInit {
     });
   }
     // ---------------------------------------------------------------------------------------------------------------------
-    viewPart2(row) {
+    viewPart2() {
       const dialogRef = this.dialog.open(Viewpart2Component, {
         width: '1000px',
         data: {
-          assignProject: row.assignProject,
-          assignPMName: row.assignPMName,
-          assignEmpName: row.assignEmpName,
-          assignFile: row.assignFile,
-          assignScopeStart: row.assignScopeStart,
-          assignScopeEnd: row.assignScopeEnd,
-          assignMat: row.assignMat,
-          assignProgress: row.assignProgress,
-          assignNote: row.assignNote,
-          assignEmpType: row.assignEmpType,
+          projectCode: this.projectCode,
+          namePm: this.namePm,
+          projProgress: this.projProgress,
+          project_id: this.project_id
         }
       });
-      console.log(row);
       dialogRef.afterClosed().subscribe(result => {
         if (result !== undefined) {
         }
       });
     }
     // -----------------------------------------------------------------------------------------------------------------------------
-    viewPart3(row) {
+    viewPart3() {
       const dialogRef = this.dialog.open(Viewpart3Component, {
         width: '1000px',
         data: {
-          assignProject: row.assignProject,
-          assignPMName: row.assignPMName,
-          assignEmpName: row.assignEmpName,
-          assignFile: row.assignFile,
-          assignScopeStart: row.assignScopeStart,
-          assignScopeEnd: row.assignScopeEnd,
-          assignMat: row.assignMat,
-          assignProgress: row.assignProgress,
-          assignNote: row.assignNote,
-          assignEmpType: row.assignEmpType,
+          projectCode: this.projectCode,
+          namePm: this.namePm,
+          projProgress: this.projProgress,
+          project_id: this.project_id
         }
       });
-      console.log(row);
       dialogRef.afterClosed().subscribe(result => {
         if (result !== undefined) {
         }
@@ -242,7 +227,10 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart3Component, {
       width: '1000px',
       data: {
-        project: this.rows
+        projectCode: this.projectCode,
+        project_id: this.project_id,
+        namePm: this.namePm,
+        projProgress: this.projProgress,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -261,23 +249,16 @@ export class PmcontrolComponent implements OnInit {
     });
   }
     // ---------------------------------------------------------------------------------------------------------------------
-    viewPart4(row) {
+    viewPart4() {
       const dialogRef = this.dialog.open(Viewpart4Component, {
         width: '1000px',
         data: {
-          assignProject: row.assignProject,
-          assignPMName: row.assignPMName,
-          assignEmpName: row.assignEmpName,
-          assignFile: row.assignFile,
-          assignScopeStart: row.assignScopeStart,
-          assignScopeEnd: row.assignScopeEnd,
-          assignMat: row.assignMat,
-          assignProgress: row.assignProgress,
-          assignNote: row.assignNote,
-          assignEmpType: row.assignEmpType,
+          projectCode: this.projectCode,
+          namePm: this.namePm,
+          projProgress: this.projProgress,
+          project_id: this.project_id
         }
       });
-      console.log(row);
       dialogRef.afterClosed().subscribe(result => {
         if (result !== undefined) {
         }
@@ -288,7 +269,10 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(AssignPart4Component, {
       width: '1000px',
       data: {
-        project: this.rows
+        projectCode: this.projectCode,
+        project_id: this.project_id,
+        namePm: this.namePm,
+        projProgress: this.projProgress,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
