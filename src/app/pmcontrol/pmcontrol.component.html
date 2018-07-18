@@ -19,7 +19,7 @@
       <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
         <div *ngIf="tile.text==='Draft'">
           <label style="text-align: center;">Draft</label>
-          <button mat-mini-fab color="accent" (click)="editDraft()">
+          <button mat-mini-fab color="accent" (click)="editDraft(value)">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-mini-fab color="accent" (click)="viewDraft(value)">

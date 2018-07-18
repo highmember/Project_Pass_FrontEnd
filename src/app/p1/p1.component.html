@@ -36,7 +36,7 @@
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
               <a *ngIf="data !== undefined;">
-                <input matInput type="number" name="fileRecive" (change)="onUpdate(data.fileRecive,rowsss)" [(ngModel)]="data.fileRecive"> Piece
+                <input matInput type="number" name="fileRecive" [(ngModel)]="data.fileRecive"> Piece
               </a>
             </div>
           </ng-template>
@@ -45,6 +45,13 @@
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
               <a *ngIf="data !== undefined;">{{data.fileProgress}} %</a>
+              </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ส่งต่อ">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;"> <button mat-button color="primary" (click)="onUpdate(data.fileRecive,rowsss)" >Move to {{data.fileMove}}</button></a>
               </div>
           </ng-template>
         </ngx-datatable-column>
