@@ -78,8 +78,9 @@ export class PmcontrolComponent implements OnInit {
       width: '1000px',
       data: {
         projectCode: this.projectCode,
+        project_id: this.project_id,
         namePm: this.namePm,
-        projProgress: this.projProgress
+        projProgress: this.projProgress,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -101,19 +102,12 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(ViewdraftComponent, {
       width: '1000px',
       data: {
-        assignProject: row.assignProject,
-        assignPMName: row.assignPMName,
-        assignEmpName: row.assignEmpName,
-        assignFile: row.assignFile,
-        assignScopeStart: row.assignScopeStart,
-        assignScopeEnd: row.assignScopeEnd,
-        assignMat: row.assignMat,
-        assignProgress: row.assignProgress,
-        assignNote: row.assignNote,
-        assignEmpType: row.assignEmpType,
+        projectCode: this.projectCode,
+        namePm: this.namePm,
+        projProgress: this.projProgress,
+        project_id: this.project_id
       }
     });
-    console.log(row);
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
 

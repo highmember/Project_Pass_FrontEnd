@@ -27,6 +27,7 @@
         </mat-select>
       </mat-form-field> 
       <app-dropdown [data]="productCodes" [value]="data.productCodeR" placeholder="Select File" name="productCodeR" fxFlex [formGroup]='formFile'></app-dropdown>
+      <app-dropdown [data]="fileMove" [value]="data.fileMove" name="fileMove" placeholder="Moveto ?" fxFlex [formGroup]='formFile'></app-dropdown>
       <app-input-text-normal [value]="data.fileNum" name="fileNum" placeholder="จำนวน" fxFlex [formGroup]='formFile'></app-input-text-normal>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" (click)="addProducts()" [disabled]="formFile.invalid">Add</button>

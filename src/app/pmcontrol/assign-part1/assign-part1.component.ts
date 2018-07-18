@@ -34,6 +34,7 @@ export class AssignPart1Component implements OnInit {
   public matScope: Date;
   public matScopeNew: Date;
   public matType = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
+  public fileMove = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
   public assignFileNgx: any[];
   public assignMatNgx: any[];
 
@@ -57,7 +58,6 @@ export class AssignPart1Component implements OnInit {
     this.formFile = this.formBuilder.group({});
     this.projectService.getAllProject().subscribe((results) => {
       this.projectFile = results;
-      console.log(this.projectFile);
       this.checkFile();
     });
     this.matFormGroup = this.formBuilder.group({});
@@ -118,7 +118,8 @@ export class AssignPart1Component implements OnInit {
       // tslint:disable-next-line:radix
       fileNum: parseInt(this.formFile.value.fileNum),
       fileRecive: 0,
-      fileProgress: 0
+      fileProgress: 0,
+      fileMove: this.formFile.value.fileMove
     });
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
@@ -151,7 +152,9 @@ export class AssignPart1Component implements OnInit {
       matItem: this.data.matItem.materialName,
       matType: this.matFormGroup.value.matType,
       matNum: this.matFormGroup.value.matNum,
-      matDate: this.matScope
+      matRecive: 0,
+      matDate: this.matScope,
+      matForm: 'old',
     });
     this.assignMatNgx = this.matItemAll;
     console.log(this.assignMatNgx);
@@ -162,7 +165,9 @@ export class AssignPart1Component implements OnInit {
       matItem: this.matNewFormGroup.value.matItemNew,
       matType: this.matNewFormGroup.value.matTypeNew,
       matNum: this.matNewFormGroup.value.matNumNew,
-      matDate: this.matScopeNew
+      matRecive: 0,
+      matDate: this.matScopeNew,
+      matForm: 'new',
     });
     this.assignMatNgx = this.matItemAll;
     console.log(this.assignMatNgx);

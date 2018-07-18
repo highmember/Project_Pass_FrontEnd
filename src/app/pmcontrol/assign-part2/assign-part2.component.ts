@@ -35,6 +35,7 @@ export class AssignPart2Component implements OnInit {
   public fileProduct: any[];
   public codeProducts: String;
   public productCodes = [];
+  public fileMove = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -118,7 +119,8 @@ export class AssignPart2Component implements OnInit {
       // tslint:disable-next-line:radix
       fileNum: parseInt(this.formFile.value.fileNum),
       fileRecive: 0,
-      fileProgress: 0
+      fileProgress: 0,
+      fileMove: this.formFile.value.fileMove
     });
     this.assignFileNgx = this.products;
     console.log(this.assignFileNgx);
@@ -151,7 +153,9 @@ export class AssignPart2Component implements OnInit {
       matItem: this.data.matItem.materialName,
       matType: this.matFormGroup.value.matType,
       matNum: this.matFormGroup.value.matNum,
-      matDate: this.matScope
+      matRecive: 0,
+      matDate: this.matScope,
+      matForm: 'old',
     });
     this.assignMatNgx = this.matItemAll;
     console.log(this.assignMatNgx);
@@ -162,7 +166,9 @@ export class AssignPart2Component implements OnInit {
       matItem: this.matNewFormGroup.value.matItemNew,
       matType: this.matNewFormGroup.value.matTypeNew,
       matNum: this.matNewFormGroup.value.matNumNew,
-      matDate: this.matScopeNew
+      matRecive: 0,
+      matDate: this.matScopeNew,
+      matForm: 'new',
     });
     this.assignMatNgx = this.matItemAll;
   }

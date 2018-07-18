@@ -53,7 +53,8 @@ export class Viewpart1Component implements OnInit {
           });
           this.progressBarr += value.fileProgress;
         });
-        this.numLen = element.assignFile.length;
+        this.numLen += element.assignFile.length;
+        console.log(this.numLen);
       }
     });
     this.progressBar = (this.progressBarr / this.numLen);
