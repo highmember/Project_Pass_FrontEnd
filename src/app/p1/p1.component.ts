@@ -21,7 +21,6 @@ export class P1Component implements OnInit {
 
   ngOnInit() {
     this.assignService.getAllAssign().subscribe((results) => {
-      console.log(results)
       this.rows = results;
       this.checkAssign();
     });
@@ -30,7 +29,6 @@ export class P1Component implements OnInit {
     this.rows.forEach(element => {
       if (element.assignEmpType === 'Part1') {
         this.rowss.push(element);
-        // console.log(this.rowss);
       }
     });
     this.rowsss = this.rowss;
@@ -62,24 +60,24 @@ export class P1Component implements OnInit {
         //   });
       }
     });
-}
+  }
 
 
-viewFile(): void {
-  const dialogRef = this.dialog.open(P1FileDialogComponent, {
-    width: '1000px',
-    data: {
-    }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-      // this.degreeService.addDegree(result).pipe(
-      //   mergeMap(() => this.degreeService.getAllDegree()))
-      //   .subscribe((results) => {
-      //     this.rows = results;
-      //   });
-    }
-  });
-}
+  viewFile(): void {
+    const dialogRef = this.dialog.open(P1FileDialogComponent, {
+      width: '1000px',
+      data: {
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        // this.degreeService.addDegree(result).pipe(
+        //   mergeMap(() => this.degreeService.getAllDegree()))
+        //   .subscribe((results) => {
+        //     this.rows = results;
+        //   });
+      }
+    });
+  }
 
 }

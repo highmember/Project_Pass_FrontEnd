@@ -1,0 +1,9 @@
+<h2>เพิ่มผู้ใช้งาน</h2>
+<content fxLayout="column">
+  <app-input-text-normal [value]="data.username" name="username" placeholder="ชื่อผู้ใช้" text="ชื่อผู้ใช้" fxFlex [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.password" name="password" placeholder="รหัสผ่าน" text="รหัสผ่าน" fxFlex [formGroup]='form'></app-input-text-normal>
+</content>
+<footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
+  <button mat-raised-button color="warn" (click)="onClose()">ยกเลิก</button>
+</footer>

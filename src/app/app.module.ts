@@ -68,8 +68,11 @@ import { Viewpart2Component } from './pmcontrol/pmview/viewpart2/viewpart2.compo
 import { Viewpart3Component } from './pmcontrol/pmview/viewpart3/viewpart3.component';
 import { Viewpart1Component } from './pmcontrol/pmview/viewpart1/viewpart1.component';
 import { Viewpart4Component } from './pmcontrol/pmview/viewpart4/viewpart4.component';
+import { UserService } from './shared/service/user.service';
+import { AdminUserDialogComponent } from './admin/user-dialog.component';
 
 const appRoutes: Routes = [
+  { path: 'app-root', component: AppComponent },
   { path: 'app-admin', component: AdminComponent },
   { path: 'app-sale', component: SaleComponent },
   { path: 'app-store', component: StoreComponent },
@@ -130,7 +133,8 @@ enableProdMode();
     BillComponent,
     P2Component,
     P2DialogComponent,
-    P2FileDialogComponent
+    P2FileDialogComponent,
+    AdminUserDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -162,6 +166,7 @@ enableProdMode();
     EmployeeService,
     StoreService,
     AssignService,
+    UserService
   ],
   entryComponents: [
     TestDialogComponent,
@@ -192,6 +197,7 @@ enableProdMode();
     P4DialogComponent,
     P3FileDialogComponent,
     P3DialogComponent,
+    AdminUserDialogComponent
   ],
   bootstrap: [AppComponent]
 })

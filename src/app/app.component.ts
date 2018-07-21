@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { TestService } from './shared/service/test.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from './shared/service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,51 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public username: string;
+  public password: string;
+  public check = false;
+  public checkType: String;
 
   constructor(
+    private router: Router,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute = activatedRoute;
+    this.router = router;
+  }
 
-  ) { }
+  login(): void {
+    const val = {
+      username: this.username,
+      password: this.password
+    };
+    this.userService.checkUser(val).subscribe((results) => {
+      this.checkType = results;
+      if (results !== undefined) {
+        this.check = true;
+      } else {
+        alert('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!');
+      }
+    });
+  }
 
+  logout() {
+    this.router.navigate(
+      [
+        '../',
+        {
+          outlets: {
+            chat: null
+          }
+        }
+      ],
+      {
+        relativeTo: this.activatedRoute
+      }
+    );
+    this.checkType = '';
+    this.check = false;
+    alert('ออกจากระบบสำเร็จ');
+  }
 }
