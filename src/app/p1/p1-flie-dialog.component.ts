@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AssignService } from '../shared/service/assign.service';
 @Component({
   selector: 'app-flie-p1-dialog',
   templateUrl: './p1-flie-dialog.component.html',
@@ -8,6 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class P1FileDialogComponent implements OnInit {
   public file: any[];
   public form: FormGroup;
+  public assign = [];
+  public fileConnect = [];
+  public fileFrom: String;
+  public sum = 0;
+  public progressBar = 0;
+  public numFile = 0;
   /**
    *  variable 'form' use FormGroup for manage form
   */
@@ -15,30 +22,45 @@ export class P1FileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<P1FileDialogComponent>,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private assignService: AssignService,
   ) { }
   /**
    * create from group and set data of sale
   */
   ngOnInit() {
-    this.form = this.formBuilder.group({});
-    this.file = [{
-      productFileName: 'File001',
-      productFileName2: 'File002',
-      productFileName3: 'File003',
-      productFileName4: 'File004'
-    }];
+    this.assignService.getSomeAssign(this.data.assignProjectCode).subscribe((results) => {
+      this.assign = results;
+      this.checkAssign();
+    });
   }
+
+  checkAssign() {
+    this.assign.forEach(element => {
+      element.value.assignFile.forEach(value => {
+        if (value.fileMove === 'Part1') {
+          this.fileFrom = element.value.assignEmpType;
+          this.fileConnect.push({
+            productCodeR: value.productCodeR,
+            productFile: value.productFile,
+            fileNum: value.fileNum,
+            fileRecive: value.fileRecive,
+            fileProgress: value.fileProgress
+          });
+        }
+      });
+    });
+    this.data.assignFile.forEach(val => {
+       this.numFile += 1;
+       this.sum += val.fileProgress;
+    });
+    this.progressBar = this.sum / this.numFile;
+  }
+
   /**
    * set value in close() for return
    */
   onClose() {
     this.dialogRef.close(/*sent value to tab-supervision*/);
-  }
-  /**
-   * save value in variable and return
-   */
-  onSave() {
-    this.dialogRef.close();
   }
 }

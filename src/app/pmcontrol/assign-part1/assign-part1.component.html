@@ -1,11 +1,11 @@
-<h1>Part 1</h1>
+<h1>{{data.assignEmpType}}</h1>
 <mat-horizontal-stepper [linear]="false" #stepper>
   <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
     <ng-template matStepLabel>Select Manager</ng-template>
     <mat-card class="card">
       <content fxLayout="column">
-        <app-dropdown [data]="empP1" [value]="data.employeeName" text="ขื่อ-นามสกุล" placeholder="Select Manager" name="empP1" fxFlex
+        <app-dropdown [data]="empP1" [value]="data.assignEmpName" text="ขื่อ-นามสกุล" placeholder="Select Manager" name="empP1" fxFlex
           [formGroup]='formEmp'></app-dropdown>
       </content>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
@@ -27,6 +27,7 @@
         </mat-select>
       </mat-form-field> 
       <app-dropdown [data]="productCodes" [value]="data.productCodeR" placeholder="Select File" name="productCodeR" fxFlex [formGroup]='formFile'></app-dropdown>
+      <app-dropdown [data]="fileMove" [value]="data.fileMove" name="fileMove" placeholder="Moveto ?" fxFlex [formGroup]='formFile'></app-dropdown>
       <app-input-text-normal [value]="data.fileNum" name="fileNum" placeholder="จำนวน" fxFlex [formGroup]='formFile'></app-input-text-normal>
       <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <button mat-raised-button color="primary" (click)="addProducts()" [disabled]="formFile.invalid">Add</button>
@@ -61,7 +62,7 @@
   </mat-step>
   <!-- ------------------------------------------------------------------------------------------------------------------------------------------- -->
   <mat-step [stepControl]="thirdFormGroup" [editable]="true">
-    <ng-template matStepLabel>Scope Part1</ng-template>
+    <ng-template matStepLabel>Scope {{data.assignEmpType}}</ng-template>
     <div fxLayout="row">
       <h4>Start</h4>
       <mat-form-field>

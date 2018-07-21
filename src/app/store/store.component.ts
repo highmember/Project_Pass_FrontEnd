@@ -5,6 +5,8 @@ import { MatDialogComponent } from './material-dialog.component';
 import { StoreService } from '../shared/service/store.service';
 import { mergeMap } from 'rxjs/operators';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { ProjectService } from '../shared/service/project.service';
+import { AssignService } from '../shared/service/assign.service';
 
 @Component({
   selector: 'app-store',
@@ -19,12 +21,21 @@ export class StoreComponent implements OnInit {
   public matback: any[];
   public customer: any[];
   public customerName: String;
+  public projectCode = '';
+  public tmp: any[];
+  public valueAssign: any[];
   constructor(
     private dialog: MatDialog,
     private storeService: StoreService,
+    private projectService: ProjectService,
+    private assignService: AssignService,
   ) { }
 
   ngOnInit() {
+    this.projectService.getAllProject().subscribe((results) => {
+      this.tmp = results;
+      console.log(this.tmp)
+    });
     this.storeService.getAllStore().subscribe((results) => {
       this.temp = results;
       this.check();
@@ -37,6 +48,12 @@ export class StoreComponent implements OnInit {
       }
     });
     this.rowss = this.rows;
+  }
+  getAssign() {
+    this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {
+      this.valueAssign = results;
+      console.log(this.valueAssign)
+    });
   }
   editMaterial(row): void {
     const dialogRef = this.dialog.open(MatDialogComponent, {

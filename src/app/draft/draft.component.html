@@ -1,46 +1,73 @@
-<mat-card>
-  <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
-    <h2>Draft</h2>
-  </mat-card-subtitle>
-  <mat-card-content>
-    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows">
-      <ngx-datatable-column name="รหัสโปรเจค">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectCode}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="ความคืบหน้าของ Draft">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.DraftProgress}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="ชนิดโปรเจค">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectType}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="ลูกค้า">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.customer}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="ผู้จัดการ">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.pm}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="ไฟล์" [maxWidth]="170">
+<p>
+  <mat-card>
+    <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+      <h2>Manager Draft</h2>
+      <div fxFlex></div>
+    </mat-card-subtitle>
+    <mat-card-content>
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="rowsss">
+        <ngx-datatable-column name="รหัสโปรเจค">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.viewFile}}
+            {{value.assignProjectCode}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="อัพไฟล์" [maxWidth]="170">
-            <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-              <button mat-mini-fab color="primary" (click)="upFile()">
-                <mat-icon>attachment</mat-icon>
-              </button>
-            </ng-template>
-          </ngx-datatable-column>
-    </ngx-datatable>
-  </mat-card-content>
-</mat-card>
+        <ngx-datatable-column name="ชื่อโปรดักส์">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="รหัสไฟล์">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data.productFile}}</a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="จำนวนที่สั่ง">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data.fileNum}} Piece</a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="จำนวนที่ทำได้">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">
+                <input matInput type="number" name="fileRecive" [(ngModel)]="data.fileRecive"> Piece
+              </a>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ความคืบหน้า">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;">{{data.fileProgress}} %</a>
+              </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ส่งต่อ">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;"> <button mat-button color="primary" (click)="onUpdate(data.fileRecive,rowsss)" >Move to {{data.fileMove}}</button></a>
+              </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="ผู้จัดการ">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.assignPMName}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="รายละเอียดงาน" [maxWidth]="170">
+          <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+            <button mat-mini-fab color="primary" (click)="viewFile(value)">
+              <mat-icon>attachment</mat-icon>
+            </button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </mat-card-content>
+  </mat-card>
+</p>

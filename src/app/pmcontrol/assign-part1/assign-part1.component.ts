@@ -25,15 +25,14 @@ export class AssignPart1Component implements OnInit {
   public codeProducts: String;
   public fileProduct: any[];
   public productCodes = [];
-  public products = [];
   public empN: String;
   public partScopeStart: Date;
   public partScopeEnd: Date;
   public partNote: String;
-  public matItemAll = [];
   public matScope: Date;
   public matScopeNew: Date;
   public matType = ['ชิ้น', 'อัน', 'ตัว', 'แกลลอน', 'ลิตร', 'ยูนิต', 'ตัน', 'กิโลกรัม', 'เส้น', 'กล่อง'];
+  public fileMove = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
   public assignFileNgx: any[];
   public assignMatNgx: any[];
 
@@ -49,6 +48,16 @@ export class AssignPart1Component implements OnInit {
    * create from group and set data of sale
   */
   ngOnInit() {
+    if (this.data.assignRound === 'First') {
+      this.assignFileNgx = [];
+      this.assignMatNgx = [];
+    } else {
+      this.assignFileNgx = this.data.assignFile;
+      this.partScopeStart = this.data.assignScopeStart;
+      this.partScopeEnd = this.data.assignScopeEnd;
+      this.partNote = this.data.assignNote;
+      this.assignMatNgx = this.data.assignMat;
+    }
     this.formEmp = this.formBuilder.group({});
     this.employeeService.getAllEmployee().subscribe((results) => {
       this.empName = results;
@@ -57,7 +66,6 @@ export class AssignPart1Component implements OnInit {
     this.formFile = this.formBuilder.group({});
     this.projectService.getAllProject().subscribe((results) => {
       this.projectFile = results;
-      console.log(this.projectFile);
       this.checkFile();
     });
     this.matFormGroup = this.formBuilder.group({});
@@ -88,7 +96,7 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   checkName() {
     this.empName.forEach(element => {
-      if (element.employeeType === 'Part1') {
+      if (element.employeeType === this.data.assignEmpType) {
         this.empP1.push(element.employeeName);
       }
     });
@@ -100,38 +108,34 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   checkFile() {
     this.projectFile.forEach(element => {
-      if (element.projectCode === this.data.projectCode) {
+      if (element.projectCode === this.data.assignProjectCode) {
         element.projectFile.forEach(value => {
-          console.log(value);
-          console.log(Object.keys(value));
           this.fileProduct = Object.values(value);
           this.productCode.push(Object.keys(value));
         });
       }
     });
-    console.log(this.fileProduct);
   }
   addProducts() {
-    this.products.push({
+    this.assignFileNgx.push({
       productCodeR: this.codeProducts,
       productFile: this.formFile.value.productCodeR,
-      fileNum: this.formFile.value.fileNum,
+      // tslint:disable-next-line:radix
+      fileNum: parseInt(this.formFile.value.fileNum),
       fileRecive: 0,
+      fileProgress: 0,
+      fileMove: this.formFile.value.fileMove
     });
-    this.assignFileNgx = this.products;
-    console.log(this.assignFileNgx);
   }
   selectFile() {
     this.productCodes = [];
     this.fileProduct.forEach(element => {
       element.forEach(val => {
         if (val.codeProduct === this.codeProducts) {
-          console.log(Object.values(val.codeProduct));
           this.productCodes.push(val.file);
         }
       });
     });
-    console.log(this.productCodes);
   }
 
   deleteMsg(msg: String) {
@@ -144,36 +148,36 @@ export class AssignPart1Component implements OnInit {
   }
   // -------------------------------------------------------------------------------------------------------------------
   addMat() {
-    this.matItemAll.push({
+    this.assignMatNgx.push({
       matId: this.data.matItem,
       matItem: this.data.matItem.materialName,
       matType: this.matFormGroup.value.matType,
       matNum: this.matFormGroup.value.matNum,
-      matDate: this.matScope
+      matRecive: 0,
+      matDate: this.matScope,
+      matForm: 'old',
     });
-    this.assignMatNgx = this.matItemAll;
-    console.log(this.assignMatNgx);
   }
   addMatNew() {
-    this.matItemAll.push({
+    this.assignMatNgx.push({
       matId: '',
       matItem: this.matNewFormGroup.value.matItemNew,
       matType: this.matNewFormGroup.value.matTypeNew,
       matNum: this.matNewFormGroup.value.matNumNew,
-      matDate: this.matScopeNew
+      matRecive: 0,
+      matDate: this.matScopeNew,
+      matForm: 'new',
     });
-    this.assignMatNgx = this.matItemAll;
-    console.log(this.assignMatNgx);
   }
   deleteMat(msg: String) {
     const index: number = this.assignMatNgx.indexOf(msg);
     this.assignMatNgx.splice(index, 1);
-    console.log(this.assignMatNgx);
   }
   // -------------------------------------------------------------------------------------------------------------------
   onSave() {
     const value = {
-      assignProject: this.data.projectCode,
+      assignProjectCode: this.data.assignProjectCode,
+      assignProject_id: this.data.project_id,
       assignPMName: this.data.namePm,
       assignEmpName: this.empN,
       assignFile: this.assignFileNgx,
@@ -182,7 +186,7 @@ export class AssignPart1Component implements OnInit {
       assignMat: this.assignMatNgx,
       assignProgress: this.data.projProgress,
       assignNote: this.partNote,
-      assignEmpType: 'Part1',
+      assignEmpType: this.data.assignEmpType,
     };
     this.dialogRef.close(value);
   }

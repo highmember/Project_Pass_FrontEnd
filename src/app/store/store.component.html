@@ -48,7 +48,14 @@
       </mat-card-content>
     </mat-tab>
     <mat-tab label="คำสั่งของ">
-      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="datamat">
+      <!-- <mat-form-field>
+        <mat-select placeholder="Select Project" [(ngModel)]="projectCode" name="projectCode">
+          <mat-option *ngFor="let code of tmp.projectCode" [value]="code">
+            {{projectCode}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssign">
         <ngx-datatable-column name="รหัสโปรเจค">
           <ng-template let-value="value" ngx-datatable-cell-template>
             {{value.projectCode }}

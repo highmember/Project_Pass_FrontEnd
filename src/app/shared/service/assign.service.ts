@@ -4,7 +4,7 @@ import { ApiService } from './api.service';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
-/**
+/**1
  * service of Store page
 */
 export class AssignService {
@@ -43,7 +43,11 @@ export class AssignService {
   deleteAssign(id: string): Observable<any> {
     return this.apiService.delete('assign/' + id);
   }
-  getSomeAssign(id: string): Observable<any> {
-    return this.apiService.get('assign/' + id);
+  getSomeAssign(id): Observable<any> {
+    return this.apiService.get('assignId/' + id);
   }
+  getProjectProgress(id): Observable<any> {
+    return this.apiService.get('assignnId/' + id);
+  }
+
 }
