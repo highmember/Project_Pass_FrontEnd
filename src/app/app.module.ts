@@ -59,11 +59,7 @@ import { P4FileDialogComponent } from './p4/p4-file-dialog.component';
 import { BillComponent } from './bill/bill.component';
 import { P2Component } from './p2/p2.component';
 import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
-import { ViewdraftComponent } from './pmcontrol/pmview/viewdraft/viewdraft.component';
-import { Viewpart2Component } from './pmcontrol/pmview/viewpart2/viewpart2.component';
-import { Viewpart3Component } from './pmcontrol/pmview/viewpart3/viewpart3.component';
-import { Viewpart1Component } from './pmcontrol/pmview/viewpart1/viewpart1.component';
-import { Viewpart4Component } from './pmcontrol/pmview/viewpart4/viewpart4.component';
+import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
 
 const appRoutes: Routes = [
   { path: 'app-admin', component: AdminComponent },
@@ -110,11 +106,6 @@ enableProdMode();
     DraftComponent,
     DraftfileComponent,
     PmcontrolComponent,
-    ViewdraftComponent,
-    Viewpart2Component,
-    Viewpart1Component,
-    Viewpart3Component,
-    Viewpart4Component,
     P1Component,
     P3Component,
     P3FileDialogComponent,
@@ -122,7 +113,8 @@ enableProdMode();
     P4FileDialogComponent,
     BillComponent,
     P2Component,
-    P2FileDialogComponent
+    P2FileDialogComponent,
+    PmviewdetailComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -172,14 +164,10 @@ enableProdMode();
     ViewdialogComponent,
     MatDialogComponent,
     DraftfileComponent,
-    ViewdraftComponent,
-    Viewpart2Component,
-    Viewpart1Component,
-    Viewpart3Component,
-    Viewpart4Component,
     P2FileDialogComponent,
     P4FileDialogComponent,
     P3FileDialogComponent,
+    PmviewdetailComponent
   ],
   bootstrap: [AppComponent]
 })

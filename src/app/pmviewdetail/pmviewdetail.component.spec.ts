@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Viewpart3Component } from './viewpart3.component';
+import { PmviewdetailComponent } from './pmviewdetail.component';
 
-describe('Viewpart3Component', () => {
-  let component: Viewpart3Component;
-  let fixture: ComponentFixture<Viewpart3Component>;
+describe('PmviewdetailComponent', () => {
+  let component: PmviewdetailComponent;
+  let fixture: ComponentFixture<PmviewdetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Viewpart3Component ]
+      declarations: [ PmviewdetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Viewpart3Component);
+    fixture = TestBed.createComponent(PmviewdetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

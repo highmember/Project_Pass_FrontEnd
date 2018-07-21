@@ -1,17 +1,17 @@
-<h1>Detail</h1>
+<h1>Detail's {{data.assignProjectCode}}</h1>
 <div fxLayout="row">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Manager" disabled [(ngModel)]="assignEmpName" name="assignEmpName">
+    <input matInput placeholder="Project Maneger (PM)" disabled [value]="data.assignPMName" name="assignPMName">
   </mat-form-field>
   <ul></ul>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="assignScopeStart" name="assignScopeStart">
+    <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [value]="data.assignScopeStart" name="assignScopeStart">
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
   </mat-form-field>
   <ul></ul>
   <mat-form-field>
-    <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="assignScopeEnd" name="assignScopeEnd">
+    <input matInput [matDatepicker]="picker2" placeholder="End" disabled [value]="data.assignScopeEnd" name="assignScopeEnd">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
@@ -20,22 +20,22 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Products
+        Products Connect from :
       </mat-panel-title>
       <mat-panel-description >
-        {{assignFileNum}}
+        {{fileFrom}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <table matSort (matSortChange)="sortData($event)">
       <tr>
         <th mat-sort-header="product">Product</th>
         <th mat-sort-header="file">File</th>
-        <th mat-sort-header="num">Order</th>
-        <th mat-sort-header="num">Recive</th>
+        <th mat-sort-header="num">Demand</th>
+        <th mat-sort-header="num">Supply</th>
         <th mat-sort-header="num">Percent Per Order</th>
       </tr>
 
-      <tr *ngFor="let product of assignFile">
+      <tr *ngFor="let product of fileConnect">
         <td>{{product.productCodeR}}</td>
         <td>{{product.productFile}}</td>
         <td>{{product.fileNum}} Piece</td>
@@ -45,11 +45,40 @@
     </table>
   </mat-expansion-panel>
 </div>
+<div>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Material Req:
+      </mat-panel-title>
+      <mat-panel-description >
+        {{data.assignMat.length}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table matSort (matSortChange)="sortData($event)">
+      <tr>
+        <th mat-sort-header="product">Item</th>
+        <th mat-sort-header="type">Type</th>
+        <th mat-sort-header="num">Num</th>
+        <th mat-sort-header="contain">Contain</th>
+        <th mat-sort-header="date">Date</th>
+      </tr>
+
+      <tr *ngFor="let mat of data.assignMat">
+        <td>{{mat.matItem}}</td>
+        <td>{{mat.matType}}</td>
+        <td>{{mat.matNum}}</td>
+        <td>{{mat.matRecive}}</td>
+        <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
+      </tr>
+    </table>
+  </mat-expansion-panel>
+</div>
 <br>
 <div>
   <mat-card>
     <mat-card-content>
-      <h3>Progress</h3>
+      <h3>Progress's {{data.assignEmpType}}</h3>
       <mat-progress-bar [color]="color" [mode]="mode" [value]="progressBar">
       </mat-progress-bar>
     </mat-card-content>
