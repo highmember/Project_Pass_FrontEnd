@@ -24,11 +24,13 @@ export class P3Component implements OnInit {
     });
   }
   onUpdate(result, row) {
-    this.assignService.updateAssign(row[0]._id, row[0])
-    .mergeMap(() => this.assignService.getAllAssign())
-      .subscribe((results) => {
-        this.rows = results;
+    row.forEach((item, index) => {
+      this.assignService.updateAssign(row[index]._id, row[index])
+        .mergeMap(() => this.assignService.getAllAssign())
+        .subscribe((results) => {
+          this.rows = results;
         });
+    });
   }
   checkAssign() {
     this.rows.forEach(element => {
@@ -39,10 +41,20 @@ export class P3Component implements OnInit {
     this.rowsss = this.rowss;
   }
 
-viewFile(): void {
+viewFile(val): void {
   const dialogRef = this.dialog.open(P3FileDialogComponent, {
     width: '1000px',
     data: {
+      assignEmpType: val.assignEmpType,
+      assignFile: val.assignFile,
+      assignMat: val.assignMat,
+      assignNote: val.assignNote,
+      assignPMName: val.assignPMName,
+      assignProgress: val.assignProgress,
+      assignProjectCode: val.assignProjectCode,
+      assignProject_id: val.assignProject_id,
+      assignScopeEnd: val.assignScopeEnd,
+      assignScopeStart: val.assignScopeStart
     }
   });
   dialogRef.afterClosed().subscribe(result => {

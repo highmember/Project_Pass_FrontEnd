@@ -25,10 +25,12 @@
           <button mat-mini-fab color="accent" (click)="viewDraft(value)">
             <mat-icon>pageview</mat-icon>
           </button>
+          <div>
+          <mat-progress-bar [color]="color" [mode]="mode" [value]="value"></mat-progress-bar></div>
         </div>
         <div *ngIf="tile.text==='Part1'">
           <label style="text-align: center;">Part1</label>
-          <button mat-mini-fab color="accent" (click)="editPart1(value)">
+          <button mat-mini-fab color="accent" (click)="editPart1()">
             <mat-icon>edit</mat-icon>
           </button>
           <button mat-mini-fab color="accent" (click)="viewPart1(value)">
@@ -72,7 +74,7 @@
     <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
     </mat-progress-bar>
     <h2>Progress</h2>
-    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+    <mat-progress-bar [color]="color" [mode]="mode" [value]="projectProgress.value">
     </mat-progress-bar>
   </mat-card-content>
 </mat-card>

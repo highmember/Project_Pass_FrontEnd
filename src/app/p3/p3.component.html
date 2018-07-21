@@ -1,7 +1,7 @@
 <p>
   <mat-card>
     <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
-      <h2>MG Part 1</h2>
+      <h2>Manager Part 3</h2>
       <div fxFlex></div>
     </mat-card-subtitle>
     <mat-card-content>
@@ -11,14 +11,14 @@
             {{value.assignProjectCode}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="รหัสโปรดักส์">
+        <ngx-datatable-column name="ชื่อโปรดักส์">
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
               <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
             </div>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ชื่อโปรดักส์">
+        <ngx-datatable-column name="รหัสไฟล์">
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
               <a *ngIf="data !== undefined;">{{data.productFile}}</a>
@@ -36,7 +36,7 @@
           <ng-template let-value="value" ngx-datatable-cell-template>
             <div *ngFor="let data of value.assignFile">
               <a *ngIf="data !== undefined;">
-                <input matInput type="number" name="fileRecive" (change)="onUpdate(data.fileRecive,rowsss)" [(ngModel)]="data.fileRecive"> Piece
+                <input matInput type="number" name="fileRecive" [(ngModel)]="data.fileRecive"> Piece
               </a>
             </div>
           </ng-template>
@@ -48,6 +48,13 @@
               </div>
           </ng-template>
         </ngx-datatable-column>
+        <ngx-datatable-column name="ส่งต่อ">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            <div *ngFor="let data of value.assignFile">
+              <a *ngIf="data !== undefined;"> <button mat-button color="primary" (click)="onUpdate(data.fileRecive,rowsss)" >Move to {{data.fileMove}}</button></a>
+              </div>
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="ผู้จัดการ">
           <ng-template let-value="value" ngx-datatable-cell-template>
             {{value.assignPMName}}
@@ -55,7 +62,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="รายละเอียดงาน" [maxWidth]="170">
           <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-            <button mat-mini-fab color="primary" (click)="viewFile()">
+            <button mat-mini-fab color="primary" (click)="viewFile(value)">
               <mat-icon>attachment</mat-icon>
             </button>
           </ng-template>

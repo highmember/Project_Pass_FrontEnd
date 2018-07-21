@@ -43,7 +43,11 @@ export class AssignService {
   deleteAssign(id: string): Observable<any> {
     return this.apiService.delete('assign/' + id);
   }
-  getSomeAssign(id: string): Observable<any> {
-    return this.apiService.get('assign/' + id);
+  getSomeAssign(id): Observable<any> {
+    return this.apiService.get('assignId/' + id);
   }
+  getProjectProgress(id): Observable<any> {
+    return this.apiService.get('assignnId/' + id);
+  }
+
 }
