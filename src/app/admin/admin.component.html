@@ -1,5 +1,5 @@
-<h2>Admin manage</h2>
 <mat-tab-group>
+  <h2>Admin manage</h2>
   <mat-tab label="Customer">
     <mat-card>
       <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
@@ -48,7 +48,8 @@
         <h2>Sale</h2>
         <div fxFlex></div>
         <app-button-card-title (onClick)="openSaleDialog()">
-          <mat-icon>add</mat-icon>Sale</app-button-card-title>
+          <mat-icon>add</mat-icon>Sale
+        </app-button-card-title>
       </mat-card-subtitle>
       <mat-card-content>
         <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="sale"
@@ -70,6 +71,9 @@
           </ngx-datatable-column>
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
             <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="accent" (click)="openUserDialog(value,'Sale')">
+                <mat-icon>person_add</mat-icon>
+              </button>
               <button mat-mini-fab color="primary" (click)="editSaleDialog(value)">
                 <mat-icon>edit</mat-icon>
               </button>
@@ -89,7 +93,8 @@
         <h2>PM</h2>
         <div fxFlex></div>
         <app-button-card-title (onClick)="openPmDialog()">
-          <mat-icon>add</mat-icon>PM</app-button-card-title>
+          <mat-icon>add</mat-icon>PM
+        </app-button-card-title>
       </mat-card-subtitle>
       <mat-card-content>
         <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="pm"
@@ -111,6 +116,9 @@
           </ngx-datatable-column>
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
             <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="accent" (click)="openUserDialog(value, 'PM')">
+                <mat-icon>person_add</mat-icon>
+              </button>
               <button mat-mini-fab color="primary" (click)="editPmDialog(value)">
                 <mat-icon>edit</mat-icon>
               </button>
@@ -130,7 +138,8 @@
         <h2>Employee</h2>
         <div fxFlex></div>
         <app-button-card-title (onClick)="openEmpDialog()">
-          <mat-icon>add</mat-icon>Employee</app-button-card-title>
+          <mat-icon>add</mat-icon>Employee
+        </app-button-card-title>
       </mat-card-subtitle>
       <mat-card-content>
         <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="employee"
@@ -157,6 +166,9 @@
           </ngx-datatable-column>
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
             <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="accent" (click)="openUserDialog(value, 'Employee')">
+                <mat-icon>person_add</mat-icon>
+              </button>
               <button mat-mini-fab color="primary" (click)="editEmpDialog(value)">
                 <mat-icon>edit</mat-icon>
               </button>

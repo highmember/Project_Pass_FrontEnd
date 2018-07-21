@@ -42,7 +42,6 @@ export class P1Component implements OnInit {
     });
     this.rowsss = this.rowss;
   }
-
 viewFile(val): void {
   const dialogRef = this.dialog.open(P1FileDialogComponent, {
     width: '1000px',

@@ -59,9 +59,12 @@ import { P4FileDialogComponent } from './p4/p4-file-dialog.component';
 import { BillComponent } from './bill/bill.component';
 import { P2Component } from './p2/p2.component';
 import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
+import { UserService } from './shared/service/user.service';
+import { AdminUserDialogComponent } from './admin/user-dialog.component';
 import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
 
 const appRoutes: Routes = [
+  { path: 'app-root', component: AppComponent },
   { path: 'app-admin', component: AdminComponent },
   { path: 'app-sale', component: SaleComponent },
   { path: 'app-store', component: StoreComponent },
@@ -113,7 +116,9 @@ enableProdMode();
     P4FileDialogComponent,
     BillComponent,
     P2Component,
+    P2DialogComponent,
     P2FileDialogComponent,
+    AdminUserDialogComponent
     PmviewdetailComponent
   ],
   imports: [
@@ -146,6 +151,7 @@ enableProdMode();
     EmployeeService,
     StoreService,
     AssignService,
+    UserService
   ],
   entryComponents: [
     TestDialogComponent,
@@ -167,6 +173,8 @@ enableProdMode();
     P2FileDialogComponent,
     P4FileDialogComponent,
     P3FileDialogComponent,
+    P3DialogComponent,
+    AdminUserDialogComponent
     PmviewdetailComponent
   ],
   bootstrap: [AppComponent]

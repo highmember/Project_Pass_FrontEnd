@@ -9,6 +9,8 @@ import { SaleService } from '../shared/service/sale.service';
 import { CustomerService } from '../shared/service/customer.service';
 import { EmployeeService } from '../shared/service/employee.service';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { AdminUserDialogComponent } from './user-dialog.component';
+import { UserService } from '../shared/service/user.service';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class AdminComponent implements OnInit {
     private saleService: SaleService,
     private pmService: PmService,
     private employeeService: EmployeeService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
@@ -72,7 +75,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.customerService.updateCustomer(row._id, result).
-        mergeMap(() => this.customerService.getAllCustomer())
+          mergeMap(() => this.customerService.getAllCustomer())
           .subscribe((results) => {
             this.customer = results;
           });
@@ -88,7 +91,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.status === true) {
         this.customerService.deleteCustomer(row._id).
-        mergeMap(() => this.customerService.getAllCustomer())
+          mergeMap(() => this.customerService.getAllCustomer())
           .subscribe((results) => {
             this.customer = results;
           });
@@ -123,7 +126,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.saleService.updateSale(row._id, result).
-        mergeMap(() => this.saleService.getAllSale())
+          mergeMap(() => this.saleService.getAllSale())
           .subscribe((results) => {
             this.sale = results;
           });
@@ -139,7 +142,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.saleService.deleteSale(row._id).
-        mergeMap(() => this.saleService.getAllSale())
+          mergeMap(() => this.saleService.getAllSale())
           .subscribe((results) => {
             this.sale = results;
           });
@@ -174,7 +177,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.pmService.updatePm(row._id, result).
-        mergeMap(() => this.pmService.getAllPm())
+          mergeMap(() => this.pmService.getAllPm())
           .subscribe((results) => {
             this.pm = results;
           });
@@ -190,7 +193,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.status === true) {
         this.pmService.deletePm(row._id).
-        mergeMap(() => this.pmService.getAllPm())
+          mergeMap(() => this.pmService.getAllPm())
           .subscribe((results) => {
             this.pm = results;
           });
@@ -226,7 +229,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
         this.employeeService.updateEmployee(row._id, result).
-        mergeMap(() => this.employeeService.getAllEmployee())
+          mergeMap(() => this.employeeService.getAllEmployee())
           .subscribe((results) => {
             this.employee = results;
           });
@@ -242,10 +245,24 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.status === true) {
         this.employeeService.deleteEmployee(row._id).
-        mergeMap(() => this.employeeService.getAllEmployee())
+          mergeMap(() => this.employeeService.getAllEmployee())
           .subscribe((results) => {
             this.employee = results;
           });
+      }
+    });
+  }
+  openUserDialog(val, type) {
+    const dialogRef = this.dialog.open(AdminUserDialogComponent, {
+      width: '1000px',
+      data: {
+        val: val,
+        type: type
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.userService.addUser(result).subscribe(() => {});
       }
     });
   }
