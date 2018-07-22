@@ -7,12 +7,10 @@ import { JwtService } from './shared/service/jwt.service';
 import { ApiService } from './shared/service/api.service';
 import { TestService } from './shared/service/test.service';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { Routes, RouterModule } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './shared/material.module';
-import { TestDialogComponent } from './test/test-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SaleComponent } from './sale/sale.component';
 import { SharedModule } from './shared/shared.module';
@@ -62,6 +60,7 @@ import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
 import { UserService } from './shared/service/user.service';
 import { AdminUserDialogComponent } from './admin/user-dialog.component';
 import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   { path: 'app-root', component: AppComponent },
@@ -76,6 +75,7 @@ const appRoutes: Routes = [
   { path: 'app-p3', component: P3Component },
   { path: 'app-p4', component: P4Component },
   { path: 'app-bill', component: BillComponent },
+  { path: 'app-home', component: HomeComponent }
 ];
 enableProdMode();
 @NgModule({
@@ -85,8 +85,6 @@ enableProdMode();
   ],
   declarations: [
     AppComponent,
-    TestComponent,
-    TestDialogComponent,
     SaleComponent,
     SaleDialogComponent,
     SaleFileDialogComponent,
@@ -116,10 +114,10 @@ enableProdMode();
     P4FileDialogComponent,
     BillComponent,
     P2Component,
-    P2DialogComponent,
     P2FileDialogComponent,
-    AdminUserDialogComponent
-    PmviewdetailComponent
+    AdminUserDialogComponent,
+    PmviewdetailComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -154,7 +152,6 @@ enableProdMode();
     UserService
   ],
   entryComponents: [
-    TestDialogComponent,
     SaleDialogComponent,
     SaleFileDialogComponent,
     P1FileDialogComponent,
@@ -173,8 +170,7 @@ enableProdMode();
     P2FileDialogComponent,
     P4FileDialogComponent,
     P3FileDialogComponent,
-    P3DialogComponent,
-    AdminUserDialogComponent
+    AdminUserDialogComponent,
     PmviewdetailComponent
   ],
   bootstrap: [AppComponent]
