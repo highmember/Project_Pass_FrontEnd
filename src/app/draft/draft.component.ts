@@ -23,6 +23,7 @@ export class DraftComponent implements OnInit {
     });
   }
   onUpdate(result, row) {
+    console.log(row)
     row.forEach((item, index) => {
       this.assignService.updateAssign(row[index]._id, row[index])
         .mergeMap(() => this.assignService.getAllAssign())

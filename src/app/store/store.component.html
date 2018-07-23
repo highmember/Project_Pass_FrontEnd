@@ -48,42 +48,68 @@
       </mat-card-content>
     </mat-tab>
     <mat-tab label="คำสั่งของ">
-      <!-- <mat-form-field>
-        <mat-select placeholder="Select Project" [(ngModel)]="projectCode" name="projectCode">
-          <mat-option *ngFor="let code of tmp.projectCode" [value]="code">
-            {{projectCode}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field> -->
-      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssign">
-        <ngx-datatable-column name="รหัสโปรเจค">
+
+      <app-dropdown [data]="projectCodes" [value]="projectCode" text="Select Project" placeholder="Project" name="projectCodes"
+        (change)="getMatassign()" fxFlex [formGroup]='formProJC'></app-dropdown>
+      <!-- <mat-card>
+              <table matSort (matSortChange)="sortData($event)">
+                <tr>
+                  <th mat-sort-header="item">Item</th>
+                  <th mat-sort-header="order">Order</th>
+                  <th mat-sort-header="input">Input</th>
+                  <th mat-sort-header="type">Type</th>
+                  <th mat-sort-header="date">Date</th>
+                  <th mat-sort-header="add">Add</th>
+                </tr>
+
+                <tr *ngFor="let value of valueAssign">
+                  <td>{{value.matItem}}</td>
+                  <td>{{value.matNum}}</td>
+                  <td>{{value.matRecive}}</td>
+                  <td>{{value.matType}}</td>
+                  <td>{{value.matDate}}</td>
+                  <td>
+                    <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </mat-card> -->
+      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssigns">
+        <ngx-datatable-column name="วัสดุ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.projectCode }}
+            {{value.matItem}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="ชื่อผู้จัดการ">
+        <ngx-datatable-column name="จำนวนที่ต้องการ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.pm}}
+            {{value.matNum}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="โปรดัก">
+        <ngx-datatable-column name="จำนวนที่มี">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.product_ID}}
+              <input matInput type="number" name="fileRecive" [(ngModel)]="value.matRecive">
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="วันที่">
+        <ngx-datatable-column name="หน่วย">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.Day_Request}}
+            {{value.matType}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="สถานะ">
+        <ngx-datatable-column name="จัดส่งที่">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.status}}
+            {{value.matGoAt}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="วันที่ใช้">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.matDate | date: "dd-MM-yyyy"}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name=" ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <button mat-mini-fab color="accent" (click)="viewreq()">
+            <button mat-mini-fab color="accent" (click)="sendMat(value)">
               <mat-icon>pageview</mat-icon>
             </button>
           </ng-template>
