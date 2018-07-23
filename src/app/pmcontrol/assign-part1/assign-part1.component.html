@@ -100,7 +100,7 @@
           <app-autocomplete-Store title="" [(selectedStore)]="data.matItem" name="matItem" placeholder="เลือกวัสดุ" (selectedStoreChange)="status($event)"
             fxFlex></app-autocomplete-Store>
           <app-input-text-normal [value]="data.matNum" name="matNum" placeholder="จำนวน" fxFlex [formGroup]='matFormGroup'></app-input-text-normal>
-          <app-dropdown [data]="matType" [value]="data.matType" name="matType" placeholder="หน่วย" fxFlex [formGroup]='matFormGroup'></app-dropdown>
+          <app-dropdown [data]="matType" [value]="data.materialUnit" name="matType" placeholder="หน่วย" fxFlex [formGroup]='matFormGroup'></app-dropdown>
           <ul></ul>
           <mat-form-field>
             <input matInput [matDatepicker]="picker3" placeholder="Choose a Date" [(ngModel)]="matScope" name="matScope">
