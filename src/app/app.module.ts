@@ -116,9 +116,8 @@ enableProdMode();
     P4FileDialogComponent,
     BillComponent,
     P2Component,
-    P2DialogComponent,
     P2FileDialogComponent,
-    AdminUserDialogComponent
+    AdminUserDialogComponent,
     PmviewdetailComponent
   ],
   imports: [
@@ -173,8 +172,7 @@ enableProdMode();
     P2FileDialogComponent,
     P4FileDialogComponent,
     P3FileDialogComponent,
-    P3DialogComponent,
-    AdminUserDialogComponent
+    AdminUserDialogComponent,
     PmviewdetailComponent
   ],
   bootstrap: [AppComponent]

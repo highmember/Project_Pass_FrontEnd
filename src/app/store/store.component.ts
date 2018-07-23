@@ -30,6 +30,7 @@ export class StoreComponent implements OnInit {
   public assignMat = [];
   public formProJC: FormGroup;
   rowssss: any;
+  public valueFromStore = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,6 +57,8 @@ export class StoreComponent implements OnInit {
       this.projectCodes.push(element.projectCode);
     });
   }
+  // tslint:disable-next-line:max-line-length
+  // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
   getMatassign() {
     this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
       this.assignMat = results;
@@ -63,22 +66,51 @@ export class StoreComponent implements OnInit {
     });
   }
   assignMatF() {
-    this.assignMat.forEach((ele) => {
-      ele.value.assignMat.forEach(val => {
-        this.valueAssign.push({
-          _id: ele.value._id,
-          assignProject_id: ele.value.assignProject_id,
-          matItem: val.matItem,
-          matNum: val.matNum,
-          matRecive: val.matRecive,
-          matType: val.matType,
-          matGoAt: ele.value.assignEmpType,
-          matDate: val.matDate,
+    this.storeService.getSomeMat(this.assignMat).subscribe((results) => {
+      this.valueFromStore = results;
+      let num = 0;
+      let check = 0;
+      this.assignMat.forEach((ele) => {
+        ele.value.assignMat.forEach(val => {
+          this.valueAssign.push({
+            _id: ele.value._id,
+            assignProject_id: ele.value.assignProject_id,
+            mat_id: val._id,
+            matId: val.matId,
+            matItem: val.matItem,
+            matNum: val.matNum,
+            matRecive: val.matRecive,
+            matFromStore: this.valueFromStore[check],
+            matType: val.matType,
+            matGoAt: ele.value.assignEmpType,
+            matDate: val.matDate,
+            matForm: val.matForm,
+            count: num
+          });
+          check++;
+          num++;
         });
+        num = 0;
       });
+      this.valueAssigns = this.valueAssign;
     });
-    this.valueAssigns = this.valueAssign;
   }
+  sendMat(val): void {
+    const assignMat = [];
+    assignMat.push({
+      _id: val._id,
+      assignMat: val
+    });
+    console.log(assignMat[0]._id)
+    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
+      .mergeMap(() => this.assignService.getAllAssign())
+      .subscribe((results) => {
+        this.rowssss = results;
+      });
+  }
+  // tslint:disable-next-line:max-line-length
+  // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
+
 
   check() {
     this.temp.forEach(element => {
@@ -87,6 +119,19 @@ export class StoreComponent implements OnInit {
       }
     });
     this.rowss = this.rows;
+  }
+  addMatToStore(val) {
+    // const assignStore = [];
+    // assignStore.push({
+    //   assignMat: val
+    // });
+    console.log(val)
+    // const
+    this.storeService.addStore(val).pipe(
+      mergeMap(() => this.storeService.getAllStore()))
+      .subscribe((results) => {
+        this.rowss = results;
+      });
   }
 
   editMaterial(row): void {
@@ -142,17 +187,5 @@ export class StoreComponent implements OnInit {
       }
     });
   }
-  sendMat(val): void {
-    const assignMat = [];
-    assignMat.push({
-      _id: val._id,
-      assignMat: val
-    });
-    console.log(assignMat[0]._id)
-    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
-      .mergeMap(() => this.assignService.getAllAssign())
-      .subscribe((results) => {
-        this.rowssss = results;
-      });
-  }
+
 }

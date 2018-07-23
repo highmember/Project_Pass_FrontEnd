@@ -33,14 +33,10 @@ export class AssignService {
    * @returns current data in database of Assign collection
    */
   updateAssign(id: string, data): Observable<any> {
-    console.log(id)
-    console.log(data)
     return this.apiService.put('assign/' + id, data);
   }
 
   updateMatStore(id: string, data): Observable<any> {
-    console.log(id)
-    console.log(data)
     return this.apiService.put('assignn/' + id, data);
   }
   /**

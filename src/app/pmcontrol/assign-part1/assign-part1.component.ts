@@ -149,7 +149,8 @@ export class AssignPart1Component implements OnInit {
   // -------------------------------------------------------------------------------------------------------------------
   addMat() {
     this.assignMatNgx.push({
-      matId: this.data.matItem,
+      _id: this.data.matItem._id,
+      matId: this.data.matItem.materialId,
       matItem: this.data.matItem.materialName,
       matType: this.matFormGroup.value.matType,
       matNum: this.matFormGroup.value.matNum,
@@ -160,6 +161,7 @@ export class AssignPart1Component implements OnInit {
   }
   addMatNew() {
     this.assignMatNgx.push({
+      _id: '',
       matId: '',
       matItem: this.matNewFormGroup.value.matItemNew,
       matType: this.matNewFormGroup.value.matTypeNew,

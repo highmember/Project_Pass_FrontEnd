@@ -51,31 +51,6 @@
 
       <app-dropdown [data]="projectCodes" [value]="projectCode" text="Select Project" placeholder="Project" name="projectCodes"
         (change)="getMatassign()" fxFlex [formGroup]='formProJC'></app-dropdown>
-      <!-- <mat-card>
-              <table matSort (matSortChange)="sortData($event)">
-                <tr>
-                  <th mat-sort-header="item">Item</th>
-                  <th mat-sort-header="order">Order</th>
-                  <th mat-sort-header="input">Input</th>
-                  <th mat-sort-header="type">Type</th>
-                  <th mat-sort-header="date">Date</th>
-                  <th mat-sort-header="add">Add</th>
-                </tr>
-
-                <tr *ngFor="let value of valueAssign">
-                  <td>{{value.matItem}}</td>
-                  <td>{{value.matNum}}</td>
-                  <td>{{value.matRecive}}</td>
-                  <td>{{value.matType}}</td>
-                  <td>{{value.matDate}}</td>
-                  <td>
-                    <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </mat-card> -->
       <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssigns">
         <ngx-datatable-column name="วัสดุ">
           <ng-template let-value="value" ngx-datatable-cell-template>
@@ -87,9 +62,14 @@
             {{value.matNum}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="จำนวนที่มี">
+        <ngx-datatable-column name="จำนวนที่ส่งไป">
           <ng-template let-value="value" ngx-datatable-cell-template>
-              <input matInput type="number" name="fileRecive" [(ngModel)]="value.matRecive">
+            <input matInput type="number" name="fileRecive" [(ngModel)]="value.matRecive">
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="จำนวนที่มีในคลัง">
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value.matFromStore}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="หน่วย">
@@ -109,13 +89,17 @@
         </ngx-datatable-column>
         <ngx-datatable-column name=" ">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <button mat-mini-fab color="accent" (click)="sendMat(value)">
-              <mat-icon>pageview</mat-icon>
+            <button *ngIf="value.matForm==='old'" mat-mini-fab color="accent" (click)="sendMat(value)">
+              <mat-icon>send</mat-icon>
+            </button>
+            <button *ngIf="value.matForm==='new'" mat-mini-fab color="primary" (click)="addMatToStore(value)">
+              <mat-icon>fiber_new</mat-icon>
             </button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
     </mat-tab>
+
     <mat-tab label="คำสั่งคืน">
       <mat-card-content>
         <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="matback">
