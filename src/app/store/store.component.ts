@@ -5,8 +5,9 @@ import { MatDialogComponent } from './material-dialog.component';
 import { StoreService } from '../shared/service/store.service';
 import { mergeMap } from 'rxjs/operators';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
-import { ProjectService } from '../shared/service/project.service';
 import { AssignService } from '../shared/service/assign.service';
+import { ProjectService } from '../shared/service/project.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-store',
@@ -21,10 +22,17 @@ export class StoreComponent implements OnInit {
   public matback: any[];
   public customer: any[];
   public customerName: String;
-  public projectCode = '';
+  public projectCodes = [];
   public tmp: any[];
-  public valueAssign: any[];
+  public projectCode: String;
+  public valueAssign = [];
+  public valueAssigns: any[];
+  public assignMat = [];
+  public formProJC: FormGroup;
+  rowssss: any;
+
   constructor(
+    private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private storeService: StoreService,
     private projectService: ProjectService,
@@ -32,15 +40,46 @@ export class StoreComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.projectService.getAllProject().subscribe((results) => {
-      this.tmp = results;
-      console.log(this.tmp)
-    });
+    this.formProJC = this.formBuilder.group({});
     this.storeService.getAllStore().subscribe((results) => {
       this.temp = results;
       this.check();
     });
+    this.projectService.getAllProject().subscribe((results) => {
+      this.tmp = results;
+      this.checkAssign();
+    });
   }
+
+  checkAssign() {
+    this.tmp.forEach(element => {
+      this.projectCodes.push(element.projectCode);
+    });
+  }
+  getMatassign() {
+    this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
+      this.assignMat = results;
+      this.assignMatF();
+    });
+  }
+  assignMatF() {
+    this.assignMat.forEach((ele) => {
+      ele.value.assignMat.forEach(val => {
+        this.valueAssign.push({
+          _id: ele.value._id,
+          assignProject_id: ele.value.assignProject_id,
+          matItem: val.matItem,
+          matNum: val.matNum,
+          matRecive: val.matRecive,
+          matType: val.matType,
+          matGoAt: ele.value.assignEmpType,
+          matDate: val.matDate,
+        });
+      });
+    });
+    this.valueAssigns = this.valueAssign;
+  }
+
   check() {
     this.temp.forEach(element => {
       if (element.materialName !== 'อื่นๆ') {
@@ -49,12 +88,7 @@ export class StoreComponent implements OnInit {
     });
     this.rowss = this.rows;
   }
-  getAssign() {
-    this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {
-      this.valueAssign = results;
-      console.log(this.valueAssign)
-    });
-  }
+
   editMaterial(row): void {
     const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '450px',
@@ -108,20 +142,17 @@ export class StoreComponent implements OnInit {
       }
     });
   }
-  viewreq(): void {
-    const dialogRef = this.dialog.open(ViewdialogComponent, {
-      width: '1000px',
-      data: {
-      }
+  sendMat(val): void {
+    const assignMat = [];
+    assignMat.push({
+      _id: val._id,
+      assignMat: val
     });
-    dialogRef.afterClosed().subscribe(result => {
-      // if (result !== undefined) {
-      //   this.storeService.addMaterial(result).pipe(
-      //     mergeMap(() => this.storeService.getAllMaterial()))
-      //     .subscribe((results) => {
-      //       this.rows = results;
-      //     });
-      // }
-    });
+    console.log(assignMat[0]._id)
+    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
+      .mergeMap(() => this.assignService.getAllAssign())
+      .subscribe((results) => {
+        this.rowssss = results;
+      });
   }
 }
