@@ -116,8 +116,12 @@ enableProdMode();
     P2Component,
     P2FileDialogComponent,
     AdminUserDialogComponent,
+<<<<<<< HEAD
     PmviewdetailComponent,
     HomeComponent
+=======
+    PmviewdetailComponent
+>>>>>>> 75c23acacce59e62c5284c73f2c6e46b41247e90
   ],
   imports: [
     BrowserAnimationsModule,

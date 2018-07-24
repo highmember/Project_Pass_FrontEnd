@@ -5,8 +5,9 @@ import { MatDialogComponent } from './material-dialog.component';
 import { StoreService } from '../shared/service/store.service';
 import { mergeMap } from 'rxjs/operators';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
-import { ProjectService } from '../shared/service/project.service';
 import { AssignService } from '../shared/service/assign.service';
+import { ProjectService } from '../shared/service/project.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-store',
@@ -21,10 +22,18 @@ export class StoreComponent implements OnInit {
   public matback: any[];
   public customer: any[];
   public customerName: String;
-  public projectCode = '';
+  public projectCodes = [];
   public tmp: any[];
-  public valueAssign: any[];
+  public projectCode: String;
+  public valueAssign = [];
+  public valueAssigns: any[];
+  public assignMat = [];
+  public formProJC: FormGroup;
+  rowssss: any;
+  public valueFromStore = [];
+
   constructor(
+    private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private storeService: StoreService,
     private projectService: ProjectService,
@@ -32,15 +41,77 @@ export class StoreComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.projectService.getAllProject().subscribe((results) => {
-      this.tmp = results;
-      console.log(this.tmp)
-    });
+    this.formProJC = this.formBuilder.group({});
     this.storeService.getAllStore().subscribe((results) => {
       this.temp = results;
       this.check();
     });
+    this.projectService.getAllProject().subscribe((results) => {
+      this.tmp = results;
+      this.checkAssign();
+    });
   }
+
+  checkAssign() {
+    this.tmp.forEach(element => {
+      this.projectCodes.push(element.projectCode);
+    });
+  }
+  // tslint:disable-next-line:max-line-length
+  // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
+  getMatassign() {
+    this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
+      this.assignMat = results;
+      this.assignMatF();
+    });
+  }
+  assignMatF() {
+    this.storeService.getSomeMat(this.assignMat).subscribe((results) => {
+      this.valueFromStore = results;
+      let num = 0;
+      let check = 0;
+      this.assignMat.forEach((ele) => {
+        ele.value.assignMat.forEach(val => {
+          this.valueAssign.push({
+            _id: ele.value._id,
+            assignProject_id: ele.value.assignProject_id,
+            mat_id: val._id,
+            matId: val.matId,
+            matItem: val.matItem,
+            matNum: val.matNum,
+            matRecive: val.matRecive,
+            matFromStore: this.valueFromStore[check],
+            matType: val.matType,
+            matGoAt: ele.value.assignEmpType,
+            matDate: val.matDate,
+            matForm: val.matForm,
+            count: num
+          });
+          check++;
+          num++;
+        });
+        num = 0;
+      });
+      this.valueAssigns = this.valueAssign;
+    });
+  }
+  sendMat(val): void {
+    const assignMat = [];
+    assignMat.push({
+      _id: val._id,
+      assignMat: val
+    });
+    console.log(assignMat[0]._id)
+    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
+      .mergeMap(() => this.assignService.getAllAssign())
+      .subscribe((results) => {
+        this.rowssss = results;
+      });
+  }
+  // tslint:disable-next-line:max-line-length
+  // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
+
+
   check() {
     this.temp.forEach(element => {
       if (element.materialName !== 'อื่นๆ') {
@@ -49,12 +120,20 @@ export class StoreComponent implements OnInit {
     });
     this.rowss = this.rows;
   }
-  getAssign() {
-    this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {
-      this.valueAssign = results;
-      console.log(this.valueAssign)
-    });
+  addMatToStore(val) {
+    // const assignStore = [];
+    // assignStore.push({
+    //   assignMat: val
+    // });
+    console.log(val)
+    // const
+    this.storeService.addStore(val).pipe(
+      mergeMap(() => this.storeService.getAllStore()))
+      .subscribe((results) => {
+        this.rowss = results;
+      });
   }
+
   editMaterial(row): void {
     const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '450px',
@@ -108,20 +187,5 @@ export class StoreComponent implements OnInit {
       }
     });
   }
-  viewreq(): void {
-    const dialogRef = this.dialog.open(ViewdialogComponent, {
-      width: '1000px',
-      data: {
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      // if (result !== undefined) {
-      //   this.storeService.addMaterial(result).pipe(
-      //     mergeMap(() => this.storeService.getAllMaterial()))
-      //     .subscribe((results) => {
-      //       this.rows = results;
-      //     });
-      // }
-    });
-  }
+
 }

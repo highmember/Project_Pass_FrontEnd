@@ -43,4 +43,8 @@ export class StoreService {
   deleteStore(id: string): Observable<any> {
     return this.apiService.delete('store/' + id);
   }
+
+  getSomeMat(data): Observable<any> {
+    return this.apiService.put('storeId/', data);
+  }
 }
