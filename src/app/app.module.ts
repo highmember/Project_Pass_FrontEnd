@@ -65,10 +65,18 @@ import { HomeComponent } from './home/home.component';
 const appRoutes: Routes = [
   { path: 'app-root', component: AppComponent },
   { path: 'app-admin', component: AdminComponent },
+  { path: 'app-sale/:id', component: SaleComponent },
   { path: 'app-sale', component: SaleComponent },
   { path: 'app-store', component: StoreComponent },
-  { path: 'app-fristpage', component: FristpageComponent },
+  { path: 'app-fristpage/:id', component: FristpageComponent },
   { path: 'app-pmcontrol/:id', component: PmcontrolComponent },
+  { path: 'app-draft/:id', component: DraftComponent },
+  { path: 'app-p1/:id', component: P1Component },
+  { path: 'app-p2/:id', component: P2Component },
+  { path: 'app-p3/:id', component: P3Component },
+  { path: 'app-p4/:id', component: P4Component },
+  { path: 'app-fristpage', component: FristpageComponent },
+  { path: 'app-pmcontrol', component: PmcontrolComponent },
   { path: 'app-draft', component: DraftComponent },
   { path: 'app-p1', component: P1Component },
   { path: 'app-p2', component: P2Component },
@@ -116,12 +124,9 @@ enableProdMode();
     P2Component,
     P2FileDialogComponent,
     AdminUserDialogComponent,
-<<<<<<< HEAD
     PmviewdetailComponent,
     HomeComponent
-=======
-    PmviewdetailComponent
->>>>>>> 75c23acacce59e62c5284c73f2c6e46b41247e90
+
   ],
   imports: [
     BrowserAnimationsModule,

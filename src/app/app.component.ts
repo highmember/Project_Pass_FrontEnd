@@ -14,7 +14,7 @@ export class AppComponent {
   public password: string;
   public check = false;
   public checkType: String;
-
+  public value = {};
   constructor(
     private router: Router,
     private userService: UserService,
@@ -30,8 +30,11 @@ export class AppComponent {
       password: this.password
     };
     this.userService.checkUser(val).subscribe((results) => {
-      this.checkType = results;
-      if (results !== undefined) {
+      this.checkType = results.type;
+      this.value = results;
+      console.log(this.checkType)
+      console.log(this.value)
+      if (this.checkType !== undefined) {
         this.check = true;
       } else {
         alert('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง!');
