@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
     <mat-toolbar-row>
         <span>
             <img src="./assets/pass-logo.png" style="width: 40%;">
@@ -6,43 +6,104 @@
         <span class="example-fill-remaining-space"></span>
         <span class="align-center"></span>
         <span class="example-spacer"></span>
-        <div *ngIf="checkType==='Admin'">
-            <a routerLink="app-admin" routerLinkActive="active">Admin</a>
-            <a routerLink="app-sale" routerLinkActive="active">Sale</a>
-            <a routerLink="app-store" routerLinkActive="active">Store</a>
-            <a routerLink="app-fristpage" routerLinkActive="active">PM</a>
-            <a routerLink="app-draft" routerLinkActive="active">Draft</a>
-            <a routerLink="app-p1" routerLinkActive="active">Part1</a>
-            <a routerLink="app-p2" routerLinkActive="active">Part2</a>
-            <a routerLink="app-p3" routerLinkActive="active">Part3</a>
-            <a routerLink="app-p4" routerLinkActive="active">Part4</a>
+        <div *ngIf="check===true">
+            <div *ngIf="checkType==='God'">
+                <div class="dropdown pointer">
+                    <a routerLink="app-admin" routerLinkActive="active">Admin</a>
+                    <a routerLink="app-sale" routerLinkActive="active">Sale</a>
+                    <a routerLink="app-store" routerLinkActive="active">Store</a>
+                    <a routerLink="app-fristpage" routerLinkActive="active">Project</a>
+                    <a routerLink="app-draft" routerLinkActive="active">Draft</a>
+                    <a routerLink="app-p1" routerLinkActive="active">Part1</a>
+                    <a routerLink="app-p2" routerLinkActive="active">Part2</a>
+                    <a routerLink="app-p3" routerLinkActive="active">Part3</a>
+                    <a routerLink="app-p4" routerLinkActive="active">Part4</a>
+                    <a *ngIf="check===true" (click)="logout()">Logout</a>
+                </div>
+            </div>
+            <div *ngIf="checkType==='Admin'">
+                <div class="dropdown pointer">
+                    <a routerLink="app-admin" routerLinkActive="active">Admin Manager</a>
+                    <a *ngIf="check===true" (click)="logout()">Logout</a>
+                </div>
+            </div>
+            <div *ngIf="checkType==='Sale'">
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.saleName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="app-sale/{{value._id}}" routerLinkActive="active">Sale Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Store'">
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Store</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="app-store" routerLinkActive="active">Store Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='PM'">
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.pmName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-fristpage/{{value._id}}" routerLinkActive="active">Project Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Draft'">
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-draft/{{value._id}}" routerLinkActive="active">Draft Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Part1'">
+                <a routerLink="app-p1" routerLinkActive="active">Part1</a>
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-p1/{{value._id}}" routerLinkActive="active">Part1 Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Part2'">
+                <a routerLink="app-p2" routerLinkActive="active">Part2</a>
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-p2/{{value._id}}" routerLinkActive="active">Part2 Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Part3'">
+                <a routerLink="app-p3" routerLinkActive="active">Part3</a>
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-p3/{{value._id}}" routerLinkActive="active">Part3 Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
+            <div *ngIf="checkType==='Part4'">
+                <a routerLink="app-p4" routerLinkActive="active">Part4</a>
+                <a class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
+                    <div class="dropdown-content pointer">
+                        <a routerLink="/app-p4/{{value._id}}" routerLinkActive="active">Part4 Manager</a>
+                        <a *ngIf="check===true" (click)="logout()">Logout</a>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div *ngIf="checkType==='Sale'">
-            <a routerLink="app-sale" routerLinkActive="active">Sale</a>
-        </div>
-        <div *ngIf="checkType==='Store'">
-            <a routerLink="app-store" routerLinkActive="active">Store</a>
-        </div>
-        <div *ngIf="checkType==='PM'">
-            <a routerLink="app-fristpage" routerLinkActive="active">PM</a>
-        </div>
-        <div *ngIf="checkType==='Draft'">
-            <a routerLink="app-draft" routerLinkActive="active">Draft</a>
-        </div>
-        <div *ngIf="checkType==='Part1'">
-            <a routerLink="app-p1" routerLinkActive="active">Part1</a>
-        </div>
-        <div *ngIf="checkType==='Part2'">
-            <a routerLink="app-p2" routerLinkActive="active">Part2</a>
-        </div>
-        <div *ngIf="checkType==='Part3'">
-            <a routerLink="app-p3" routerLinkActive="active">Part3</a>
-        </div>
-        <div *ngIf="checkType==='Part4'">
-            <a routerLink="app-p4" routerLinkActive="active">Part4</a>
-        </div>
-        <ul></ul>
-        <mat-icon *ngIf="check===true" (click)="logout()" class="pointer">power_settings_new</mat-icon>
     </mat-toolbar-row>
 </mat-toolbar>
 <div *ngIf="check===true">
@@ -78,4 +139,14 @@
             <button mat-raised-button (click)="login()" color="primary">Login</button>
         </mat-card-actions>
     </mat-card>
-</div>
+</div> -->
+<a routerLink="app-admin" routerLinkActive="active">Admin</a>
+<a routerLink="app-sale" routerLinkActive="active">Sale</a>
+<a routerLink="app-store" routerLinkActive="active">Store</a>
+<a routerLink="app-fristpage" routerLinkActive="active">Project</a>
+<a routerLink="app-draft" routerLinkActive="active">Draft</a>
+<a routerLink="app-p1" routerLinkActive="active">Part1</a>
+<a routerLink="app-p2" routerLinkActive="active">Part2</a>
+<a routerLink="app-p3" routerLinkActive="active">Part3</a>
+<a routerLink="app-p4" routerLinkActive="active">Part4</a>
+<router-outlet></router-outlet>

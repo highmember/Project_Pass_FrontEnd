@@ -21,6 +21,9 @@ export class ProjectService {
   getIdProject(id: String): Observable<any> {
     return this.apiService.get(`project/` + id);
   }
+  getIdProjectFromPM(id: String): Observable<any> {
+    return this.apiService.get(`projectFromPM/` + id);
+  }
   /**
    * @param data
    * insert data in database of Project collection

@@ -34,7 +34,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="จัดการ" [maxWidth]="170">
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-          <a routerLink="/app-pmcontrol/{{value._id}}" (click)="pmControl(value._id)">
+          <a routerLink="/app-pmcontrol/{{value._id}}">
             <mat-icon>build</mat-icon>
           </a>
         </ng-template>
