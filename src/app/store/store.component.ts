@@ -80,13 +80,14 @@ export class StoreComponent implements OnInit {
             matItem: val.matItem,
             matNum: val.matNum,
             matRecive: val.matRecive,
-            matFromStore: this.valueFromStore[check],
+            matFromStore: this.valueFromStore[check].materialNum,
             matType: val.matType,
             matGoAt: ele.value.assignEmpType,
             matDate: val.matDate,
-            matForm: val.matForm,
+            matForm: this.valueFromStore[check].materialForm,
             count: num
           });
+          console.log(this.valueFromStore[check].materialForm)
           check++;
           num++;
         });
@@ -96,6 +97,7 @@ export class StoreComponent implements OnInit {
     });
   }
   sendMat(val): void {
+    console.log(val)
     const assignMat = [];
     assignMat.push({
       _id: val._id,
@@ -121,17 +123,38 @@ export class StoreComponent implements OnInit {
     this.rowss = this.rows;
   }
   addMatToStore(val) {
-    // const assignStore = [];
-    // assignStore.push({
-    //   assignMat: val
-    // });
-    console.log(val)
-    // const
-    this.storeService.addStore(val).pipe(
-      mergeMap(() => this.storeService.getAllStore()))
-      .subscribe((results) => {
-        this.rowss = results;
-      });
+    const dialogRef = this.dialog.open(MatDialogComponent, {
+      width: '450px',
+      data: {
+        materialId: val.matId,
+        materialName: val.matItem,
+        materialNum: val.matFromStore,
+        materialUnit: val.matType,
+        materialPrice: 0,
+        materialForm: 'old'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.storeService.addStore(result).pipe(
+          mergeMap(() => this.storeService.getAllStore()))
+          .subscribe((results) => {
+            this.rowss = results;
+          });
+        const matForm = [];
+        matForm.push({
+          _id: val._id,
+          valueAssign: val,
+          value: result,
+          matForms: 'old'
+        });
+        this.assignService.updateMatStoreForm(val._id, matForm)
+          .mergeMap(() => this.assignService.getAllAssign())
+          .subscribe((results) => {
+            this.rowssss = results;
+          });
+      }
+    });
   }
 
   editMaterial(row): void {
@@ -142,7 +165,8 @@ export class StoreComponent implements OnInit {
         materialName: row.materialName,
         materialNum: row.materialNum,
         materialUnit: row.materialUnit,
-        materialPrice: row.materialPrice
+        materialPrice: row.materialPrice,
+        materialForm: row.materialForm
       }
     });
     dialogRef.afterClosed().subscribe(result => {
