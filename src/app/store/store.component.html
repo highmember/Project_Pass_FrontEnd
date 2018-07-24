@@ -38,10 +38,7 @@
             <ng-template let-value="value" ngx-datatable-cell-template>
               <button mat-mini-fab color="primary" (click)="editMaterial(value)">
                 <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-mini-fab color="warn" (click)="confirmMatDelete(value)">
-                <mat-icon>delete</mat-icon>
-              </button>
+                </button>
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
@@ -64,12 +61,12 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="จำนวนที่ส่งไป">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            <input matInput type="number" name="fileRecive" [(ngModel)]="value.matRecive">
+            {{value.matRecive}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="จำนวนที่มีในคลัง">
           <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value.matFromStore}}
+            <input matInput type="number" name="fileRecive" [(ngModel)]="value.matFromStore">
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="หน่วย">
