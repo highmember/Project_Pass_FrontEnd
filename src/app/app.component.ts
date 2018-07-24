@@ -40,19 +40,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.router.navigate(
-      [
-        '../',
-        {
-          outlets: {
-            chat: null
-          }
-        }
-      ],
-      {
-        relativeTo: this.activatedRoute
-      }
-    );
+    this.router.navigate(['app-home']);
     this.checkType = '';
     this.check = false;
     alert('ออกจากระบบสำเร็จ');

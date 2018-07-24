@@ -15,18 +15,14 @@
     margin: 0;
     background-color: #DDDDDD;
   }
-  
+
   .material-icons { 
-    font-size: 22px;
-    height: 22px;
-    width: 22px;
+    font-size: 19px;
+    height: 19px;
+    width: 19px;
     text-align: center;
   }
-  body { 
-    font-family: Roboto, Arial, sans-serif;
-    margin: 0;
-  }
-  
+
   .basic-container {
     padding: 30px;
   }
@@ -55,5 +51,3 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000; 
 }
-
-  
