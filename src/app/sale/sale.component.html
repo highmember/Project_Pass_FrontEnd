@@ -6,7 +6,8 @@
       <mat-icon>add</mat-icon>Project</app-button-card-title>
   </mat-card-subtitle>
   <mat-card-content>
-    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows" [limit]="10">
+    <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows"
+      [limit]="10">
       <ngx-datatable-column name="รหัสโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
           {{value.projectCode}}
@@ -34,9 +35,11 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="ไฟล์" [maxWidth]="170">
         <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-          <button mat-mini-fab color="primary" (click)="viewFile(value)">
-            <mat-icon>attachment</mat-icon>
-          </button>
+          <a routerLink="/app-saleviewprogress/{{value._id}}">
+            <button mat-mini-fab color="primary">
+              <mat-icon>attachment</mat-icon>
+            </button>
+          </a>
           <button mat-mini-fab color="warn" (click)="confirmDelete(value)">
             <mat-icon>delete</mat-icon>
           </button>

@@ -1,6 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SaleService } from '../shared/service/sale.service';
+import { CustomerService } from '../shared/service/customer.service';
+import { PmService } from '../shared/service/pm.service';
 @Component({
   selector: 'app-sale-dialog',
   templateUrl: './sale-dialog.component.html',
@@ -35,13 +38,17 @@ export class SaleDialogComponent implements OnInit {
   public product = [];
   public output = [];
   public typeProject = ['Project Jon', 'Mass', 'Auto Mobile'];
-  public oldCustomer = ['สุทธิ ใจเย็น', 'สุขุม ว่องไว', 'มานะ ใจสั่น', 'นรากร สงคราม', 'วรชิตร สมควร'];
-  public pm = ['นารีรัตน์ สุดใจ', 'วรวุฒิ สมใจ', 'สมพร เดโช', 'อรนงค์ สุดใจ', 'ประสงค์ เงินดี'];
+  public oldCustomer = [];
+  // public oldCustomers = [];
+  public pm = [];
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<SaleDialogComponent>,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private saleService: SaleService,
+    private customerService: CustomerService,
+    private pmService: PmService
   ) { }
   /**
    * create from group and set data of sale
@@ -52,6 +59,8 @@ export class SaleDialogComponent implements OnInit {
     this.formProject = this.formBuilder.group({});
     this.formPM = this.formBuilder.group({});
     this.formScope = this.formBuilder.group({});
+    this.getCustomer();
+    this.getPm();
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: [this.type, Validators.required]
     });
@@ -67,6 +76,28 @@ export class SaleDialogComponent implements OnInit {
     this.fifthFormGroup = this._formBuilder.group({
       secondCtrl: [this.pmName, Validators.required]
     });
+  }
+  getCustomer() {
+    this.customerService.getAllCustomer().subscribe((results) => {
+      results.forEach(element => {
+        this.oldCustomer.push({
+          _id: element._id,
+          customerName: element.customerName
+        });
+      });
+    });
+    console.log(this.oldCustomer)
+  }
+  getPm() {
+    this.pmService.getAllPm().subscribe((results) => {
+      results.forEach(element => {
+        this.pm.push({
+          _id: element._id,
+          pmName: element.pmName
+        });
+      });
+    });
+    console.log(this.pm)
   }
 
   next() {
