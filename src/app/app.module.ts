@@ -61,6 +61,7 @@ import { UserService } from './shared/service/user.service';
 import { AdminUserDialogComponent } from './admin/user-dialog.component';
 import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
 import { HomeComponent } from './home/home.component';
+import { SaleviewprogressComponent } from './saleviewprogress/saleviewprogress.component';
 
 const appRoutes: Routes = [
   { path: 'app-root', component: AppComponent },
@@ -83,7 +84,8 @@ const appRoutes: Routes = [
   { path: 'app-p3', component: P3Component },
   { path: 'app-p4', component: P4Component },
   { path: 'app-bill', component: BillComponent },
-  { path: 'app-home', component: HomeComponent }
+  { path: 'app-home', component: HomeComponent },
+  { path: 'app-saleviewprogress/:id', component: SaleviewprogressComponent }
 ];
 enableProdMode();
 @NgModule({
@@ -125,7 +127,8 @@ enableProdMode();
     P2FileDialogComponent,
     AdminUserDialogComponent,
     PmviewdetailComponent,
-    HomeComponent
+    HomeComponent,
+    SaleviewprogressComponent
 
   ],
   imports: [

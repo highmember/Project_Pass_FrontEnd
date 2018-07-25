@@ -18,7 +18,7 @@ export class FristpageComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    this.projectService.getIdProjectFromPM(id).subscribe((results) => {
+    this.projectService.getAllProject().subscribe((results) => {
       this.rows = results;
       this.getProduct();
     });
