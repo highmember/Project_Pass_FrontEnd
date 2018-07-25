@@ -79,6 +79,7 @@ export class PmcontrolComponent implements OnInit {
       const dialogRef = this.dialog.open(AssignPart1Component, {
         width: '1000px',
         data: {
+          assign_id: this.tmp[0].value._id,
           assignProjectCode: this.tmp[0].value.assignProjectCode,
           assignProject_id: this.tmp[0].value.assignProject_id,
           assignPMName: this.tmp[0].value.assignPMName,
@@ -138,6 +139,7 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
+        assign_id: this.tmp[0].value._id,
         assignProjectCode: this.tmp[0].value.assignProjectCode,
         assignProject_id: this.tmp[0].value.assignProject_id,
         assignPMName: this.tmp[0].value.assignPMName,
@@ -164,6 +166,7 @@ export class PmcontrolComponent implements OnInit {
       const dialogRef = this.dialog.open(AssignPart1Component, {
         width: '1000px',
         data: {
+          assign_id: this.tmp[1].value._id,
           assignProjectCode: this.tmp[1].value.assignProjectCode,
           assignProject_id: this.tmp[1].value.assignProject_id,
           assignPMName: this.tmp[1].value.assignPMName,
@@ -224,6 +227,7 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
+        assign_id: this.tmp[1].value._id,
         assignProjectCode: this.tmp[1].value.assignProjectCode,
         assignProject_id: this.tmp[1].value.assignProject_id,
         assignPMName: this.tmp[1].value.assignPMName,
@@ -250,6 +254,7 @@ export class PmcontrolComponent implements OnInit {
       const dialogRef = this.dialog.open(AssignPart1Component, {
         width: '1000px',
         data: {
+          assign_id: this.tmp[2].value._id,
           assignProjectCode: this.tmp[2].value.assignProjectCode,
           assignProject_id: this.tmp[2].value.assignProject_id,
           assignPMName: this.tmp[2].value.assignPMName,
@@ -310,6 +315,7 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
+        assign_id: this.tmp[2].value._id,
         assignProjectCode: this.tmp[2].value.assignProjectCode,
         assignProject_id: this.tmp[2].value.assignProject_id,
         assignPMName: this.tmp[2].value.assignPMName,
@@ -333,6 +339,7 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
+        assign_id: this.tmp[3].value._id,
         assignProjectCode: this.tmp[3].value.assignProjectCode,
         assignProject_id: this.tmp[3].value.assignProject_id,
         assignPMName: this.tmp[3].value.assignPMName,
@@ -358,6 +365,7 @@ export class PmcontrolComponent implements OnInit {
       const dialogRef = this.dialog.open(AssignPart1Component, {
         width: '1000px',
         data: {
+          assign_id: this.tmp[3].value._id,
           assignProjectCode: this.tmp[3].value.assignProjectCode,
           assignProject_id: this.tmp[3].value.assignProject_id,
           assignPMName: this.tmp[3].value.assignPMName,
@@ -418,6 +426,7 @@ export class PmcontrolComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
+        assign_id: this.tmp[4].value._id,
         assignProjectCode: this.tmp[4].value.assignProjectCode,
         assignProject_id: this.tmp[4].value.assignProject_id,
         assignPMName: this.tmp[4].value.assignPMName,
@@ -442,6 +451,7 @@ export class PmcontrolComponent implements OnInit {
       const dialogRef = this.dialog.open(AssignPart1Component, {
         width: '1000px',
         data: {
+          assign_id: this.tmp[4].value._id,
           assignProjectCode: this.tmp[4].value.assignProjectCode,
           assignProject_id: this.tmp[4].value.assignProject_id,
           assignPMName: this.tmp[4].value.assignPMName,

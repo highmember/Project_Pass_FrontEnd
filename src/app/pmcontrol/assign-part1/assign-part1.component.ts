@@ -35,6 +35,7 @@ export class AssignPart1Component implements OnInit {
   public fileMove = ['Draft', 'Part1', 'Part2', 'Part3', 'Part4'];
   public assignFileNgx: any[];
   public assignMatNgx: any[];
+  public matreturn = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -157,6 +158,7 @@ export class AssignPart1Component implements OnInit {
       matRecive: 0,
       matDate: this.matScope,
       matForm: 'old',
+      matReturn: this.matreturn
     });
   }
   addMatNew() {
@@ -169,6 +171,7 @@ export class AssignPart1Component implements OnInit {
       matRecive: 0,
       matDate: this.matScopeNew,
       matForm: 'new',
+      matReturn: this.matreturn
     });
   }
   deleteMat(msg: String) {
