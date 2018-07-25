@@ -16,48 +16,92 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 </div>
-<mat-card>
-  <h3>Related Products</h3>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Products
-      </mat-panel-title>
-      <mat-panel-description>
-        {{assignFileNum}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table matSort (matSortChange)="sortData($event)">
-      <tr>
-        <th mat-sort-header="product">Product</th>
-        <th mat-sort-header="file">File</th>
-        <th mat-sort-header="order">Order</th>
-        <th mat-sort-header="recive">Recive</th>
-        <th mat-sort-header="progress">Progress</th>
-        <th mat-sort-header="move">Move To</th>
-      </tr>
+<mat-tab-group>
+  <mat-tab label="ไฟล์ที่เกี่ยวข้อง">
+    <mat-card>
+      <h3>Related Products</h3>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Products
+          </mat-panel-title>
+          <mat-panel-description>
+            {{assignFileNum}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table matSort (matSortChange)="sortData($event)">
+          <tr>
+            <th mat-sort-header="product">Product</th>
+            <th mat-sort-header="file">File</th>
+            <th mat-sort-header="order">Order</th>
+            <th mat-sort-header="recive">Recive</th>
+            <th mat-sort-header="progress">Progress</th>
+            <th mat-sort-header="move">Move To</th>
+          </tr>
 
-      <tr *ngFor="let product of assignFile">
-        <td>{{product.productCodeR}}</td>
-        <td>
-          <a href="{{product.productFile}}" target="_blank">{{product.productFile}}</a>
-        </td>
-        <td>{{product.fileNum}}</td>
-        <td>{{product.fileRecive}}</td>
-        <td>{{product.fileProgress}}%</td>
-        <td>{{product.fileMove}}</td>
-      </tr>
-    </table>
-  </mat-expansion-panel>
-  <mat-card>
-    <h5>Progress bar</h5>
-    <mat-progress-bar mode="determinate" [value]="assignBarProgress"></mat-progress-bar>
-  </mat-card>
-</mat-card>
-<mat-card>
-  <h3>Material used</h3>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
+          <tr *ngFor="let product of assignFile">
+            <td>{{product.productCodeR}}</td>
+            <td>
+              <a href="{{product.productFile}}" target="_blank">{{product.productFile}}</a>
+            </td>
+            <td>{{product.fileNum}}</td>
+            <td>{{product.fileRecive}}</td>
+            <td>{{product.fileProgress}}%</td>
+            <td>{{product.fileMove}}</td>
+          </tr>
+        </table>
+      </mat-expansion-panel>
+      <mat-card>
+        <h5>Progress bar</h5>
+        <mat-progress-bar mode="determinate" [value]="assignBarProgress"></mat-progress-bar>
+      </mat-card>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="วัสดุที่ใช้">
+    <mat-card>
+      <h3>Material used</h3>
+      <!-- <mat-expansion-panel> -->
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="listMatAssigns">
+          <!-- <ngx-datatable-column name="วัสดุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matId}}
+            </ng-template>
+          </ngx-datatable-column> -->
+          <ngx-datatable-column name="วัสดุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matItem}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ชนิต">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matType}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่ต้องการ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matNum}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่มี">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matRecive}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="วันที่ใช้">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matDate | date: "dd-MM-yyyy"}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="คืน">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <mat-checkbox (value)="mat.matReturn" (click)="returnMat(value)">Checked</mat-checkbox>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+      <!-- <mat-expansion-panel-header>
       <mat-panel-title>
         Material
       </mat-panel-title>
@@ -80,7 +124,10 @@
         <td>{{mat.matNum}}</td>
         <td>{{mat.matRecive}}</td>
         <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
+        <td><mat-checkbox (value)="mat.matReturn">Checked</mat-checkbox></td>
       </tr>
-    </table>
-  </mat-expansion-panel>
-</mat-card>
+    </table> -->
+      <!-- </mat-expansion-panel> -->
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

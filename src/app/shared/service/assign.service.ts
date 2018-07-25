@@ -39,6 +39,10 @@ export class AssignService {
     return this.apiService.put('assign/' + id, data);
   }
 
+  updateAssignReturnMat(id: string, data): Observable<any> {
+    return this.apiService.put('assignReturn/' + id, data);
+  }
+
   updateMatStore(id: string, data): Observable<any> {
     return this.apiService.put('assignn/' + id, data);
   }

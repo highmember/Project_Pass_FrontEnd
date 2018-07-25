@@ -38,14 +38,13 @@
             <ng-template let-value="value" ngx-datatable-cell-template>
               <button mat-mini-fab color="primary" (click)="editMaterial(value)">
                 <mat-icon>edit</mat-icon>
-                </button>
+              </button>
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>
       </mat-card-content>
     </mat-tab>
     <mat-tab label="คำสั่งของ">
-
       <app-dropdown [data]="projectCodes" [value]="projectCode" text="Select Project" placeholder="Project" name="projectCodes"
         (change)="getMatassign()" fxFlex [formGroup]='formProJC'></app-dropdown>
       <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssigns">
@@ -99,32 +98,51 @@
 
     <mat-tab label="คำสั่งคืน">
       <mat-card-content>
-        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="matback">
-          <ngx-datatable-column name="รหัสการคืน">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.backID}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="รหัสวัตถุดิบ">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.matID}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="ชื่อวัตถุดิบ">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.nameMat}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="จำนวนที่คืน">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.Amount}}
-            </ng-template>
-          </ngx-datatable-column>
-          <ngx-datatable-column name="วันที่คืน">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.Day_Back}}
-            </ng-template>
-          </ngx-datatable-column>
+        <app-dropdown [data]="projectCodes" [value]="projectCode" text="Select Project" placeholder="Project" name="projectCodes"
+          (change)="getMatReturnAssign()" fxFlex [formGroup]='formProJC'></app-dropdown>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="listMatsAssignReturn">
+            <ngx-datatable-column name="วัสดุ">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matItem}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="จำนวนที่ต้องการ">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matNum}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="จำนวนที่ส่งไป">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matRecive}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="จำนวนที่มีในคลัง">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <input matInput type="number" name="fileRecive" [(ngModel)]="value.matFromStore">
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="หน่วย">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matType}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="จัดส่งที่">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matGoAt}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="วันที่ใช้">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matDate | date: "dd-MM-yyyy"}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="บันทึก">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <button *ngIf="value.matForm==='old'" mat-mini-fab color="accent" (click)="sendMatas(value)">
+                    <mat-icon>save</mat-icon>
+                  </button>
+                </ng-template>
+              </ngx-datatable-column>
         </ngx-datatable>
       </mat-card-content>
     </mat-tab>

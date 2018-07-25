@@ -8,6 +8,7 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 import { AssignService } from '../shared/service/assign.service';
 import { ProjectService } from '../shared/service/project.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { count } from 'rxjs/operator/count';
 
 @Component({
   selector: 'app-store',
@@ -28,9 +29,13 @@ export class StoreComponent implements OnInit {
   public valueAssign = [];
   public valueAssigns: any[];
   public assignMat = [];
+  public assignMatRet = [];
+  public listMatAssignReturn = [];
+  public listMatsAssignReturn: any[];
   public formProJC: FormGroup;
   rowssss: any;
   public valueFromStore = [];
+  public valueFromStoreTagReturn = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,7 +92,6 @@ export class StoreComponent implements OnInit {
             matForm: this.valueFromStore[check].materialForm,
             count: num
           });
-          console.log(this.valueFromStore[check].materialForm)
           check++;
           num++;
         });
@@ -96,14 +100,51 @@ export class StoreComponent implements OnInit {
       this.valueAssigns = this.valueAssign;
     });
   }
+  getMatReturnAssign() {
+    this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
+      this.assignMatRet = results;
+      this.assignMatReturn();
+    });
+  }
+  assignMatReturn() {
+    this.storeService.getSomeMat(this.assignMatRet).subscribe((results) => {
+      this.valueFromStoreTagReturn = results;
+      let num = 0;
+      let check = 0;
+      this.assignMatRet.forEach((ele) => {
+        ele.value.assignMat.forEach((val) => {
+          if (val.matReturn === true) {
+            this.listMatAssignReturn.push({
+              _id: ele.value._id,
+              assignProject_id: ele.value.assignProject_id,
+              mat_id: val._id,
+              matId: val.matId,
+              matItem: val.matItem,
+              matNum: val.matNum,
+              matRecive: val.matRecive,
+              matFromStore: this.valueFromStoreTagReturn[check].materialNum,
+              matType: val.matType,
+              matGoAt: ele.value.assignEmpType,
+              matDate: val.matDate,
+              matForm: this.valueFromStoreTagReturn[check].materialForm,
+              count: num
+            });
+          }
+          check++;
+          num++;
+        });
+        num = 0;
+      });
+      console.log(this.listMatAssignReturn)
+      this.listMatsAssignReturn = this.listMatAssignReturn;
+    });
+  }
   sendMat(val): void {
-    console.log(val)
     const assignMat = [];
     assignMat.push({
       _id: val._id,
       assignMat: val
     });
-    console.log(assignMat[0]._id)
     this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
       .mergeMap(() => this.assignService.getAllAssign())
       .subscribe((results) => {
@@ -189,22 +230,6 @@ export class StoreComponent implements OnInit {
       if (result !== undefined) {
         this.storeService.addStore(result).pipe(
           mergeMap(() => this.storeService.getAllStore()))
-          .subscribe((results) => {
-            this.rowss = results;
-          });
-      }
-    });
-  }
-  confirmMatDelete(row): void {
-    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
-      width: '500px',
-      data: {
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.status === true) {
-        this.storeService.deleteStore(row._id).
-          mergeMap(() => this.storeService.getAllStore())
           .subscribe((results) => {
             this.rowss = results;
           });
