@@ -3,7 +3,6 @@
     <mat-icon>arrow_back_ios</mat-icon>
   </button>
   <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
-
     <h1>PM</h1>
     <div fxFlex></div>
   </mat-card-subtitle>
@@ -26,7 +25,8 @@
             <mat-icon>pageview</mat-icon>
           </button>
           <div>
-          <mat-progress-bar [color]="color" [mode]="mode" [value]="value"></mat-progress-bar></div>
+            <mat-progress-bar [color]="color" [mode]="mode" [value]="value"></mat-progress-bar>
+          </div>
         </div>
         <div *ngIf="tile.text==='Part1'">
           <label style="text-align: center;">Part1</label>

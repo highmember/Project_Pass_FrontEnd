@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SaleService } from '../shared/service/sale.service';
 import { CustomerService } from '../shared/service/customer.service';
 import { PmService } from '../shared/service/pm.service';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 @Component({
   selector: 'app-sale-dialog',
   templateUrl: './sale-dialog.component.html',
@@ -27,10 +28,11 @@ export class SaleDialogComponent implements OnInit {
   public thirdFormGroup: FormGroup;
   public fourthFormGroup: FormGroup;
   public fifthFormGroup: FormGroup;
-  public customer: any[];
+  public customer: Object;
+  public pmIdSend: Object;
   public project: any[];
   public type: String;
-  public customerName: String;
+  public customerName = '';
   public pmName: String;
   public code: String;
   public scopeStart: Date;
@@ -39,6 +41,14 @@ export class SaleDialogComponent implements OnInit {
   public output = [];
   public typeProject = ['Project Jon', 'Mass', 'Auto Mobile'];
   public oldCustomer = [];
+  public customerId = {
+    _id: Object,
+    customerName: ''
+  };
+  public pmId = {
+    _id: Object,
+    pmName: ''
+  };
   // public oldCustomers = [];
   public pm = [];
   constructor(
@@ -86,7 +96,6 @@ export class SaleDialogComponent implements OnInit {
         });
       });
     });
-    console.log(this.oldCustomer)
   }
   getPm() {
     this.pmService.getAllPm().subscribe((results) => {
@@ -97,7 +106,6 @@ export class SaleDialogComponent implements OnInit {
         });
       });
     });
-    console.log(this.pm)
   }
 
   next() {
@@ -129,8 +137,8 @@ export class SaleDialogComponent implements OnInit {
   }
 
   selectCustomer() {
-    this.customerName = this.formSelectCus.value.customerName;
-    this.customer = this.formSelectCus.value;
+    this.customerName = this.customerId.customerName;
+    this.customer = this.customerId._id;
     this.next();
   }
 
@@ -154,7 +162,8 @@ export class SaleDialogComponent implements OnInit {
   }
 
   selectPM() {
-    this.pmName = this.formPM.value.pm;
+    this.pmName = this.pmId.pmName;
+    this.pmIdSend = this.pmId._id;
     this.next();
   }
 
@@ -171,6 +180,7 @@ export class SaleDialogComponent implements OnInit {
    * save value in variable and return
    */
   onSave() {
+
     const value = {
       projectCode: this.code,
       projectFile: this.product,
@@ -178,7 +188,8 @@ export class SaleDialogComponent implements OnInit {
       scopeStart: this.scopeStart,
       scopeEnd: this.scopeEnd,
       customer: this.customer,
-      pm: this.pmName
+      pm: this.pmIdSend,
+      sale: this.data.sale
     };
     this.dialogRef.close(value);
   }

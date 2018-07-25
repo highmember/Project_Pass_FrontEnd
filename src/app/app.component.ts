@@ -32,8 +32,6 @@ export class AppComponent {
     this.userService.checkUser(val).subscribe((results) => {
       this.checkType = results.type;
       this.value = results;
-      console.log(this.checkType)
-      console.log(this.value)
       if (this.checkType !== undefined) {
         this.check = true;
       } else {

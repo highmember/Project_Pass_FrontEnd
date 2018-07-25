@@ -18,6 +18,9 @@ export class AssignService {
   getAllAssign(): Observable<any> {
     return this.apiService.get(`assign`);
   }
+  getId(id: String): Observable<any> {
+    return this.apiService.get(`assign/` + id);
+  }
   /**
    * @param data
    * insert data in database of Assign collection

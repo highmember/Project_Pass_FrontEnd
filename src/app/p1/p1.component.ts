@@ -4,6 +4,7 @@ import { P1FileDialogComponent } from './p1-flie-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AssignService } from '../shared/service/assign.service';
 import { element } from 'protractor';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-p1',
@@ -14,22 +15,24 @@ export class P1Component implements OnInit {
   public rows: any[];
   public rowss = [];
   public rowsss: any[];
+  public id: String;
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.assignService.getAllAssign().subscribe((results) => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.assignService.getId(this.id).subscribe((results) => {
       this.rows = results;
       this.checkAssign();
     });
   }
   onUpdate(result, row) {
-    console.log(row)
     row.forEach((item, index) => {
       this.assignService.updateAssign(row[index]._id, row[index])
-        .mergeMap(() => this.assignService.getAllAssign())
+        .mergeMap(() => this.assignService.getId(this.id))
         .subscribe((results) => {
           this.rows = results;
         });

@@ -5,6 +5,7 @@ import { SaleFileDialogComponent } from './sale-file-dialog.component';
 import { CustomerService } from '../shared/service/customer.service';
 import { ProjectService } from '../shared/service/project.service';
 import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delete-dialog/confirm-delete-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sale',
@@ -13,22 +14,25 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 })
 export class SaleComponent implements OnInit {
   public rows: any[];
+  public saleId: string;
   constructor(
     private dialog: MatDialog,
     private customerService: CustomerService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.projectService.getAllProject().subscribe((results) => {
+    this.saleId = this.route.snapshot.paramMap.get('id');
+    this.projectService.getIdProjectFromSale(this.saleId).subscribe((results) => {
       this.rows = results;
-      console.log(this.rows);
     });
   }
   insertProject(): void {
     const dialogRef = this.dialog.open(SaleDialogComponent, {
       width: '1000px',
       data: {
+        sale: this.saleId
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -40,7 +44,7 @@ export class SaleComponent implements OnInit {
             });
         }
         this.projectService.addProject(result).mergeMap(() =>
-          this.projectService.getAllProject())
+          this.projectService.getIdProjectFromSale(this.saleId))
           .subscribe((results) => {
             this.rows = results;
           });

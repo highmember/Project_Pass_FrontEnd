@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { P2FileDialogComponent } from './p2-flie-dialog.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AssignService } from '../shared/service/assign.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-p2',
@@ -13,21 +14,25 @@ export class P2Component implements OnInit {
   public rows: any[];
   public rowss = [];
   public rowsss: any[];
+  public id: String;
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.assignService.getAllAssign().subscribe((results) => {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.assignService.getId(this.id).subscribe((results) => {
       this.rows = results;
+      console.log(results)
       this.checkAssign();
     });
   }
   onUpdate(result, row) {
     row.forEach((item, index) => {
       this.assignService.updateAssign(row[index]._id, row[index])
-        .mergeMap(() => this.assignService.getAllAssign())
+        .mergeMap(() => this.assignService.getId(this.id))
         .subscribe((results) => {
           this.rows = results;
         });

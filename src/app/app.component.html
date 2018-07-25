@@ -1,4 +1,4 @@
-<!-- <mat-toolbar color="primary">
+<mat-toolbar color="primary">
     <mat-toolbar-row>
         <span>
             <img src="./assets/pass-logo.png" style="width: 40%;">
@@ -64,7 +64,6 @@
                 </a>
             </div>
             <div *ngIf="checkType==='Part1'">
-                <a routerLink="app-p1" routerLinkActive="active">Part1</a>
                 <a class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
                     <div class="dropdown-content pointer">
@@ -74,7 +73,6 @@
                 </a>
             </div>
             <div *ngIf="checkType==='Part2'">
-                <a routerLink="app-p2" routerLinkActive="active">Part2</a>
                 <a class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
                     <div class="dropdown-content pointer">
@@ -84,7 +82,6 @@
                 </a>
             </div>
             <div *ngIf="checkType==='Part3'">
-                <a routerLink="app-p3" routerLinkActive="active">Part3</a>
                 <a class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
                     <div class="dropdown-content pointer">
@@ -94,7 +91,6 @@
                 </a>
             </div>
             <div *ngIf="checkType==='Part4'">
-                <a routerLink="app-p4" routerLinkActive="active">Part4</a>
                 <a class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
                     <div class="dropdown-content pointer">
@@ -139,14 +135,4 @@
             <button mat-raised-button (click)="login()" color="primary">Login</button>
         </mat-card-actions>
     </mat-card>
-</div> -->
-<a routerLink="app-admin" routerLinkActive="active">Admin</a>
-<a routerLink="app-sale" routerLinkActive="active">Sale</a>
-<a routerLink="app-store" routerLinkActive="active">Store</a>
-<a routerLink="app-fristpage" routerLinkActive="active">Project</a>
-<a routerLink="app-draft" routerLinkActive="active">Draft</a>
-<a routerLink="app-p1" routerLinkActive="active">Part1</a>
-<a routerLink="app-p2" routerLinkActive="active">Part2</a>
-<a routerLink="app-p3" routerLinkActive="active">Part3</a>
-<a routerLink="app-p4" routerLinkActive="active">Part4</a>
-<router-outlet></router-outlet>
+</div>

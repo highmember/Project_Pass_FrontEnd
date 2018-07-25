@@ -7,6 +7,7 @@ import { mergeMap } from 'rxjs/operators';
 import { ProjectService } from '../shared/service/project.service';
 import { Location } from '@angular/common';
 import { PmviewdetailComponent } from '../pmviewdetail/pmviewdetail.component';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 
 @Component({
@@ -51,12 +52,17 @@ export class PmcontrolComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     this.projectService.getIdProject(id).subscribe((results) => {
       this.rows = results;
-      this.project_id = results._id;
-      this.projectCode = results.projectCode;
-      this.customer = results.customer;
-      this.namePm = results.pm;
-      this.projProgress = results.projectProgress;
+      this.getShow();
       this.getAssign();
+    });
+  }
+  getShow() {
+    this.rows.forEach(element => {
+      this.project_id = element._id;
+      this.projectCode = element.projectCode;
+      this.customer = element.customer[0].customerName;
+      this.namePm = element.pm[0].pmName;
+      this.projProgress = element.projectProgress;
     });
   }
   getAssign() {
@@ -65,7 +71,7 @@ export class PmcontrolComponent implements OnInit {
     });
     this.assignService.getProjectProgress(this.projectCode).subscribe((results2) => {
       this.projectProgressngx = results2;
-      this.projectProgressngx.forEach( val => {
+      this.projectProgressngx.forEach(val => {
         this.projectProgress = val;
       });
     });

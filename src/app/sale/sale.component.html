@@ -25,12 +25,12 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="ลูกค้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.customer}}
+          {{value.customer[0].customerName}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ผู้จัดการ">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.pm}}
+          {{value.pm[0].pmName}}
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ไฟล์" [maxWidth]="170">

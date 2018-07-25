@@ -13,7 +13,7 @@ export class P3FileDialogComponent implements OnInit {
   public fileConnect = [];
   public fileFrom: String;
   numFile: number;
-  sum: any;
+  public sum: number;
   progressBar: number;
   /**
    *  variable 'form' use FormGroup for manage form
@@ -51,8 +51,12 @@ export class P3FileDialogComponent implements OnInit {
     this.data.assignFile.forEach(val => {
       this.numFile += 1;
       this.sum += val.fileProgress;
-   });
-   this.progressBar = this.sum / this.numFile;
+      console.log(this.sum)
+      console.log(val)
+      console.log(val.fileProgress)
+    });
+    this.progressBar = this.sum / this.numFile;
+    console.log(this.progressBar)
   }
   onClose() {
     this.dialogRef.close(/*sent value to tab-supervision*/);
