@@ -106,19 +106,19 @@
                   {{value.matItem}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="จำนวนที่ต้องการ">
-                <ng-template let-value="value" ngx-datatable-cell-template>
-                  {{value.matNum}}
-                </ng-template>
-              </ngx-datatable-column>
               <ngx-datatable-column name="จำนวนที่ส่งไป">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                   {{value.matRecive}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="จำนวนที่มีในคลัง">
+              <ngx-datatable-column name="จำนวนที่ใช้จริง">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <input matInput type="number" name="fileRecive" [(ngModel)]="value.matFromStore">
+                  {{value.matUse}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="จำนวนที่เหลือ">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  {{value.matToStore}}
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column name="หน่วย">
@@ -126,7 +126,7 @@
                   {{value.matType}}
                 </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="จัดส่งที่">
+              <ngx-datatable-column name="มาจาก">
                 <ng-template let-value="value" ngx-datatable-cell-template>
                   {{value.matGoAt}}
                 </ng-template>
@@ -138,7 +138,7 @@
               </ngx-datatable-column>
               <ngx-datatable-column name="บันทึก">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                  <button *ngIf="value.matForm==='old'" mat-mini-fab color="accent" (click)="sendMatas(value)">
+                  <button mat-mini-fab color="accent" (click)="sendMatToStore(value)">
                     <mat-icon>save</mat-icon>
                   </button>
                 </ng-template>

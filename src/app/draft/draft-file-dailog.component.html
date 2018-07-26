@@ -16,7 +16,7 @@
     <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
 </div>
-<div>
+<!-- <div>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -83,4 +83,114 @@
       </mat-progress-bar>
     </mat-card-content>
   </mat-card>
-</div>
+</div> -->
+<mat-tab-group>
+  <mat-tab label="ไฟล์ที่เกี่ยวข้อง">
+    <mat-card>
+      <h3>Related Products</h3>
+      Products Connect from : {{fileFrom}}
+        <table matSort (matSortChange)="sortData($event)">
+          <tr>
+            <th mat-sort-header="product">Product</th>
+            <th mat-sort-header="file">File</th>
+            <th mat-sort-header="num">Demand</th>
+            <th mat-sort-header="num">Supply</th>
+            <th mat-sort-header="num">Percent Per Order</th>
+          </tr>
+    
+          <tr *ngFor="let product of fileConnect">
+            <td>{{product.productCodeR}}</td>
+            <td>{{product.productFile}}</td>
+            <td>{{product.fileNum}} Piece</td>
+            <td>{{product.fileRecive}} Piece</td>
+            <td>{{product.fileProgress}} %</td>
+          </tr>
+        </table>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="วัสดุที่ใช้">
+    <mat-card>
+      <h3>Material used</h3>
+      <!-- <mat-expansion-panel> -->
+      <mat-card-content>
+        <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="listMatAssigns">
+          <!-- <ngx-datatable-column name="วัสดุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matId}}
+            </ng-template>
+          </ngx-datatable-column> -->
+          <ngx-datatable-column name="วัสดุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matItem}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="ชนิต">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matType}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่ต้องการ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matNum}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่มี">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matRecive}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่ใช้แล้ว">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matUse}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่ใช้ประจำวัน">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <input matInput type="number" name="fileRecive" [(ngModel)]="value.matUseInOneDay">
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="วันที่ใช้">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matDate | date: "dd-MM-yyyy"}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="บันทึก">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              <button mat-mini-fab color="accent" (click)="matUsed(value)">
+                <mat-icon>save</mat-icon>
+              </button>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </mat-card-content>
+      <!-- <mat-expansion-panel-header>
+      <mat-panel-title>
+        Material
+      </mat-panel-title>
+      <mat-panel-description>
+        {{assignMatNum}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table matSort (matSortChange)="sortData($event)">
+      <tr>
+        <th mat-sort-header="product">Item</th>
+        <th mat-sort-header="type">Type</th>
+        <th mat-sort-header="num">Num</th>
+        <th mat-sort-header="contain">Contain</th>
+        <th mat-sort-header="date">Date</th>
+      </tr>
+
+      <tr *ngFor="let mat of assignMat">
+        <td>{{mat.matItem}}</td>
+        <td>{{mat.matType}}</td>
+        <td>{{mat.matNum}}</td>
+        <td>{{mat.matRecive}}</td>
+        <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
+        <td><mat-checkbox (value)="mat.matReturn">Checked</mat-checkbox></td>
+      </tr>
+    </table> -->
+      <!-- </mat-expansion-panel> -->
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>

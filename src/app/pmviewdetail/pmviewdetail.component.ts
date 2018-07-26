@@ -54,6 +54,7 @@ export class PmviewdetailComponent implements OnInit {
         matType: ele.matType,
         matRecive: ele.matRecive,
         matDate: ele.matDate,
+        matUse: ele.matUse,
         matReturn: ele.matReturn
       });
       count++;
@@ -70,6 +71,7 @@ export class PmviewdetailComponent implements OnInit {
       matType: val.matType,
       matRecive: val.matRecive,
       matDate: val.matDate,
+      matUse: val.matUse,
       matReturn: val.matReturn,
       count: val.count,
     });

@@ -46,6 +46,9 @@ export class AssignService {
   updateMatStore(id: string, data): Observable<any> {
     return this.apiService.put('assignn/' + id, data);
   }
+  updateMatUse(id: string, data): Observable<any> {
+    return this.apiService.put('assignMatUse/' + id, data);
+  }
   /**
    * @param id
    * delete data in database of Assign collection from id

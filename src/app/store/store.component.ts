@@ -8,7 +8,6 @@ import { ConfirmDeleteDialogComponent } from '../@theme/components/confirm-delet
 import { AssignService } from '../shared/service/assign.service';
 import { ProjectService } from '../shared/service/project.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { count } from 'rxjs/operator/count';
 
 @Component({
   selector: 'app-store',
@@ -90,6 +89,8 @@ export class StoreComponent implements OnInit {
             matGoAt: ele.value.assignEmpType,
             matDate: val.matDate,
             matForm: this.valueFromStore[check].materialForm,
+            matReturn: val.matReturn,
+            matUse: val.matUse,
             count: num
           });
           check++;
@@ -100,6 +101,19 @@ export class StoreComponent implements OnInit {
       this.valueAssigns = this.valueAssign;
     });
   }
+  sendMat(val): void {
+    const assignMat = [];
+    assignMat.push({
+      _id: val._id,
+      assignMat: val
+    });
+    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
+      .mergeMap(() => this.assignService.getAllAssign())
+      .subscribe((results) => {
+        this.rowssss = results;
+      });
+  }
+
   getMatReturnAssign() {
     this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
       this.assignMatRet = results;
@@ -122,10 +136,11 @@ export class StoreComponent implements OnInit {
               matItem: val.matItem,
               matNum: val.matNum,
               matRecive: val.matRecive,
-              matFromStore: this.valueFromStoreTagReturn[check].materialNum,
+              matToStore: val.matRecive - val.matUse,
               matType: val.matType,
               matGoAt: ele.value.assignEmpType,
               matDate: val.matDate,
+              matUse: val.matUse,
               matForm: this.valueFromStoreTagReturn[check].materialForm,
               count: num
             });
@@ -135,20 +150,13 @@ export class StoreComponent implements OnInit {
         });
         num = 0;
       });
-      console.log(this.listMatAssignReturn)
       this.listMatsAssignReturn = this.listMatAssignReturn;
     });
   }
-  sendMat(val): void {
-    const assignMat = [];
-    assignMat.push({
-      _id: val._id,
-      assignMat: val
-    });
-    this.assignService.updateMatStore(assignMat[0]._id, assignMat[0])
-      .mergeMap(() => this.assignService.getAllAssign())
+  sendMatToStore(val) {
+    this.storeService.findAndUpdateLeftOver(val.matId, val)
+      .mergeMap(() => this.storeService.getAllStore())
       .subscribe((results) => {
-        this.rowssss = results;
       });
   }
   // tslint:disable-next-line:max-line-length

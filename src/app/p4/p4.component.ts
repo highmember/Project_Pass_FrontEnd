@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { P4FileDialogComponent } from './p4-file-dialog.component';
 import { AssignService } from '../shared/service/assign.service';
 import { ActivatedRoute } from '@angular/router';
+import { DraftfileComponent } from '../draft/draft-file-dailog.component';
 
 @Component({
   selector: 'app-p4',
@@ -46,9 +47,10 @@ export class P4Component implements OnInit {
   }
 
 viewFile(val): void {
-  const dialogRef = this.dialog.open(P4FileDialogComponent, {
+  const dialogRef = this.dialog.open(DraftfileComponent, {
     width: '1000px',
     data: {
+      _id: val._id,
       assignEmpType: val.assignEmpType,
       assignFile: val.assignFile,
       assignMat: val.assignMat,

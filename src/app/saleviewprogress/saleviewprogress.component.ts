@@ -44,17 +44,19 @@ export class SaleviewprogressComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.projectService.getIdProject(id).subscribe((results) => {
-      this.project_id = results._id;
-      this.projectCode = results.projectCode;
-      this.customer = results.customer;
-      this.namePm = results.pm;
-      this.projProgress = results.projectProgress;
+      this.project_id = results[0]._id;
+      this.projectCode = results[0].projectCode;
+      this.customer = results[0].customer[0].customerName;
+      this.namePm = results[0].pm;
+      this.projProgress = results[0].projectProgress;
       this.getAssign();
     });
+    
   }
   getAssign() {
     this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {
       this.tmp = results;
+      console.log(this.tmp)
     });
     this.assignService.getProjectProgress(this.projectCode).subscribe((results2) => {
       this.projectProgressngx = results2;
@@ -93,17 +95,17 @@ export class SaleviewprogressComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
-        assignProjectCode: this.tmp[0].value.assignProjectCode,
-        assignProject_id: this.tmp[0].value.assignProject_id,
-        assignPMName: this.tmp[0].value.assignPMName,
-        assignEmpName: this.tmp[0].value.assignEmpName,
-        assignFile: this.tmp[0].value.assignFile,
-        assignScopeStart: this.tmp[0].value.assignScopeStart,
-        assignScopeEnd: this.tmp[0].value.assignScopeEnd,
-        assignMat: this.tmp[0].value.assignMat,
-        assignProgress: this.tmp[0].value.assignProgress,
-        assignNote: this.tmp[0].value.assignNote,
-        assignEmpType: this.tmp[0].value.assignEmpType
+        assignProjectCode: this.tmp[1].value.assignProjectCode,
+        assignProject_id: this.tmp[1].value.assignProject_id,
+        assignPMName: this.tmp[1].value.assignPMName,
+        assignEmpName: this.tmp[1].value.assignEmpName,
+        assignFile: this.tmp[1].value.assignFile,
+        assignScopeStart: this.tmp[1].value.assignScopeStart,
+        assignScopeEnd: this.tmp[1].value.assignScopeEnd,
+        assignMat: this.tmp[1].value.assignMat,
+        assignProgress: this.tmp[1].value.assignProgress,
+        assignNote: this.tmp[1].value.assignNote,
+        assignEmpType: this.tmp[1].value.assignEmpType
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -116,17 +118,17 @@ export class SaleviewprogressComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
-        assignProjectCode: this.tmp[0].value.assignProjectCode,
-        assignProject_id: this.tmp[0].value.assignProject_id,
-        assignPMName: this.tmp[0].value.assignPMName,
-        assignEmpName: this.tmp[0].value.assignEmpName,
-        assignFile: this.tmp[0].value.assignFile,
-        assignScopeStart: this.tmp[0].value.assignScopeStart,
-        assignScopeEnd: this.tmp[0].value.assignScopeEnd,
-        assignMat: this.tmp[0].value.assignMat,
-        assignProgress: this.tmp[0].value.assignProgress,
-        assignNote: this.tmp[0].value.assignNote,
-        assignEmpType: this.tmp[0].value.assignEmpType
+        assignProjectCode: this.tmp[2].value.assignProjectCode,
+        assignProject_id: this.tmp[2].value.assignProject_id,
+        assignPMName: this.tmp[2].value.assignPMName,
+        assignEmpName: this.tmp[2].value.assignEmpName,
+        assignFile: this.tmp[2].value.assignFile,
+        assignScopeStart: this.tmp[2].value.assignScopeStart,
+        assignScopeEnd: this.tmp[2].value.assignScopeEnd,
+        assignMat: this.tmp[2].value.assignMat,
+        assignProgress: this.tmp[2].value.assignProgress,
+        assignNote: this.tmp[2].value.assignNote,
+        assignEmpType: this.tmp[2].value.assignEmpType
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -139,17 +141,17 @@ export class SaleviewprogressComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
-        assignProjectCode: this.tmp[0].value.assignProjectCode,
-        assignProject_id: this.tmp[0].value.assignProject_id,
-        assignPMName: this.tmp[0].value.assignPMName,
-        assignEmpName: this.tmp[0].value.assignEmpName,
-        assignFile: this.tmp[0].value.assignFile,
-        assignScopeStart: this.tmp[0].value.assignScopeStart,
-        assignScopeEnd: this.tmp[0].value.assignScopeEnd,
-        assignMat: this.tmp[0].value.assignMat,
-        assignProgress: this.tmp[0].value.assignProgress,
-        assignNote: this.tmp[0].value.assignNote,
-        assignEmpType: this.tmp[0].value.assignEmpType
+        assignProjectCode: this.tmp[3].value.assignProjectCode,
+        assignProject_id: this.tmp[3].value.assignProject_id,
+        assignPMName: this.tmp[3].value.assignPMName,
+        assignEmpName: this.tmp[3].value.assignEmpName,
+        assignFile: this.tmp[3].value.assignFile,
+        assignScopeStart: this.tmp[3].value.assignScopeStart,
+        assignScopeEnd: this.tmp[3].value.assignScopeEnd,
+        assignMat: this.tmp[3].value.assignMat,
+        assignProgress: this.tmp[3].value.assignProgress,
+        assignNote: this.tmp[3].value.assignNote,
+        assignEmpType: this.tmp[3].value.assignEmpType
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -162,17 +164,17 @@ export class SaleviewprogressComponent implements OnInit {
     const dialogRef = this.dialog.open(PmviewdetailComponent, {
       width: '1000px',
       data: {
-        assignProjectCode: this.tmp[0].value.assignProjectCode,
-        assignProject_id: this.tmp[0].value.assignProject_id,
-        assignPMName: this.tmp[0].value.assignPMName,
-        assignEmpName: this.tmp[0].value.assignEmpName,
-        assignFile: this.tmp[0].value.assignFile,
-        assignScopeStart: this.tmp[0].value.assignScopeStart,
-        assignScopeEnd: this.tmp[0].value.assignScopeEnd,
-        assignMat: this.tmp[0].value.assignMat,
-        assignProgress: this.tmp[0].value.assignProgress,
-        assignNote: this.tmp[0].value.assignNote,
-        assignEmpType: this.tmp[0].value.assignEmpType
+        assignProjectCode: this.tmp[4].value.assignProjectCode,
+        assignProject_id: this.tmp[4].value.assignProject_id,
+        assignPMName: this.tmp[4].value.assignPMName,
+        assignEmpName: this.tmp[4].value.assignEmpName,
+        assignFile: this.tmp[4].value.assignFile,
+        assignScopeStart: this.tmp[4].value.assignScopeStart,
+        assignScopeEnd: this.tmp[4].value.assignScopeEnd,
+        assignMat: this.tmp[4].value.assignMat,
+        assignProgress: this.tmp[4].value.assignProgress,
+        assignNote: this.tmp[4].value.assignNote,
+        assignEmpType: this.tmp[4].value.assignEmpType
       }
     });
     dialogRef.afterClosed().subscribe(result => {
