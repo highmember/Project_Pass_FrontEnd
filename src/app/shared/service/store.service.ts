@@ -47,4 +47,9 @@ export class StoreService {
   getSomeMat(data): Observable<any> {
     return this.apiService.put('storeId/', data);
   }
+
+  findAndUpdateLeftOver(id: string, data): Observable<any> {
+    return this.apiService.put('storesId/' + id, data);
+  }
+
 }

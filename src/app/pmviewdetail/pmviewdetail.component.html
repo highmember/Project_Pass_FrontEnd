@@ -84,9 +84,14 @@
               {{value.matNum}}
             </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="จำนวนที่มี">
+          <ngx-datatable-column name="จำนวนที่ได้รับ">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.matRecive}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="จำนวนที่ใช้แล้ว">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.matUse}}
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="วันที่ใช้">

@@ -49,6 +49,7 @@ viewFile(val): void {
   const dialogRef = this.dialog.open(DraftfileComponent, {
     width: '1000px',
     data: {
+      _id: val._id,
       assignEmpType: val.assignEmpType,
       assignFile: val.assignFile,
       assignMat: val.assignMat,

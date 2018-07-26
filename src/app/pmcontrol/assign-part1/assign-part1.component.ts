@@ -158,19 +158,21 @@ export class AssignPart1Component implements OnInit {
       matRecive: 0,
       matDate: this.matScope,
       matForm: 'old',
+      matUse: 0,
       matReturn: this.matreturn
     });
   }
   addMatNew() {
     this.assignMatNgx.push({
       _id: '',
-      matId: '',
+      matId: '00000',
       matItem: this.matNewFormGroup.value.matItemNew,
       matType: this.matNewFormGroup.value.matTypeNew,
       matNum: this.matNewFormGroup.value.matNumNew,
       matRecive: 0,
       matDate: this.matScopeNew,
       matForm: 'new',
+      matUse: 0,
       matReturn: this.matreturn
     });
   }

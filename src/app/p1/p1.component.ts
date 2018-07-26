@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AssignService } from '../shared/service/assign.service';
 import { element } from 'protractor';
 import { ActivatedRoute } from '@angular/router';
+import { DraftfileComponent } from '../draft/draft-file-dailog.component';
 
 @Component({
   selector: 'app-p1',
@@ -47,9 +48,10 @@ export class P1Component implements OnInit {
     this.rowsss = this.rowss;
   }
 viewFile(val): void {
-  const dialogRef = this.dialog.open(P1FileDialogComponent, {
+  const dialogRef = this.dialog.open(DraftfileComponent, {
     width: '1000px',
     data: {
+      _id: val._id,
       assignEmpType: val.assignEmpType,
       assignFile: val.assignFile,
       assignMat: val.assignMat,

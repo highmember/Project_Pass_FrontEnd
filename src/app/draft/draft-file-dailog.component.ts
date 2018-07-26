@@ -19,6 +19,10 @@ export class DraftfileComponent implements OnInit {
   public sum = 0;
   public progressBar = 0;
   public numFile = 0;
+  public assignMat = [];
+  public listMatAssign = [];
+  public listMatAssigns: any[];
+  public matUseInOneDay = 0;
   /**
    *  variable 'form' use FormGroup for manage form
   */
@@ -33,16 +37,49 @@ export class DraftfileComponent implements OnInit {
    * create from group and set data of sale
   */
   ngOnInit() {
+    this.assignMat = this.data.assignMat;
+    this.getAssignMat();
     this.assignService.getSomeAssign(this.data.assignProjectCode).subscribe((results) => {
       this.assign = results;
       this.checkAssign();
     });
   }
+  getAssignMat() {
+    let count = 0;
+    this.assignMat.forEach((ele) => {
+      this.listMatAssign.push({
+        count: count,
+        matId: ele.matId,
+        matItem: ele.matItem,
+        matNum: ele.matNum,
+        matType: ele.matType,
+        matRecive: ele.matRecive,
+        matUse: ele.matUse,
+        matUseInOneDay: this.matUseInOneDay,
+        matDate: ele.matDate,
+        matReturn: ele.matReturn,
+        matForm: ele.matForm
+      });
+      count++;
+    });
+    this.listMatAssigns = this.listMatAssign;
+  }
+  matUsed(val) {
+    const assignMat = [];
+    assignMat.push({
+      _id: this.data._id,
+      assignMat: val
+    });
+    this.assignService.updateMatUse(assignMat[0]._id, assignMat[0])
+      .mergeMap(() => this.assignService.getAllAssign())
+      .subscribe((results) => {
+      });
+  }
 
   checkAssign() {
     this.assign.forEach(element => {
       element.value.assignFile.forEach(value => {
-        if (value.fileMove === 'Draft') {
+        if (value.fileMove === this.data.assignEmpType) {
           this.fileFrom = element.value.assignEmpType;
           this.fileConnect.push({
             productCodeR: value.productCodeR,
