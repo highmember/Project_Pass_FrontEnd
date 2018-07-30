@@ -157,6 +157,11 @@ export class SaleDialogComponent implements OnInit {
     this.show();
   }
 
+  deleteMsg(msg: String) {
+    const index: number = this.product.indexOf(msg);
+    this.product.splice(index, 1);
+  }
+
   show() {
     this.output = this.product;
   }
