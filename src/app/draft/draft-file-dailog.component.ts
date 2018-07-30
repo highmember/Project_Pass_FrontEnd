@@ -15,7 +15,6 @@ export class DraftfileComponent implements OnInit {
   public form: FormGroup;
   public assign = [];
   public fileConnect = [];
-  public fileFrom: String;
   public sum = 0;
   public progressBar = 0;
   public numFile = 0;
@@ -80,13 +79,13 @@ export class DraftfileComponent implements OnInit {
     this.assign.forEach(element => {
       element.value.assignFile.forEach(value => {
         if (value.fileMove === this.data.assignEmpType) {
-          this.fileFrom = element.value.assignEmpType;
           this.fileConnect.push({
             productCodeR: value.productCodeR,
             productFile: value.productFile,
             fileNum: value.fileNum,
             fileRecive: value.fileRecive,
-            fileProgress: value.fileProgress
+            fileProgress: value.fileProgress,
+            fileFrom: element.value.assignEmpType
           });
         }
       });

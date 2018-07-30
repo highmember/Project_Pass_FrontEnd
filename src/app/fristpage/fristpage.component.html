@@ -13,6 +13,8 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="ความคืบหน้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
+            <mat-progress-bar [color]="color" [mode]="mode" [value]="value.projectProgress">
+              </mat-progress-bar>
           {{value.projectProgress}}
         </ng-template>
       </ngx-datatable-column>

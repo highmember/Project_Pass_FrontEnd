@@ -19,9 +19,11 @@ export class PmcontrolComponent implements OnInit {
   public rows: any[];
   public assign: any[];
   public projectCode: Number;
-  public project_id: String;
+  public project_id: string;
   public customer: String;
   public namePm: String;
+  public projectStart: Date;
+  public projectEnd: Date;
   public projProgress: Number;
   public tmp: any[];
   public projectProgressngx: any[];
@@ -58,6 +60,8 @@ export class PmcontrolComponent implements OnInit {
   }
   getShow() {
     this.rows.forEach(element => {
+      this.projectStart = element.projectStart;
+      this.projectEnd = element.projectEnd;
       this.project_id = element._id;
       this.projectCode = element.projectCode;
       this.customer = element.customer[0].customerName;
@@ -65,6 +69,7 @@ export class PmcontrolComponent implements OnInit {
       this.projProgress = element.projectProgress;
     });
   }
+
   getAssign() {
     this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {
       this.tmp = results;
@@ -72,10 +77,21 @@ export class PmcontrolComponent implements OnInit {
     this.assignService.getProjectProgress(this.projectCode).subscribe((results2) => {
       this.projectProgressngx = results2;
       this.projectProgressngx.forEach(val => {
-        this.projectProgress = val;
+        this.projectProgress = val.value;
+        this.updateProjectProgress();
       });
     });
   }
+  updateProjectProgress() {
+    console.log(this.projectProgress)
+    console.log(this.project_id)
+    this.projectService.updateProject(this.project_id, this.projectProgressngx).mergeMap(() =>
+      this.projectService.getAllProject())
+      .subscribe((results1) => {
+        this.rows = results1;
+      });
+  }
+
   goBack(): void {
     this.location.back();
   }
@@ -100,12 +116,13 @@ export class PmcontrolComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
+        console.log(result)
         if (result !== undefined) {
           this.assignService.updateAssign(this.tmp[0].value._id, result).pipe(
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
+              this.projectService.updateProject(result.assignProject_id, result).mergeMap(() =>
                 this.projectService.getAllProject())
                 .subscribe((results1) => {
                   this.rows = results1;
@@ -118,9 +135,9 @@ export class PmcontrolComponent implements OnInit {
         width: '1000px',
         data: {
           assignProjectCode: this.projectCode,
-          project_id: this.project_id,
-          namePm: this.namePm,
-          projProgress: this.projProgress,
+          assignProject_id: this.project_id,
+          assignPMName: this.namePm,
+          assignProgress: this.projProgress,
           assignEmpType: 'Draft',
           assignRound: 'First'
         }
@@ -205,9 +222,9 @@ export class PmcontrolComponent implements OnInit {
         width: '1000px',
         data: {
           assignProjectCode: this.projectCode,
-          project_id: this.project_id,
-          namePm: this.namePm,
-          projProgress: this.projProgress,
+          assignProject_id: this.project_id,
+          assignPMName: this.namePm,
+          assignProgress: this.projProgress,
           assignEmpType: 'Part1',
           assignRound: 'First'
         }
@@ -293,9 +310,9 @@ export class PmcontrolComponent implements OnInit {
         width: '1000px',
         data: {
           assignProjectCode: this.projectCode,
-          project_id: this.project_id,
-          namePm: this.namePm,
-          projProgress: this.projProgress,
+          assignProject_id: this.project_id,
+          assignPMName: this.namePm,
+          assignProgress: this.projProgress,
           assignEmpType: 'Part2',
           assignRound: 'First'
         }
@@ -404,9 +421,9 @@ export class PmcontrolComponent implements OnInit {
         width: '1000px',
         data: {
           assignProjectCode: this.projectCode,
-          project_id: this.project_id,
-          namePm: this.namePm,
-          projProgress: this.projProgress,
+          assignProject_id: this.project_id,
+          assignPMName: this.namePm,
+          assignProgress: this.projProgress,
           assignEmpType: 'Part3',
           assignRound: 'First'
         }
@@ -490,9 +507,9 @@ export class PmcontrolComponent implements OnInit {
         width: '1000px',
         data: {
           assignProjectCode: this.projectCode,
-          project_id: this.project_id,
-          namePm: this.namePm,
-          projProgress: this.projProgress,
+          assignProject_id: this.project_id,
+          assignPMName: this.namePm,
+          assignProgress: this.projProgress,
           assignEmpType: 'Part4',
           assignRound: 'First'
         }
