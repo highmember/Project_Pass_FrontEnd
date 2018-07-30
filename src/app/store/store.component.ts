@@ -64,7 +64,9 @@ export class StoreComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
   getMatassign() {
+    console.log(this.formProJC.value.projectCodes)
     this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
+      console.log(results)
       this.assignMat = results;
       this.assignMatF();
     });
@@ -232,6 +234,7 @@ export class StoreComponent implements OnInit {
     const dialogRef = this.dialog.open(MatDialogComponent, {
       width: '450px',
       data: {
+        materialForm: 'old'
       }
     });
     dialogRef.afterClosed().subscribe(result => {

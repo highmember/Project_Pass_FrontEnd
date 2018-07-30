@@ -24,9 +24,6 @@
           <button mat-mini-fab color="accent" (click)="viewDraft(value)">
             <mat-icon>pageview</mat-icon>
           </button>
-          <div>
-            <mat-progress-bar [color]="color" [mode]="mode" [value]="value"></mat-progress-bar>
-          </div>
         </div>
         <div *ngIf="tile.text==='Part1'">
           <label style="text-align: center;">Part1</label>
@@ -70,11 +67,25 @@
 </mat-card>
 <mat-card>
   <mat-card-content>
-    <h2>Scope</h2>
-    <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
-    </mat-progress-bar>
-    <h2>Progress</h2>
-    <mat-progress-bar [color]="color" [mode]="mode" [value]="projectProgress">
-    </mat-progress-bar>
+    <mat-card>
+      <h2>Time schedule</h2>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="projectStart" name="projectStart">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="projectEnd" name="projectEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+      </mat-progress-bar>
+    </mat-card>
+    <mat-card>
+      <h2>Progress {{projectProgress}} %</h2>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="projectProgress">
+      </mat-progress-bar>
+    </mat-card>
   </mat-card-content>
 </mat-card>

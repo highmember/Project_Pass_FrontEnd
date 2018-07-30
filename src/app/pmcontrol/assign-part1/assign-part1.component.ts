@@ -58,6 +58,7 @@ export class AssignPart1Component implements OnInit {
       this.partScopeEnd = this.data.assignScopeEnd;
       this.partNote = this.data.assignNote;
       this.assignMatNgx = this.data.assignMat;
+      this.empN = this.data.assignEmpName;
     }
     this.formEmp = this.formBuilder.group({});
     this.employeeService.getAllEmployee().subscribe((results) => {
@@ -184,14 +185,14 @@ export class AssignPart1Component implements OnInit {
   onSave() {
     const value = {
       assignProjectCode: this.data.assignProjectCode,
-      assignProject_id: this.data.project_id,
-      assignPMName: this.data.namePm,
+      assignProject_id: this.data.assignProject_id,
+      assignPMName: this.data.assignPMName,
       assignEmpName: this.empN,
       assignFile: this.assignFileNgx,
       assignScopeStart: this.partScopeStart,
       assignScopeEnd: this.partScopeEnd,
       assignMat: this.assignMatNgx,
-      assignProgress: this.data.projProgress,
+      assignProgress: this.data.assignProgress,
       assignNote: this.partNote,
       assignEmpType: this.data.assignEmpType,
     };

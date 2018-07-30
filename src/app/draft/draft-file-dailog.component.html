@@ -88,24 +88,25 @@
   <mat-tab label="ไฟล์ที่เกี่ยวข้อง">
     <mat-card>
       <h3>Related Products</h3>
-      Products Connect from : {{fileFrom}}
-        <table matSort (matSortChange)="sortData($event)">
-          <tr>
-            <th mat-sort-header="product">Product</th>
-            <th mat-sort-header="file">File</th>
-            <th mat-sort-header="num">Demand</th>
-            <th mat-sort-header="num">Supply</th>
-            <th mat-sort-header="num">Percent Per Order</th>
-          </tr>
-    
-          <tr *ngFor="let product of fileConnect">
-            <td>{{product.productCodeR}}</td>
-            <td>{{product.productFile}}</td>
-            <td>{{product.fileNum}} Piece</td>
-            <td>{{product.fileRecive}} Piece</td>
-            <td>{{product.fileProgress}} %</td>
-          </tr>
-        </table>
+      <table matSort (matSortChange)="sortData($event)">
+        <tr>
+          <th mat-sort-header="product">Product</th>
+          <th mat-sort-header="file">File</th>
+          <th mat-sort-header="demand">Demand</th>
+          <th mat-sort-header="supply">Supply</th>
+          <th mat-sort-header="from">From ?</th>
+          <th mat-sort-header="percent">Percent Per Order</th>
+        </tr>
+
+        <tr *ngFor="let product of fileConnect">
+          <td>{{product.productCodeR}}</td>
+          <td>{{product.productFile}}</td>
+          <td>{{product.fileNum}} Piece</td>
+          <td>{{product.fileRecive}} Piece</td>
+          <td>{{product.fileFrom}}</td>
+          <td>{{product.fileProgress}} %</td>
+        </tr>
+      </table>
     </mat-card>
   </mat-tab>
 
@@ -191,6 +192,12 @@
       </tr>
     </table> -->
       <!-- </mat-expansion-panel> -->
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="โน๊ต">
+    <mat-card>
+      <h3>Note</h3>
+      {{data.assignNote}}
     </mat-card>
   </mat-tab>
 </mat-tab-group>
