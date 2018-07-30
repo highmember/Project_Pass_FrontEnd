@@ -78,9 +78,7 @@ export class PmviewdetailComponent implements OnInit {
     this.assignService.updateAssignReturnMat(matReturnList[0]._id, matReturnList[0]).pipe(
       mergeMap(() => this.assignService.getAllAssign()))
       .subscribe((results) => {
-        console.log(results);
       });
-    console.log(val)
   }
 
 }

@@ -83,8 +83,6 @@ export class PmcontrolComponent implements OnInit {
     });
   }
   updateProjectProgress() {
-    console.log(this.projectProgress)
-    console.log(this.project_id)
     this.projectService.updateProject(this.project_id, this.projectProgressngx).mergeMap(() =>
       this.projectService.getAllProject())
       .subscribe((results1) => {
@@ -116,17 +114,11 @@ export class PmcontrolComponent implements OnInit {
         }
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result)
         if (result !== undefined) {
           this.assignService.updateAssign(this.tmp[0].value._id, result).pipe(
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject_id, result).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -148,11 +140,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -209,11 +196,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -235,11 +217,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -297,11 +274,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -323,11 +295,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -408,11 +375,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -434,11 +396,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -494,11 +451,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
@@ -520,11 +472,6 @@ export class PmcontrolComponent implements OnInit {
             mergeMap(() => this.assignService.getAllAssign()))
             .subscribe((results) => {
               this.assign = results;
-              this.projectService.updateProject(result.assignProject, this.assign[this.assign.length - 1]).mergeMap(() =>
-                this.projectService.getAllProject())
-                .subscribe((results1) => {
-                  this.rows = results1;
-                });
             });
         }
       });
