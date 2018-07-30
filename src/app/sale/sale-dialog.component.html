@@ -55,7 +55,9 @@
         </div>
         <mat-card class="content">
           <mat-card-content *ngFor="let value of output">
-            รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+            รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}} <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </mat-card-content>
         </mat-card>
       </content>
