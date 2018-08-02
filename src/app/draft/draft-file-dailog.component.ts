@@ -22,9 +22,6 @@ export class DraftfileComponent implements OnInit {
   public listMatAssign = [];
   public listMatAssigns: any[];
   public matUseInOneDay = 0;
-  public dayDifference: Number;
-  public timeSchedule: Number;
-  public dayDifferenceBetCurr: Number;
   /**
    *  variable 'form' use FormGroup for manage form
   */
@@ -39,27 +36,14 @@ export class DraftfileComponent implements OnInit {
    * create from group and set data of sale
   */
   ngOnInit() {
-    console.log(this.data)
     this.assignMat = this.data.assignMat;
     this.getAssignMat();
     this.assignService.getSomeAssign(this.data.assignProjectCode).subscribe((results) => {
       this.assign = results;
       this.checkAssign();
     });
-    this.getschedule();
   }
-  getschedule() {
-    const today: number = Date.now();
-    const date2 =  new Date(this.data.assignScopeEnd);
-    const date1 = new Date(this.data.assignScopeStart);
-    const currDate = Math.abs(date1.valueOf() - today) / 1000 / 60 / 60 / 24;
-    const timeDifference = date2.valueOf() - date1.valueOf();
-    const dayDifference = (timeDifference / 1000 / 60 / 60 / 24);
-    const dayDifferenceBetCurr = (dayDifference - currDate);
-    this.dayDifferenceBetCurr = dayDifferenceBetCurr;
-    this.dayDifference = dayDifference;
-    this.timeSchedule = ((currDate * 100) / dayDifference );
-  }
+
   getAssignMat() {
     let count = 0;
     this.assignMat.forEach((ele) => {

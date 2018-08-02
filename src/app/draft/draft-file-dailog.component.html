@@ -89,33 +89,3 @@
     </mat-card>
   </mat-tab>
 </mat-tab-group>
-<mat-card>
-  <mat-card-content>
-    <mat-card>
-      <h2>Time schedule</h2>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="data.assignScopeStart" name="assignScopeStart">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="data.assignScopeEnd" name="assignScopeEnd">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Total Days" disabled [(ngModel)]="dayDifference">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Days left" disabled [(ngModel)]="dayDifferenceBetCurr">
-      </mat-form-field>
-      <mat-progress-bar [color]="color" [mode]="mode" [value]="timeSchedule">
-      </mat-progress-bar>
-    </mat-card>
-    <mat-card>
-      <h2>Progress</h2>
-      <mat-progress-bar [color]="color" [mode]="mode" [value]="data.assignProgress">
-      </mat-progress-bar>
-    </mat-card>
-  </mat-card-content>
-</mat-card>

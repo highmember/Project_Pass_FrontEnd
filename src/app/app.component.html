@@ -58,7 +58,7 @@
                 <a class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn">{{ value.employeeName }}</a>
                     <div class="dropdown-content pointer">
-                        <a routerLink="/app-p1/{{value._id}}" routerLinkActive="active">Draft Manager</a>
+                        <a routerLink="/app-draft/{{value._id}}" routerLinkActive="active">Draft Manager</a>
                         <a *ngIf="check===true" (click)="logout()">Logout</a>
                     </div>
                 </a>

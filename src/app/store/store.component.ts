@@ -70,6 +70,7 @@ export class StoreComponent implements OnInit {
   assignMatF() {
     this.storeService.getSomeMat(this.assignMat).subscribe((results) => {
       this.valueFromStore = results;
+      console.log(this.valueFromStore)
       let num = 0;
       let check = 0;
       const valueAssign = [];
@@ -99,10 +100,10 @@ export class StoreComponent implements OnInit {
         } else {
           num++;
         }
-        check = 0;
         num = 0;
       });
       this.valueAssigns = valueAssign;
+      console.log(this.valueAssigns)
     });
   }
   sendMat(val): void {
@@ -157,7 +158,6 @@ export class StoreComponent implements OnInit {
         } else {
           num++;
         }
-        check = 0;
         num = 0;
       });
       this.listMatsAssignReturn = listMatAssignReturn;

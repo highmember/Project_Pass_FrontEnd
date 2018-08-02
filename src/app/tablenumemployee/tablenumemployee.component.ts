@@ -64,6 +64,5 @@ export class TablenumemployeeComponent implements OnInit {
       });
       this.valueAssigns = valueAssign;
     });
-    console.log(this.valueAssigns)
   }
 }

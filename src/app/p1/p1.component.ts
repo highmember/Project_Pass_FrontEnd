@@ -22,6 +22,15 @@ export class P1Component implements OnInit {
     _id: Object,
     assignProjectCode: ''
   };
+  public assignProjectCode: String;
+  public assignPMName: String;
+  public assignFile: any[];
+  public assignScopeEnd: Date;
+  public assignScopeStart: Date;
+  public assignProgress: Number;
+  public dayDifference: Number;
+  public timeSchedule: Number;
+  public dayDifferenceBetCurr: Number;
 
   constructor(
     private dialog: MatDialog,
@@ -54,26 +63,44 @@ export class P1Component implements OnInit {
     this.rowsss = [];
     this.rows.forEach(ele => {
       if (ele.assignProjectCode === this.sleProjectCode.assignProjectCode) {
+        this.assignPMName = ele.assignPMName;
+        this.assignProjectCode = ele.assignProjectCode;
+        this.assignScopeStart = ele.assignScopeStart;
+        this.assignScopeEnd = ele.assignScopeEnd;
+        this.assignProgress = ele.assignProgress;
         this.rowss.push(ele);
       }
     });
     this.rowsss = this.rowss;
+    this.getschedule();
   }
-viewFile(val): void {
-  const dialogRef = this.dialog.open(DraftfileComponent, {
+  getschedule() {
+    const today: number = Date.now();
+    const date2 =  new Date(this.assignScopeEnd);
+    const date1 = new Date(this.assignScopeStart);
+    const currDate = Math.abs(date1.valueOf() - today) / 1000 / 60 / 60 / 24;
+    const timeDifference = date2.valueOf() - date1.valueOf();
+    const dayDifference = (timeDifference / 1000 / 60 / 60 / 24);
+    const dayDifferenceBetCurr = (dayDifference - currDate);
+    this.dayDifferenceBetCurr = dayDifferenceBetCurr;
+    this.dayDifference = dayDifference;
+    this.timeSchedule = ((currDate * 100) / dayDifference );
+  }
+viewFile(): void {
+  const dialogRef = this.dialog.open(P1FileDialogComponent, {
     width: '1000px',
     data: {
-      _id: val._id,
-      assignEmpType: val.assignEmpType,
-      assignFile: val.assignFile,
-      assignMat: val.assignMat,
-      assignNote: val.assignNote,
-      assignPMName: val.assignPMName,
-      assignProgress: val.assignProgress,
-      assignProjectCode: val.assignProjectCode,
-      assignProject_id: val.assignProject_id,
-      assignScopeEnd: val.assignScopeEnd,
-      assignScopeStart: val.assignScopeStart
+      _id: this.rowss[0]._id,
+      assignEmpType: this.rowss[0].assignEmpType,
+      assignFile: this.rowss[0].assignFile,
+      assignMat: this.rowss[0].assignMat,
+      assignNote: this.rowss[0].assignNote,
+      assignPMName: this.rowss[0].assignPMName,
+      assignProgress: this.rowss[0].assignProgress,
+      assignProjectCode: this.rowss[0].assignProjectCode,
+      assignProject_id: this.rowss[0].assignProject_id,
+      assignScopeEnd: this.rowss[0].assignScopeEnd,
+      assignScopeStart: this.rowss[0].assignScopeStart
     }
   });
   dialogRef.afterClosed().subscribe(result => {
