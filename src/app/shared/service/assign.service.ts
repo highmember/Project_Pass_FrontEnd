@@ -63,6 +63,9 @@ export class AssignService {
   getProjectProgress(id): Observable<any> {
     return this.apiService.get('assignnId/' + id);
   }
+  getAssignByEmp(id): Observable<any> {
+    return this.apiService.get('assignEmpName/' + id);
+  }
   updateMatStoreForm(id: string, data): Observable<any> {
     return this.apiService.put('assignForm/' + id, data);
   }

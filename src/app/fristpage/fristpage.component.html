@@ -3,34 +3,61 @@
     <h2>Project Manager</h2>
     <div fxFlex></div>
   </mat-card-subtitle>
+  <app-button-card-title (onClick)="searchManagerWork()">
+      <mat-icon>search</mat-icon>Search Manager</app-button-card-title>
   <mat-card-content>
     <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="rows"
       [limit]="10">
       <ngx-datatable-column name="รหัสโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectCode}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.projectCode}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.projectCode}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ความคืบหน้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            Finish !
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
             <mat-progress-bar [color]="color" [mode]="mode" [value]="value.projectProgress">
-              </mat-progress-bar>
-          {{value.projectProgress}}
+            </mat-progress-bar>
+            {{value.projectProgress}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ชนิดโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectType}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.projectType}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.projectType}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="วันสิ้นสุดโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectEnd | date: "dd-MM-yyyy"}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.projectEnd | date: "dd-MM-yyyy"}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.projectEnd | date: "dd-MM-yyyy"}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ผู้รับโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.sale[0].saleName}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.sale[0].saleName}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.sale[0].saleName}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="จัดการ" [maxWidth]="170">

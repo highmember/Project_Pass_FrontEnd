@@ -22,6 +22,9 @@ export class SaleviewprogressComponent implements OnInit {
   public tmp: any[];
   public projectProgressngx: any[];
   public projectProgress = 0;
+  public projectStart: Date;
+  public projectEnd: Date;
+
   tiles = [
     { text: 'Draft', cols: 1, rows: 1, color: 'lightblue' },
     { text: 'Part1', cols: 1, rows: 1, color: 'lightblue' },
@@ -49,9 +52,10 @@ export class SaleviewprogressComponent implements OnInit {
       this.customer = results[0].customer[0].customerName;
       this.namePm = results[0].pm;
       this.projProgress = results[0].projectProgress;
+      this.projectStart = results[0].projectStart;
+      this.projectEnd = results[0].projectEnd;
       this.getAssign();
     });
-    
   }
   getAssign() {
     this.assignService.getSomeAssign(this.projectCode).subscribe((results) => {

@@ -1,65 +1,77 @@
 <mat-card>
-    <button mat-mini-fab color="warn" (click)="goBack()">
-      <mat-icon>arrow_back_ios</mat-icon>
-    </button>
-    <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
-  
-      <h1>Deteil {{projectCode}}</h1>
-      <div fxFlex></div>
-    </mat-card-subtitle>
-    <mat-card-content>
+  <button mat-mini-fab color="warn" (click)="goBack()">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <mat-card-subtitle fxLayout="row" fxLayoutGap="10px">
+
+    <h1>Deteil {{projectCode}}</h1>
+    <div fxFlex></div>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Project Manager :" disabled value={{projectCode}} text="คุณ">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Customer :" disabled value={{customer}} text="คุณ">
+    </mat-form-field>
+    <div fxFlex></div>
+    <mat-grid-list cols="5" rowHeight="100px">
+      <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+        <div *ngIf="tile.text==='Draft'">
+          <label style="text-align: center;">Draft</label>
+          <button mat-mini-fab color="accent" (click)="viewDraft(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part1'">
+          <label style="text-align: center;">Part1</label>
+          <button mat-mini-fab color="accent" (click)="viewPart1(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part2'">
+          <label style="text-align: center;">Part2</label>
+          <button mat-mini-fab color="accent" (click)="viewPart2(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part3'">
+          <label style="text-align: center;">Part3</label>
+          <button mat-mini-fab color="accent" (click)="viewPart3(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="tile.text==='Part4'">
+          <label style="text-align: center;">Part4</label>
+          <button mat-mini-fab color="accent" (click)="viewPart4(value)">
+            <mat-icon>pageview</mat-icon>
+          </button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <mat-card>
+      <h2>Time schedule</h2>
       <mat-form-field>
-        <input matInput placeholder="Project Manager :" disabled value={{projectCode}} text="คุณ">
+        <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="projectStart" name="projectStart">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Customer :" disabled value={{customer}} text="คุณ">
+        <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="projectEnd" name="projectEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
-      <div fxFlex></div>
-      <mat-grid-list cols="5" rowHeight="100px">
-        <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
-          <div *ngIf="tile.text==='Draft'">
-            <label style="text-align: center;">Draft</label>
-            <button mat-mini-fab color="accent" (click)="viewDraft(value)">
-              <mat-icon>pageview</mat-icon>
-            </button>
-            <div>
-            <mat-progress-bar [color]="color" [mode]="mode" [value]="value"></mat-progress-bar></div>
-          </div>
-          <div *ngIf="tile.text==='Part1'">
-            <label style="text-align: center;">Part1</label>
-            <button mat-mini-fab color="accent" (click)="viewPart1(value)">
-              <mat-icon>pageview</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="tile.text==='Part2'">
-            <label style="text-align: center;">Part2</label>
-            <button mat-mini-fab color="accent" (click)="viewPart2(value)">
-              <mat-icon>pageview</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="tile.text==='Part3'">
-            <label style="text-align: center;">Part3</label>
-            <button mat-mini-fab color="accent" (click)="viewPart3(value)">
-              <mat-icon>pageview</mat-icon>
-            </button>
-          </div>
-          <div *ngIf="tile.text==='Part4'">
-            <label style="text-align: center;">Part4</label>
-            <button mat-mini-fab color="accent" (click)="viewPart4(value)">
-              <mat-icon>pageview</mat-icon>
-            </button>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-  </mat-card>
-  <mat-card>
-    <mat-card-content>
-      <h2>Scope</h2>
       <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
       </mat-progress-bar>
+    </mat-card>
+    <mat-card>
       <h2>Progress</h2>
       <mat-progress-bar [color]="color" [mode]="mode" [value]="projectProgress.value">
       </mat-progress-bar>
-    </mat-card-content>
-  </mat-card>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
