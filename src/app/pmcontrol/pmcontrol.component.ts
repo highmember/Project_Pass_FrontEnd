@@ -37,7 +37,10 @@ export class PmcontrolComponent implements OnInit {
   ];
   color = 'primary';
   mode = 'determinate';
-  value = 100;
+  public dayDifference: Number;
+  public timeSchedule: Number;
+  public dayDifferenceBetCurr: Number;
+
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
@@ -88,10 +91,24 @@ export class PmcontrolComponent implements OnInit {
       .subscribe((results1) => {
         this.rows = results1;
       });
+    this.getschedule();
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  getschedule() {
+    const today: number = Date.now();
+    const date2 =  new Date(this.projectEnd);
+    const date1 = new Date(this.projectStart);
+    const currDate = Math.abs(date1.valueOf() - today) / 1000 / 60 / 60 / 24;
+    const timeDifference = date2.valueOf() - date1.valueOf();
+    const dayDifference = (timeDifference / 1000 / 60 / 60 / 24);
+    const dayDifferenceBetCurr = (dayDifference - currDate);
+    this.dayDifferenceBetCurr = dayDifferenceBetCurr;
+    this.dayDifference = dayDifference;
+    this.timeSchedule = ((currDate * 100) / dayDifference );
   }
   // --------------------------------------------------------------------------------------------------------------
   editDraft(): void {

@@ -4,86 +4,7 @@
     <input matInput placeholder="Project Maneger (PM)" disabled [value]="data.assignPMName" name="assignPMName">
   </mat-form-field>
   <ul></ul>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [value]="data.assignScopeStart" name="assignScopeStart">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-  <ul></ul>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker2" placeholder="End" disabled [value]="data.assignScopeEnd" name="assignScopeEnd">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
 </div>
-<!-- <div>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Products Connect from :
-      </mat-panel-title>
-      <mat-panel-description >
-        {{fileFrom}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table matSort (matSortChange)="sortData($event)">
-      <tr>
-        <th mat-sort-header="product">Product</th>
-        <th mat-sort-header="file">File</th>
-        <th mat-sort-header="num">Demand</th>
-        <th mat-sort-header="num">Supply</th>
-        <th mat-sort-header="num">Percent Per Order</th>
-      </tr>
-
-      <tr *ngFor="let product of fileConnect">
-        <td>{{product.productCodeR}}</td>
-        <td>{{product.productFile}}</td>
-        <td>{{product.fileNum}} Piece</td>
-        <td>{{product.fileRecive}} Piece</td>
-        <td>{{product.fileProgress}} %</td>
-      </tr>
-    </table>
-  </mat-expansion-panel>
-</div>
-<div>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Material Req:
-      </mat-panel-title>
-      <mat-panel-description >
-        {{data.assignMat.length}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table matSort (matSortChange)="sortData($event)">
-      <tr>
-        <th mat-sort-header="product">Item</th>
-        <th mat-sort-header="type">Type</th>
-        <th mat-sort-header="num">Num</th>
-        <th mat-sort-header="contain">Contain</th>
-        <th mat-sort-header="date">Date</th>
-      </tr>
-
-      <tr *ngFor="let mat of data.assignMat">
-        <td>{{mat.matItem}}</td>
-        <td>{{mat.matType}}</td>
-        <td>{{mat.matNum}}</td>
-        <td>{{mat.matRecive}}</td>
-        <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
-      </tr>
-    </table>
-  </mat-expansion-panel>
-</div>
-<br>
-<div>
-  <mat-card>
-    <mat-card-content>
-      <h3>Progress's {{data.assignEmpType}}</h3>
-      <mat-progress-bar [color]="color" [mode]="mode" [value]="progressBar">
-      </mat-progress-bar>
-    </mat-card-content>
-  </mat-card>
-</div> -->
 <mat-tab-group>
   <mat-tab label="ไฟล์ที่เกี่ยวข้อง">
     <mat-card>
@@ -113,14 +34,8 @@
   <mat-tab label="วัสดุที่ใช้">
     <mat-card>
       <h3>Material used</h3>
-      <!-- <mat-expansion-panel> -->
       <mat-card-content>
         <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="listMatAssigns">
-          <!-- <ngx-datatable-column name="วัสดุ">
-            <ng-template let-value="value" ngx-datatable-cell-template>
-              {{value.matId}}
-            </ng-template>
-          </ngx-datatable-column> -->
           <ngx-datatable-column name="วัสดุ">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.matItem}}
@@ -165,33 +80,6 @@
           </ngx-datatable-column>
         </ngx-datatable>
       </mat-card-content>
-      <!-- <mat-expansion-panel-header>
-      <mat-panel-title>
-        Material
-      </mat-panel-title>
-      <mat-panel-description>
-        {{assignMatNum}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table matSort (matSortChange)="sortData($event)">
-      <tr>
-        <th mat-sort-header="product">Item</th>
-        <th mat-sort-header="type">Type</th>
-        <th mat-sort-header="num">Num</th>
-        <th mat-sort-header="contain">Contain</th>
-        <th mat-sort-header="date">Date</th>
-      </tr>
-
-      <tr *ngFor="let mat of assignMat">
-        <td>{{mat.matItem}}</td>
-        <td>{{mat.matType}}</td>
-        <td>{{mat.matNum}}</td>
-        <td>{{mat.matRecive}}</td>
-        <td>{{mat.matDate | date: "dd-MM-yyyy"}}</td>
-        <td><mat-checkbox (value)="mat.matReturn">Checked</mat-checkbox></td>
-      </tr>
-    </table> -->
-      <!-- </mat-expansion-panel> -->
     </mat-card>
   </mat-tab>
   <mat-tab label="โน๊ต">
@@ -201,3 +89,33 @@
     </mat-card>
   </mat-tab>
 </mat-tab-group>
+<mat-card>
+  <mat-card-content>
+    <mat-card>
+      <h2>Time schedule</h2>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="data.assignScopeStart" name="assignScopeStart">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="data.assignScopeEnd" name="assignScopeEnd">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Total Days" disabled [(ngModel)]="dayDifference">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Days left" disabled [(ngModel)]="dayDifferenceBetCurr">
+      </mat-form-field>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="timeSchedule">
+      </mat-progress-bar>
+    </mat-card>
+    <mat-card>
+      <h2>Progress</h2>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="data.assignProgress">
+      </mat-progress-bar>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
