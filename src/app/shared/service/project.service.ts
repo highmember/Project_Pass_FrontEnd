@@ -28,6 +28,10 @@ export class ProjectService {
   getIdProjectFromSale(id: String): Observable<any> {
     return this.apiService.get(`projectFromSale/` + id);
   }
+
+  getIdProjectFromCus(id: String): Observable<any> {
+    return this.apiService.get(`projectFromCus/` + id);
+  }
   /**
    * @param data
    * insert data in database of Project collection
