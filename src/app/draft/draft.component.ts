@@ -13,6 +13,21 @@ export class DraftComponent implements OnInit {
   public rowss = [];
   public rowsss: any[];
   public id: String;
+  public projectCodeOfEmp = [];
+  public sleProjectCode = {
+    _id: Object,
+    assignProjectCode: ''
+  };
+  public assignProjectCode: String;
+  public assignPMName: String;
+  public assignFile: any[];
+  public assignScopeEnd: Date;
+  public assignScopeStart: Date;
+  public assignProgress: Number;
+  public dayDifference: Number;
+  public timeSchedule: Number;
+  public dayDifferenceBetCurr: Number;
+
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
@@ -22,9 +37,12 @@ export class DraftComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.assignService.getId(this.id).subscribe((results) => {
-      console.log(results)
+      results.forEach((ele) => {
+        this.projectCodeOfEmp.push({
+          assignProjectCode: ele.assignProjectCode,
+        });
+      });
       this.rows = results;
-      this.checkAssign();
     });
   }
   onUpdate(result, row) {
@@ -37,41 +55,55 @@ export class DraftComponent implements OnInit {
     });
   }
   checkAssign() {
-    this.rows.forEach(element => {
-      if (element.assignEmpType === 'Draft') {
-        this.rowss.push(element);
+    this.rowss = [];
+    this.rowsss = [];
+    this.rows.forEach(ele => {
+      if (ele.assignProjectCode === this.sleProjectCode.assignProjectCode) {
+        this.assignPMName = ele.assignPMName;
+        this.assignProjectCode = ele.assignProjectCode;
+        this.assignScopeStart = ele.assignScopeStart;
+        this.assignScopeEnd = ele.assignScopeEnd;
+        this.assignProgress = ele.assignProgress;
+        this.rowss.push(ele);
       }
     });
     this.rowsss = this.rowss;
-    console.log(this.rowsss)
+    this.getschedule();
+  }
+  getschedule() {
+    const today: number = Date.now();
+    const date2 = new Date(this.assignScopeEnd);
+    const date1 = new Date(this.assignScopeStart);
+    const currDate = Math.abs(date1.valueOf() - today) / 1000 / 60 / 60 / 24;
+    const timeDifference = date2.valueOf() - date1.valueOf();
+    const dayDifference = (timeDifference / 1000 / 60 / 60 / 24);
+    const dayDifferenceBetCurr = (dayDifference - currDate);
+    this.dayDifferenceBetCurr = dayDifferenceBetCurr;
+    this.dayDifference = dayDifference;
+    this.timeSchedule = ((currDate * 100) / dayDifference);
+  }
+  viewFile(): void {
+    const dialogRef = this.dialog.open(DraftfileComponent, {
+      width: '1000px',
+      data: {
+        _id: this.rowss[0]._id,
+        assignEmpType: this.rowss[0].assignEmpType,
+        assignFile: this.rowss[0].assignFile,
+        assignMat: this.rowss[0].assignMat,
+        assignNote: this.rowss[0].assignNote,
+        assignPMName: this.rowss[0].assignPMName,
+        assignProgress: this.rowss[0].assignProgress,
+        assignProjectCode: this.rowss[0].assignProjectCode,
+        assignProject_id: this.rowss[0].assignProject_id,
+        assignScopeEnd: this.rowss[0].assignScopeEnd,
+        assignScopeStart: this.rowss[0].assignScopeStart
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+      }
+    });
   }
 
-viewFile(val): void {
-  const dialogRef = this.dialog.open(DraftfileComponent, {
-    width: '1000px',
-    data: {
-      _id: val._id,
-      assignEmpType: val.assignEmpType,
-      assignFile: val.assignFile,
-      assignMat: val.assignMat,
-      assignNote: val.assignNote,
-      assignPMName: val.assignPMName,
-      assignProgress: val.assignProgress,
-      assignProjectCode: val.assignProjectCode,
-      assignProject_id: val.assignProject_id,
-      assignScopeEnd: val.assignScopeEnd,
-      assignScopeStart: val.assignScopeStart
-    }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-      // this.degreeService.addDegree(result).pipe(
-      //   mergeMap(() => this.degreeService.getAllDegree()))
-      //   .subscribe((results) => {
-      //     this.rows = results;
-      //   });
-    }
-  });
 }
 
-}

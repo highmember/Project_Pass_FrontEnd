@@ -50,13 +50,7 @@ import { PmcontrolComponent } from './pmcontrol/pmcontrol.component';
 import { AssignService } from './shared/service/assign.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
-import { P3Component } from './p3/p3.component';
-import { P3FileDialogComponent } from './p3/p3-file-dialog.component';
-import { P4Component } from './p4/p4.component';
-import { P4FileDialogComponent } from './p4/p4-file-dialog.component';
 import { BillComponent } from './bill/bill.component';
-import { P2Component } from './p2/p2.component';
-import { P2FileDialogComponent } from './p2/p2-flie-dialog.component';
 import { UserService } from './shared/service/user.service';
 import { AdminUserDialogComponent } from './admin/user-dialog.component';
 import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
@@ -74,16 +68,10 @@ const appRoutes: Routes = [
   { path: 'app-pmcontrol/:id', component: PmcontrolComponent },
   { path: 'app-draft/:id', component: DraftComponent },
   { path: 'app-p1/:id', component: P1Component },
-  { path: 'app-p2/:id', component: P2Component },
-  { path: 'app-p3/:id', component: P3Component },
-  { path: 'app-p4/:id', component: P4Component },
   { path: 'app-fristpage', component: FristpageComponent },
   { path: 'app-pmcontrol', component: PmcontrolComponent },
   { path: 'app-draft', component: DraftComponent },
   { path: 'app-p1', component: P1Component },
-  { path: 'app-p2', component: P2Component },
-  { path: 'app-p3', component: P3Component },
-  { path: 'app-p4', component: P4Component },
   { path: 'app-bill', component: BillComponent },
   { path: 'app-home', component: HomeComponent },
   { path: 'app-saleviewprogress/:id', component: SaleviewprogressComponent }
@@ -119,13 +107,7 @@ enableProdMode();
     DraftfileComponent,
     PmcontrolComponent,
     P1Component,
-    P3Component,
-    P3FileDialogComponent,
-    P4Component,
-    P4FileDialogComponent,
     BillComponent,
-    P2Component,
-    P2FileDialogComponent,
     AdminUserDialogComponent,
     PmviewdetailComponent,
     HomeComponent,
@@ -181,9 +163,6 @@ enableProdMode();
     ViewdialogComponent,
     MatDialogComponent,
     DraftfileComponent,
-    P2FileDialogComponent,
-    P4FileDialogComponent,
-    P3FileDialogComponent,
     AdminUserDialogComponent,
     PmviewdetailComponent,
     TablenumemployeeComponent

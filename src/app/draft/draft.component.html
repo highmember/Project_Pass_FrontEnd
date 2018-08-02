@@ -5,126 +5,156 @@
       <div fxFlex></div>
     </mat-card-subtitle>
     <mat-card-content>
-      <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="rowsss">
-        <ngx-datatable-column name="รหัสโปรเจค">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              {{value.assignProjectCode}}
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              {{value.assignProjectCode}}
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="ชื่อโปรดักส์">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="รหัสไฟล์">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.productFile}}</a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.productFile}}</a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="จำนวนที่สั่ง">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.fileNum}} Piece</a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.fileNum}} Piece</a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="จำนวนที่ทำได้">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.fileRecive}} Piece
-                </a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">
-                  <input matInput type="number" name="fileRecive" [(ngModel)]="data.fileRecive"> Piece
-                </a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="ความคืบหน้า">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.fileProgress}} %
-                </a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">{{data.fileProgress}} %</a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="ส่งต่อ">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">Move to {{data.fileMove}}
-                </a>
-              </div>
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              <div *ngFor="let data of value.assignFile">
-                <a *ngIf="data !== undefined;">
-                  <button mat-button color="primary" (click)="onUpdate(data.fileRecive,rowsss)">Move to {{data.fileMove}}</button>
-                </a>
-              </div>
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="ผู้จัดการ">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <div *ngIf="value.assignProgress === 100" class="finish">
-              {{value.assignPMName}}
-            </div>
-            <div *ngIf="value.assignProgress !== 100">
-              {{value.assignPMName}}
-            </div>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="รายละเอียดงาน" [maxWidth]="170">
-          <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
-            <button mat-mini-fab color="primary" (click)="viewFile(value)">
-              <mat-icon>attachment</mat-icon>
-            </button>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </mat-card-content>
-  </mat-card>
-</p>
+      <mat-form-field>
+        <mat-select placeholder="Select Project" [(value)]="sleProjectCode" (change)="checkAssign()">
+          <mat-option *ngFor="let value of projectCodeOfEmp" [value]="value">{{value.assignProjectCode}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a *ngIf="assignPMName !== undefined">
+        <mat-card>
+          <mat-form-field>
+            <input matInput placeholder="Project Code" disabled [value]="assignProjectCode" name="assignProjectCode">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Project Maneger (PM)" disabled [value]="assignPMName" name="assignPMName">
+          </mat-form-field>
+          <button mat-mini-fab color="primary" (click)="viewFile()"></button>
+          <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="30" [footerHeight]="30" [rowHeight]="'auto'" [rows]="rowsss">
+            <ngx-datatable-column name="ชื่อโปรดักส์">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.productCodeR}}</a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="รหัสไฟล์">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">
+                      <a href="{{data.productFile}}" target="_blank">
+                        <img src="{{data.productFile}}" alt="data.productFile" style="width:40px;height:40px;"> </a>
+                    </a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a href="{{data.productFile}}" target="_blank">
+                      <img src="{{data.productFile}}" alt="data.productFile" style="width:40px;height:40px;"> </a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="จำนวนที่สั่ง" [width]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.fileNum}} Piece</a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.fileNum}} Piece</a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="จำนวนที่ทำได้" [width]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.fileRecive}} Piece
+                    </a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">
+                      <input matInput type="number" name="fileRecive" [(ngModel)]="data.fileRecive"> Piece
+                    </a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ความคืบหน้า" [maxWidth]="100">
+              <ng-template let-value="value" ngx-datatable-cell-template >
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.fileProgress}} %
+                    </a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">{{data.fileProgress}} %</a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="อัพโหลดไฟล์">
+              <ng-template let-value="value" ngx-datatable-cell-template >
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="ส่งต่อ">
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <div *ngIf="value.assignProgress === 100" class="finish">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">Move to {{data.fileMove}}
+                    </a>
+                  </div>
+                </div>
+                <div *ngIf="value.assignProgress !== 100">
+                  <div *ngFor="let data of value.assignFile">
+                    <a *ngIf="data !== undefined;">
+                      <button mat-button color="primary" (click)="onUpdate(data.fileRecive,rowsss)">Move to {{data.fileMove}}</button>
+                    </a>
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+          <mat-card>
+            <h2>Time schedule</h2>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker1" placeholder="Start" disabled [(ngModel)]="assignScopeStart" name="assignScopeStart">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="End" disabled [(ngModel)]="assignScopeEnd" name="assignScopeEnd">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Total Days" disabled [(ngModel)]="dayDifference">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Days left" disabled [(ngModel)]="dayDifferenceBetCurr">
+            </mat-form-field>
+            <mat-progress-bar [color]="color" [mode]="mode" [value]="timeSchedule">
+            </mat-progress-bar>
+          </mat-card>
+          <mat-card>
+            <h2>Progress</h2>
+            <mat-progress-bar [color]="color" [mode]="mode" [value]="assignProgress">
+            </mat-progress-bar>
+          </mat-card>
+        </mat-card>
+      </a>
