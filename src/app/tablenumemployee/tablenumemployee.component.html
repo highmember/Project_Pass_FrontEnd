@@ -1,0 +1,28 @@
+<mat-card>
+  <app-dropdown [data]="partofemp" text="Select Part of Manager" placeholder="What Part ?" name="partofemp" (change)="checkPart()"
+    fxFlex [formGroup]='formProJC'></app-dropdown>
+  <mat-form-field>
+    <mat-select placeholder="Select Manager" [(value)]="employeeNames" [formGroup]="formNameEmp" (change)="getWorkEmp()">
+      <mat-option *ngFor="let value of nameOfEmp" [value]="value">{{value.employeeName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- <app-dropdown [data]="nameOfEmp" [value]="nameOfEmp.employeeName" text="Select Manager" placeholder="Who ?" name="nameOfEmp" (change)="checkParts()"
+    fxFlex [formGroup]='formNameEmp'></app-dropdown> -->
+  <ngx-datatable class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [rows]="valueAssigns">
+    <ngx-datatable-column name="โปรเจคที่รับผิดชอบ">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.assignProjectCode}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="ผู้จัดการ">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.assignPMName}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="ความคืบหน้า">
+      <ng-template let-value="value" ngx-datatable-cell-template>
+        {{value.assignProgress}}
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</mat-card>

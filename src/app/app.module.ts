@@ -62,6 +62,7 @@ import { AdminUserDialogComponent } from './admin/user-dialog.component';
 import { PmviewdetailComponent } from './pmviewdetail/pmviewdetail.component';
 import { HomeComponent } from './home/home.component';
 import { SaleviewprogressComponent } from './saleviewprogress/saleviewprogress.component';
+import { TablenumemployeeComponent } from './tablenumemployee/tablenumemployee.component';
 
 const appRoutes: Routes = [
   { path: 'app-root', component: AppComponent },
@@ -128,7 +129,8 @@ enableProdMode();
     AdminUserDialogComponent,
     PmviewdetailComponent,
     HomeComponent,
-    SaleviewprogressComponent
+    SaleviewprogressComponent,
+    TablenumemployeeComponent
 
   ],
   imports: [
@@ -183,7 +185,8 @@ enableProdMode();
     P4FileDialogComponent,
     P3FileDialogComponent,
     AdminUserDialogComponent,
-    PmviewdetailComponent
+    PmviewdetailComponent,
+    TablenumemployeeComponent
   ],
   bootstrap: [AppComponent]
 })

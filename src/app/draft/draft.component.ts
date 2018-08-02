@@ -43,6 +43,7 @@ export class DraftComponent implements OnInit {
       }
     });
     this.rowsss = this.rowss;
+    console.log(this.rowsss)
   }
 
 viewFile(val): void {

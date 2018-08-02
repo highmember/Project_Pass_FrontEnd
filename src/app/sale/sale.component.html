@@ -10,27 +10,53 @@
       [limit]="10">
       <ngx-datatable-column name="รหัสโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectCode}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.projectCode}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.projectCode}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ความคืบหน้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          <mat-progress-bar mode="determinate" value="{{value.projectProgress}}"></mat-progress-bar>
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            Finish !
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            <mat-progress-bar mode="determinate" value="{{value.projectProgress}}"></mat-progress-bar>
+            {{value.projectProgress}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ชนิดโปรเจค">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.projectType}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.projectType}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.projectType}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ลูกค้า">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.customer[0].customerName}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.customer[0].customerName}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.customer[0].customerName}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ผู้จัดการ">
         <ng-template let-value="value" ngx-datatable-cell-template>
-          {{value.pm[0].pmName}}
+          <div *ngIf="value.projectProgress === 100" class="finish">
+            {{value.pm[0].pmName}}
+          </div>
+          <div *ngIf="value.projectProgress !== 100">
+            {{value.pm[0].pmName}}
+          </div>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="ไฟล์" [maxWidth]="170">

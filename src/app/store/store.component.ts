@@ -25,11 +25,9 @@ export class StoreComponent implements OnInit {
   public projectCodes = [];
   public tmp: any[];
   public projectCode: String;
-  public valueAssign = [];
   public valueAssigns: any[];
   public assignMat = [];
   public assignMatRet = [];
-  public listMatAssignReturn = [];
   public listMatsAssignReturn: any[];
   public formProJC: FormGroup;
   rowssss: any;
@@ -64,9 +62,7 @@ export class StoreComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   // --------------------------------------------------------------------------คำสั่งของ---------------------------------------------------------------------------------
   getMatassign() {
-    console.log(this.formProJC.value.projectCodes)
     this.assignService.getSomeAssign(this.formProJC.value.projectCodes).subscribe((results) => {
-      console.log(results)
       this.assignMat = results;
       this.assignMatF();
     });
@@ -76,31 +72,37 @@ export class StoreComponent implements OnInit {
       this.valueFromStore = results;
       let num = 0;
       let check = 0;
+      const valueAssign = [];
       this.assignMat.forEach((ele) => {
-        ele.value.assignMat.forEach(val => {
-          this.valueAssign.push({
-            _id: ele.value._id,
-            assignProject_id: ele.value.assignProject_id,
-            mat_id: val._id,
-            matId: val.matId,
-            matItem: val.matItem,
-            matNum: val.matNum,
-            matRecive: val.matRecive,
-            matFromStore: this.valueFromStore[check].materialNum,
-            matType: val.matType,
-            matGoAt: ele.value.assignEmpType,
-            matDate: val.matDate,
-            matForm: this.valueFromStore[check].materialForm,
-            matReturn: val.matReturn,
-            matUse: val.matUse,
-            count: num
+        if (ele.value.assignMat !== undefined) {
+          ele.value.assignMat.forEach(val => {
+            valueAssign.push({
+              _id: ele.value._id,
+              assignProject_id: ele.value.assignProject_id,
+              mat_id: val._id,
+              matId: val.matId,
+              matItem: val.matItem,
+              matNum: val.matNum,
+              matRecive: val.matRecive,
+              matFromStore: this.valueFromStore[check].materialNum,
+              matType: val.matType,
+              matGoAt: ele.value.assignEmpType,
+              matDate: val.matDate,
+              matForm: this.valueFromStore[check].materialForm,
+              matReturn: val.matReturn,
+              matUse: val.matUse,
+              count: num
+            });
+            check++;
+            num++;
           });
-          check++;
+        } else {
           num++;
-        });
+        }
+        check = 0;
         num = 0;
       });
-      this.valueAssigns = this.valueAssign;
+      this.valueAssigns = valueAssign;
     });
   }
   sendMat(val): void {
@@ -127,32 +129,38 @@ export class StoreComponent implements OnInit {
       this.valueFromStoreTagReturn = results;
       let num = 0;
       let check = 0;
+      const listMatAssignReturn = [];
       this.assignMatRet.forEach((ele) => {
-        ele.value.assignMat.forEach((val) => {
-          if (val.matReturn === true) {
-            this.listMatAssignReturn.push({
-              _id: ele.value._id,
-              assignProject_id: ele.value.assignProject_id,
-              mat_id: val._id,
-              matId: val.matId,
-              matItem: val.matItem,
-              matNum: val.matNum,
-              matRecive: val.matRecive,
-              matToStore: val.matRecive - val.matUse,
-              matType: val.matType,
-              matGoAt: ele.value.assignEmpType,
-              matDate: val.matDate,
-              matUse: val.matUse,
-              matForm: this.valueFromStoreTagReturn[check].materialForm,
-              count: num
-            });
-          }
-          check++;
+        if (ele.value.assignMat !== undefined) {
+          ele.value.assignMat.forEach((val) => {
+            if (val.matReturn === true) {
+              listMatAssignReturn.push({
+                _id: ele.value._id,
+                assignProject_id: ele.value.assignProject_id,
+                mat_id: val._id,
+                matId: val.matId,
+                matItem: val.matItem,
+                matNum: val.matNum,
+                matRecive: val.matRecive,
+                matToStore: val.matRecive - val.matUse,
+                matType: val.matType,
+                matGoAt: ele.value.assignEmpType,
+                matDate: val.matDate,
+                matUse: val.matUse,
+                matForm: this.valueFromStoreTagReturn[check].materialForm,
+                count: num
+              });
+            }
+            check++;
+            num++;
+          });
+        } else {
           num++;
-        });
+        }
+        check = 0;
         num = 0;
       });
-      this.listMatsAssignReturn = this.listMatAssignReturn;
+      this.listMatsAssignReturn = listMatAssignReturn;
     });
   }
   sendMatToStore(val) {

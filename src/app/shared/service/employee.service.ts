@@ -18,6 +18,9 @@ export class EmployeeService {
   getAllEmployee(): Observable<any> {
     return this.apiService.get(`employee`);
   }
+  getSomeEmployeeByPart(id: string): Observable<any> {
+    return this.apiService.get('employeePart/' + id);
+  }
   /**
    * @param data
    * insert data in database of Employee collection
