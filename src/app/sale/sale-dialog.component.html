@@ -1,6 +1,6 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="true">
-    <ng-template matStepLabel>เลือกชนิดโปรเจค</ng-template>
+    <ng-template matStepLabel>ชนิดโปรเจค</ng-template>
     <mat-card class="card">
       <mat-radio-group class="example-radio-group" [(ngModel)]="type">
         <mat-radio-button color="primary" class="example-radio-button" *ngFor="let val of typeProject" [value]="val">
@@ -15,21 +15,36 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" [editable]="true">
     <div *ngIf="type==='Project Jon'">
-      <ng-template matStepLabel>กรอกข้อมูลลูกค้าใหม่</ng-template>
-      <content fxLayout="column">
-        <app-input-text-normal [value]="data.customerName" name="customerName" placeholder="ชื่อ-นามสกุล" text="ชื่อ-นามสกุล" fxFlex
-          [formGroup]='form'></app-input-text-normal>
-        <app-input-text-normal [value]="data.customerPhone" name="customerPhone" placeholder="เบอร์โทรศัพท์" text="เบอร์โทรศัพท์"
-          fxFlex [formGroup]='form'></app-input-text-normal>
-        <app-input-text-normal [value]="data.customerAddress" name="customerAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex
-          [formGroup]='form'></app-input-text-normal>
-      </content>
-      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" matStepperNext [disabled]="form.invalid" (click)="insertCustomer()">ต่อไป</button>
-      </footer>
+      <ng-template matStepLabel>ลูกค้า</ng-template>
+      <mat-tab-group>
+        <mat-tab label="กรอกข้อมูลลูกค้าใหม่">
+          <content fxLayout="column">
+            <app-input-text-normal [value]="data.customerName" name="customerName" placeholder="ชื่อ-นามสกุล" text="ชื่อ-นามสกุล" fxFlex
+              [formGroup]='form'></app-input-text-normal>
+            <app-input-text-normal [value]="data.customerPhone" name="customerPhone" placeholder="เบอร์โทรศัพท์" text="เบอร์โทรศัพท์"
+              fxFlex [formGroup]='form'></app-input-text-normal>
+            <app-input-text-normal [value]="data.customerAddress" name="customerAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex
+              [formGroup]='form'></app-input-text-normal>
+          </content>
+          <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" matStepperNext [disabled]="form.invalid" (click)="insertCustomer()">ต่อไป</button>
+          </footer>
+        </mat-tab>
+        <mat-tab label="เลือกลูกค้า">
+          <ng-template matStepLabel>ลูกค้า</ng-template>
+          <mat-form-field>
+            <mat-select placeholder="เลือกลูกค้า" [(value)]="customerId" [formGroup]="thirdFormGroup">
+              <mat-option *ngFor="let value of oldCustomer" [value]="value">{{value.customerName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-raised-button color="primary" matStepperNext (click)="selectCustomerJohn()">ต่อไป</button>
+          </footer>
+        </mat-tab>
+      </mat-tab-group>
     </div>
     <div *ngIf="type!=='Project Jon'">
-      <ng-template matStepLabel>เลือกลูกค้า</ng-template>
+      <ng-template matStepLabel>ลูกค้า</ng-template>
       <content fxLayout="column">
         <mat-form-field>
           <mat-select placeholder="เลือกลูกค้า" [(value)]="customerId" [formGroup]="thirdFormGroup">
@@ -43,32 +58,52 @@
     </div>
   </mat-step>
   <mat-step [stepControl]="thirdFormGroup" [editable]="true">
-    <ng-template matStepLabel>กรอกข้อมูลโปรเจค</ng-template>
-    <mat-card class="card">
-      <content fxLayout="column">
-        <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
-        <div fxlayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
-          <app-input-text-normal [value]="data.codeProduct" name="codeProduct" placeholder="รหัสโปรดัก" text="รหัสโปรดัก" fxFlex [formGroup]='formProject'></app-input-text-normal>
-          <a>แนบไฟล์</a>
-          <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
-          <button mat-raised-button color="primary" (click)="addProduct()">บันทึก</button>
-        </div>
-        <mat-card class="content">
-          <mat-card-content *ngFor="let value of output">
-            รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}} <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </content>
-      <br>
-      <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
-      </footer>
-    </mat-card>
+    <div *ngIf="type==='Project Jon'">
+      <ng-template matStepLabel>ข้อมูลโปรเจค</ng-template>
+      <mat-card class="card">
+        <content fxLayout="column">
+          <app-input-text-normal [value]="data.code" name="code" placeholder="รหัสโปรเจค" text="รหัสโปรเจค" fxFlex [formGroup]='formProject'></app-input-text-normal>
+          <div fxlayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
+            <app-input-text-normal [value]="data.codeProduct" name="codeProduct" placeholder="รหัสโปรดัก" text="รหัสโปรดัก" fxFlex [formGroup]='formProject'></app-input-text-normal>
+            <a>แนบไฟล์</a>
+            <app-upload-file [(value)]="data.file">อัพโหลดไฟล์</app-upload-file>
+            <button mat-raised-button color="primary" (click)="addProduct()">บันทึก</button>
+          </div>
+          <mat-card class="content">
+            <mat-card-content *ngFor="let value of output">
+              รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+              <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-content>
+          </mat-card>
+        </content>
+        <br>
+        <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" matStepperNext [disabled]="formProject.invalid" (click)="insertProject()">ต่อไป</button>
+        </footer>
+      </mat-card>
+    </div>
+    <div *ngIf="type!=='Project Jon'">
+      <ng-template matStepLabel>ข้อมูลโปรเจค</ng-template>
+      <mat-card class="card">
+        <content fxLayout="column">
+          <mat-form-field>
+            <mat-select placeholder="เลือกโปรเจค" [(value)]="tmpProject" [formGroup]="thirdFormGroup">
+              <mat-option *ngFor="let value of oldProject" [value]="value">{{value.projectCode}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <input type="text" [(ngModel)]="projectCodeUpdate" placeholder="Enter new project code.">
+        </content>
+        <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+          <button mat-raised-button color="primary" matStepperNext (click)="selectProjectFromCus()">ต่อไป</button>
+        </footer>
+      </mat-card>
+    </div>
   </mat-step>
   <mat-step [stepControl]="fourthFormGroup" [editable]="true">
-    <ng-template matStepLabel>เลือกระยะเวลาโปรเจค</ng-template>
+    <ng-template matStepLabel>ระยะเวลา</ng-template>
     <label>เริ่มต้น</label>
     <mat-form-field>
       <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="scopeStart">
@@ -86,7 +121,7 @@
     </footer>
   </mat-step>
   <mat-step [stepControl]="fifthFormGroup" [editable]="true">
-    <ng-template matStepLabel>เลือกผู้จัดการ</ng-template>
+    <ng-template matStepLabel>ผู้จัดการ</ng-template>
     <mat-card class="card">
       <mat-form-field>
         <mat-select placeholder="เลือกผู้จัดการ" [(value)]="pmId" [formGroup]="thirdFormGroup">
@@ -99,7 +134,7 @@
     </mat-card>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>รายละเอียดโปรเจค</ng-template>
+    <ng-template matStepLabel>รายละเอียด</ng-template>
     <div>รหัสโปรเจค: {{code}}</div>
     <!-- <div>ไฟล์:</div>
       <div *ngFor="let file of product">{{file}}</div> -->

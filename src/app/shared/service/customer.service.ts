@@ -18,6 +18,9 @@ export class CustomerService {
   getAllCustomer(): Observable<any> {
     return this.apiService.get(`customer`);
   }
+  getCustomerId(): Observable<any> {
+    return this.apiService.get(`customerPro`);
+  }
   /**
    * @param data
    * insert data in database of Customer collection

@@ -5,6 +5,7 @@ import { SaleService } from '../shared/service/sale.service';
 import { CustomerService } from '../shared/service/customer.service';
 import { PmService } from '../shared/service/pm.service';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { ProjectService } from '../shared/service/project.service';
 @Component({
   selector: 'app-sale-dialog',
   templateUrl: './sale-dialog.component.html',
@@ -30,7 +31,7 @@ export class SaleDialogComponent implements OnInit {
   public fifthFormGroup: FormGroup;
   public customer: Object;
   public pmIdSend: Object;
-  public project: any[];
+  public project: any;
   public type: String;
   public customerName = '';
   public pmName: String;
@@ -49,8 +50,11 @@ export class SaleDialogComponent implements OnInit {
     _id: Object,
     pmName: ''
   };
-  // public oldCustomers = [];
+  public oldProject = [];
+  public tmpProject: any;
   public pm = [];
+  public checkProject = 0;
+  public projectCodeUpdate: String;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
@@ -58,7 +62,8 @@ export class SaleDialogComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private saleService: SaleService,
     private customerService: CustomerService,
-    private pmService: PmService
+    private pmService: PmService,
+    private projectService: ProjectService
   ) { }
   /**
    * create from group and set data of sale
@@ -139,6 +144,31 @@ export class SaleDialogComponent implements OnInit {
   selectCustomer() {
     this.customerName = this.customerId.customerName;
     this.customer = this.customerId._id;
+    this.getProjectFromCus();
+    this.next();
+  }
+
+  selectCustomerJohn() {
+    this.customerName = this.customerId.customerName;
+    this.customer = this.customerId._id;
+    this.next();
+  }
+
+  getProjectFromCus() {
+    const tmp = this.customer + '';
+    if (this.checkProject === 0) {
+      this.projectService.getIdProjectFromCus(tmp).subscribe((results) => {
+        results.forEach(element => {
+          this.oldProject.push(element);
+        });
+      });
+      this.checkProject++;
+    }
+  }
+
+  selectProjectFromCus() {
+    this.code = this.tmpProject.projectCode;
+    this.project = this.tmpProject;
     this.next();
   }
 
@@ -185,18 +215,31 @@ export class SaleDialogComponent implements OnInit {
    * save value in variable and return
    */
   onSave() {
-
-    const value = {
-      projectCode: this.code,
-      projectFile: this.product,
-      projectType: this.type,
-      scopeStart: this.scopeStart,
-      scopeEnd: this.scopeEnd,
-      customer: this.customer,
-      pm: this.pmIdSend,
-      sale: this.data.sale
-    };
-    this.dialogRef.close(value);
+    if (this.checkProject === 1) {
+      const value = {
+        oldProjectCode: this.project.projectCode,
+        projectCode: this.projectCodeUpdate,
+        projectFile: this.project.projectFile,
+        projectType: this.type,
+        scopeStart: this.scopeStart,
+        scopeEnd: this.scopeEnd,
+        customer: this.customer,
+        pm: this.pmIdSend,
+        sale: this.data.sale
+      };
+      this.dialogRef.close(value);
+    } else {
+      const value = {
+        projectCode: this.code,
+        projectFile: this.product,
+        projectType: this.type,
+        scopeStart: this.scopeStart,
+        scopeEnd: this.scopeEnd,
+        customer: this.customer,
+        pm: this.pmIdSend,
+        sale: this.data.sale
+      };
+      this.dialogRef.close(value);
+    }
   }
-
 }

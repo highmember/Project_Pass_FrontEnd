@@ -39,15 +39,32 @@ export class SaleComponent implements OnInit {
       if (result !== undefined) {
         if (result.customer.customerPhone !== undefined) {
           this.customerService.addCustomer(result.customer).mergeMap(() =>
-            this.customerService.getAllCustomer())
+            this.customerService.getCustomerId())
             .subscribe((results) => {
+              const value = {
+                oldProjectCode: result.oldProjectCode,
+                projectCode: result.projectCode,
+                projectFile: result.projectFile,
+                projectType: result.projectType,
+                scopeStart: result.scopeStart,
+                scopeEnd: result.scopeEnd,
+                customer: results._id,
+                pm: result.pm,
+                sale: result.sale
+              };
+              this.projectService.addProject(value).mergeMap(() =>
+                this.projectService.getIdProjectFromSale(this.saleId))
+                .subscribe((resultss) => {
+                  this.rows = resultss;
+                });
+            });
+        } else {
+          this.projectService.addProject(result).mergeMap(() =>
+            this.projectService.getIdProjectFromSale(this.saleId))
+            .subscribe((results) => {
+              this.rows = results;
             });
         }
-        this.projectService.addProject(result).mergeMap(() =>
-          this.projectService.getIdProjectFromSale(this.saleId))
-          .subscribe((results) => {
-            this.rows = results;
-          });
       }
     });
   }
