@@ -3,6 +3,12 @@
   <app-input-text-normal [value]="data.employeeName" name="employeeName" placeholder="ชื่อ-นามสกุล" text="ชื่อ-นามสกุล" fxFlex [formGroup]='form'></app-input-text-normal>
   <app-input-text-normal [value]="data.employeePhone" name="employeePhone" placeholder="เบอร์โทรศัพท์" text="เบอร์โทรศัพท์" fxFlex [formGroup]='form'></app-input-text-normal>
   <app-input-text-normal [value]="data.employeeAddress" name="employeeAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.employeeEmail" name="employeeEmail" placeholder="อีเมล์" text="อีเมล์" fxFlex
+    [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.employeeSex" name="employeeSex" placeholder="เพศ" text="เพศ" fxFlex
+    [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.employeeAge" name="employeeAge" placeholder="อายุ" text="อายุ" fxFlex
+    [formGroup]='form'></app-input-text-normal>
   <app-dropdown [data]="employeeType" [value]="data.employeeType" name="employeeType" placeholder="ตำแหน่ง" text="ตำแหน่ง" fxFlex [formGroup]='form'></app-dropdown>
 </content>
 <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">

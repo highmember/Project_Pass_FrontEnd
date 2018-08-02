@@ -6,6 +6,12 @@
     fxFlex [formGroup]='form'></app-input-text-normal>
   <app-input-text-normal [value]="data.customerAddress" name="customerAddress" placeholder="ที่อยู่" text="ที่อยู่" fxFlex
     [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.customerEmail" name="customerEmail" placeholder="อีเมล์" text="อีเมล์" fxFlex
+    [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.customerSex" name="customerSex" placeholder="เพศ" text="เพศ" fxFlex
+    [formGroup]='form'></app-input-text-normal>
+  <app-input-text-normal [value]="data.customerAge" name="customerAge" placeholder="อายุ" text="อายุ" fxFlex
+    [formGroup]='form'></app-input-text-normal>
 </content>
 <footer select="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
   <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSave()">บันทึก</button>
