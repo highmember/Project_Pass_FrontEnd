@@ -65,7 +65,13 @@
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
       </mat-form-field>
-      <mat-progress-bar [color]="color" [mode]="mode" [value]="value">
+      <mat-form-field>
+        <input matInput placeholder="Total Days" disabled [(ngModel)]="dayDifference">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Days left" disabled [(ngModel)]="dayDifferenceBetCurr">
+      </mat-form-field>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="timeSchedule">
       </mat-progress-bar>
     </mat-card>
     <mat-card>

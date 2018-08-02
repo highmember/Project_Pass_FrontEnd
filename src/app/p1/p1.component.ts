@@ -17,6 +17,12 @@ export class P1Component implements OnInit {
   public rowss = [];
   public rowsss: any[];
   public id: String;
+  public projectCodeOfEmp = [];
+  public sleProjectCode = {
+    _id: Object,
+    assignProjectCode: ''
+  };
+
   constructor(
     private dialog: MatDialog,
     private assignService: AssignService,
@@ -26,8 +32,12 @@ export class P1Component implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.assignService.getId(this.id).subscribe((results) => {
+      results.forEach((ele) => {
+        this.projectCodeOfEmp.push({
+          assignProjectCode: ele.assignProjectCode,
+        });
+      });
       this.rows = results;
-      this.checkAssign();
     });
   }
   onUpdate(result, row) {
@@ -40,8 +50,10 @@ export class P1Component implements OnInit {
     });
   }
   checkAssign() {
+    this.rowss = [];
+    this.rowsss = [];
     this.rows.forEach(ele => {
-      if (ele.assignEmpType === 'Part1') {
+      if (ele.assignProjectCode === this.sleProjectCode.assignProjectCode) {
         this.rowss.push(ele);
       }
     });
@@ -66,11 +78,6 @@ viewFile(val): void {
   });
   dialogRef.afterClosed().subscribe(result => {
     if (result !== undefined) {
-      // this.degreeService.addDegree(result).pipe(
-      //   mergeMap(() => this.degreeService.getAllDegree()))
-      //   .subscribe((results) => {
-      //     this.rows = results;
-      //   });
     }
   });
 }
