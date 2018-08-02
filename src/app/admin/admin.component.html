@@ -21,9 +21,24 @@
               {{value.customerPhone}}
             </ng-template>
           </ngx-datatable-column>
+          <ngx-datatable-column name="อีเมล์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerEmail}}
+            </ng-template>
+          </ngx-datatable-column>
           <ngx-datatable-column name="ที่อยู่">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.customerAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เพศ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerSex}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="อายุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.customerAge}}
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
@@ -64,9 +79,24 @@
               {{value.salePhone}}
             </ng-template>
           </ngx-datatable-column>
+          <ngx-datatable-column name="อีเมล์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.saleEmail}}
+            </ng-template>
+          </ngx-datatable-column>
           <ngx-datatable-column name="ที่อยู่">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.saleAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เพศ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.saleSex}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="อายุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.saleAge}}
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
@@ -109,11 +139,27 @@
               {{value.pmPhone}}
             </ng-template>
           </ngx-datatable-column>
+          <ngx-datatable-column name="อีเมล์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmEmail}}
+            </ng-template>
+          </ngx-datatable-column>
           <ngx-datatable-column name="ที่อยู่">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.pmAddress}}
             </ng-template>
           </ngx-datatable-column>
+          <ngx-datatable-column name="เพศ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmSex}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="อายุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.pmAge}}
+            </ng-template>
+          </ngx-datatable-column>
+          
           <ngx-datatable-column name="ดำเนินการ" [maxWidth]="170">
             <ng-template let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
               <button mat-mini-fab color="accent" (click)="openUserDialog(value, 'PM')">
@@ -154,9 +200,24 @@
               {{value.employeePhone}}
             </ng-template>
           </ngx-datatable-column>
+          <ngx-datatable-column name="อีเมล์">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeEmail}}
+            </ng-template>
+          </ngx-datatable-column>
           <ngx-datatable-column name="ที่อยู่">
             <ng-template let-value="value" ngx-datatable-cell-template>
               {{value.employeeAddress}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="เพศ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeSex}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="อายุ">
+            <ng-template let-value="value" ngx-datatable-cell-template>
+              {{value.employeeAge}}
             </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="ตำแหน่ง">

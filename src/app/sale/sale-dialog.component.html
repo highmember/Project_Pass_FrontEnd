@@ -71,7 +71,8 @@
           </div>
           <mat-card class="content">
             <mat-card-content *ngFor="let value of output">
-              รหัสโปรดัก {{value.codeProduct}} ไฟล์ {{value.file}}
+              รหัสโปรดัก {{value.codeProduct}} ไฟล์ : <a href="{{value.file}}" target="_blank">
+                <img src="{{value.file}}" alt="{{value.file}}" style="width:40px;height:40px;"> </a>
               <button mat-mini-fab color="warn" (click)="deleteMsg(value)">
                 <mat-icon>delete</mat-icon>
               </button>

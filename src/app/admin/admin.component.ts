@@ -69,7 +69,10 @@ export class AdminComponent implements OnInit {
       data: {
         customerName: row.customerName,
         customerPhone: row.customerPhone,
-        customerAddress: row.customerAddress
+        customerAddress: row.customerAddress,
+        customerSex: row.customerSex,
+        customerAge: row.customerAge,
+        customerEmail: row.customerEmail,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -120,7 +123,10 @@ export class AdminComponent implements OnInit {
       data: {
         saleName: row.saleName,
         salePhone: row.salePhone,
-        saleAddress: row.saleAddress
+        saleAddress: row.saleAddress,
+        saleSex: row.saleSex,
+        saleAge: row.saleAge,
+        saleEmail: row.saleEmail,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -171,7 +177,10 @@ export class AdminComponent implements OnInit {
       data: {
         pmName: row.pmName,
         pmPhone: row.pmPhone,
-        pmAddress: row.pmAddress
+        pmAddress: row.pmAddress,
+        pmSex: row.pmSex,
+        pmAge: row.pmAge,
+        pmEmail: row.pmEmail,
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -223,6 +232,9 @@ export class AdminComponent implements OnInit {
         employeeName: row.employeeName,
         employeePhone: row.employeePhone,
         employeeAddress: row.employeeAddress,
+        employeeSex: row.employeeSex,
+        employeeAge: row.employeeAge,
+        employeeEmail: row.employeeEmail,
         employeeType: row.employeeType
       }
     });
@@ -262,7 +274,7 @@ export class AdminComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        this.userService.addUser(result).subscribe(() => {});
+        this.userService.addUser(result).subscribe(() => { });
       }
     });
   }
